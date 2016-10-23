@@ -120,7 +120,7 @@ select L.Ledger_id
         ,CONCAT(YEAR(L.Date),'-', LEFT(MONTHNAME(L.Date),3)) as YearMonth        
         ,L.Ammount
         ,IFNULL(L.UserDescription, L.Description) as Description
-	,L.Description as UploadedDescription
+	      ,L.Description as UploadedDescription
         ,A.AccountName
         ,BT.BudgetType
         ,BST.BudgetSubType

@@ -11,6 +11,7 @@ import Accounts from './Accounts'
 import Ledger from './Ledger'
 import Type from './Type'
 import NavBar from './HomePage/NavBar'
+import OverviewGraph from './HomePage/OverviewGraph'
 
 @connect((store) => {
   return {
@@ -62,10 +63,11 @@ export default class Layout extends React.Component {
 
     return <div>
               <NavBar />
-              {display}
+              <OverviewGraph />
            </div>
   }
 }
+              // {display}
              // <FileUpload />
              // <Accounts />
              // <Mappings />

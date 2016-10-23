@@ -69,7 +69,6 @@ export default function reducer (state = {
       const { typeSelected, subTypeSelected, User_Ledger_id }  = action.payload
       const index = _.findIndex(state.ledgerItems, function (obj) {return Number(obj.User_Ledger_id) == Number(User_Ledger_id) })
       const updatedLedgerItem = Object.assign({}, state.ledgerItems[index], {BudgetType: typeSelected, BudgetSubType: subTypeSelected})
-      console.log(User_Ledger_id, 'Index: ', index, ' Updated: ', updatedLedgerItem)
       return{
         ...state,
         typeDropDown:{

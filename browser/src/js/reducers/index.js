@@ -10,6 +10,7 @@ import accounts from './accountsReducer'
 import ledger from './ledgerReducer'
 import types from './typeReducer'
 import nav from './navReducer'
+import graph from './graphReducer'
 
 export default combineReducers({
   user,
@@ -20,5 +21,6 @@ export default combineReducers({
 	accounts, 
 	ledger,
 	types,
-	nav
+	nav,
+	graph
 })

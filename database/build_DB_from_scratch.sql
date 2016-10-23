@@ -14,5 +14,7 @@ SELECT 'BUILDING MAPPING PROCS';
 source mappingProcs.sql;
 SELECT 'BUILDING TYPE PROCS';
 source typeProcs.sql;
+SELECT 'BUILDING GRAPH PROCS';
+source graphProcs.sql;
 
 SELECT 'DONE!';
