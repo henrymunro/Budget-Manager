@@ -1,0 +1,19 @@
+
+{
+	"getMappings": "spWEB_GetMappingType",
+	"setMappings": "spWEB_SetMapping",
+	"applyNewMappings":"spWEB_ApplyNewMappings",
+	
+	"getType": "spWEB_GetType",
+	"getTypeSubtype":"spWEB_GetTypeSubtype",
+	"addNewType":"spWEB_AddNewType",
+	"addNewSubType":"spWEB_AddNewSubType",
+
+	"getUserMonths": "spWEB_GetUserMonths",
+	"getSplitOptions": "spWEB_GetSplitOptions",
+	"getMonthOverview": "spWEB_getMonthOverview",
+	"setMonthOverview": "spWEB_SetWebBudgetMain",
+
+	"getMonthOverviewAggregate": "spWEB_GetMonthOverviewAggregate",
+	"getMonthOverviewAggregateSubType":"spWEB_GetMonthOverviewAggregateSubType"
+}

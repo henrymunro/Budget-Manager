@@ -1,0 +1,15 @@
+.fatalError{
+
+}
+
+.rowError{
+	border-color: red;
+	border-style: solid;
+	border-width: 2px;
+
+	
+}
+
+.elementError{
+	background: green;
+}

@@ -1,0 +1,14 @@
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+
+.cf:before,
+.cf:after   { content: " "; display: table; }
+.cf:after   { clear: both; }
+.cf         { *zoom: 1; }
