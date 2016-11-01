@@ -9,11 +9,6 @@ import styles from 'styles/components/TypeDropDown.css'
 
 
 import {
-  updateSelectedType,
-  isDropDownVisible
-} from '../../actions/typeActions'
-
-import {
   updatedSelectedType,
   saveNewSelectedType,
   updateHoveredTypeInDropDown,
@@ -63,10 +58,7 @@ export default class TypeDropDown extends React.Component {
 
 
   render () {
-    const { types, hoverTypeForExpandedDropDown, BudgetType, BudgetSubType, expandTypeDropDown } = this.props
-
-    // Grabs the distinct types
-    const distinctTypes = [...new Set(types.map(item => item.BudgetType))]
+    const { types, hoverTypeForExpandedDropDown, BudgetType, BudgetSubType, distinctTypes, expandTypeDropDown } = this.props
 
     //Loops over distinct type to build up each sublist 
     const typeList = distinctTypes.map((type, typeKey)=> {

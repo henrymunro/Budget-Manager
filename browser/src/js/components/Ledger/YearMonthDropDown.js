@@ -1,13 +1,20 @@
 import React from 'react'
 
 
+import { updateYearMonth } from 'js/actions/ledgerActions'
+
+
 export default class YearMonthDropDown extends React.Component {
   componentWillMount () {
   }
 
+  updatedYearMonth(e){
+    const yearMonth = e.target.value 
+    this.props.dispatch(updateYearMonth(yearMonth))
+  }
+
   render () {
     const { yearMonth } = this.props.ledger
-    const { onYearMonthChange } = this.props
     const yearMonthSelectList = yearMonth.array.map((yearMonth, key)=>{
       let selected = false
       return <option 
@@ -18,7 +25,7 @@ export default class YearMonthDropDown extends React.Component {
               </option>
     })
 
-    return <select defaultValue={yearMonth.selectedValue} data-id='' onChange={onYearMonthChange}>
+    return <select value={yearMonth.selectedValue} data-id='' onChange={this.updatedYearMonth.bind(this)}>
         {yearMonthSelectList}
     </select>
   }
@@ -26,6 +33,5 @@ export default class YearMonthDropDown extends React.Component {
 
 
 YearMonthDropDown.propTypes = {
-  yearMonth: React.PropTypes.object,
-  // onYearMonthChange: React.PropTypes.function
+  yearMonth: React.PropTypes.object
 }

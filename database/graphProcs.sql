@@ -10,9 +10,9 @@ CREATE PROCEDURE sp_GetTypeOverview(
 )
 BEGIN
 	
-	SELECT CONCAT('01-', MONTH(Date), '-', YEAR(Date)) as YearMonth, SUM(Ammount/cast(Split as decimal(4,2))) as Amount, BudgetType
+	SELECT CONCAT('01-', MONTH(Date), '-', YEAR(Date)) as YearMonth, SUM(Ammount/cast(Split as decimal(4,2))) as Amount, BudgetType, YearMonth as YearMonthOrigionalFormat
 	FROM vw_Ledger
-	GROUP BY CONCAT('01-', MONTH(Date), '-', YEAR(Date)), YEAR(Date), MONTH(Date), BudgetType
+	GROUP BY CONCAT('01-', MONTH(Date), '-', YEAR(Date)), YEAR(Date), MONTH(Date), BudgetType, YearMonth
 	ORDER BY BudgetType, YEAR(Date) desc, MONTH(Date) desc;
 
 
@@ -29,10 +29,10 @@ CREATE PROCEDURE sp_GetSubTypeOverview(
 )
 BEGIN
 	
-	SELECT CONCAT('01-', MONTH(Date), '-', YEAR(Date)) as YearMonth, SUM(Ammount/cast(Split as decimal(4,2))) as Amount, BudgetSubType as BudgetType
+	SELECT CONCAT('01-', MONTH(Date), '-', YEAR(Date)) as YearMonth, SUM(Ammount/cast(Split as decimal(4,2))) as Amount, BudgetSubType as BudgetType,  YearMonth as YearMonthOrigionalFormat
 	FROM vw_Ledger
 	WHERE BudgetType = budgetType_id
-	GROUP BY CONCAT('01-', MONTH(Date), '-', YEAR(Date)), YEAR(Date), MONTH(Date), BudgetSubType
+	GROUP BY CONCAT('01-', MONTH(Date), '-', YEAR(Date)), YEAR(Date), MONTH(Date), BudgetSubType, YearMonth
 	ORDER BY BudgetSubType, YEAR(Date) desc, MONTH(Date) desc;
 
 

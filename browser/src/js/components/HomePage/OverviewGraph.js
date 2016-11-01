@@ -117,7 +117,7 @@ export default class OverviewGraph extends React.Component {
                             return <g>
                                      <Axis {...axisProps} axisType='x'/>     
                                      <Axis {...axisProps} maxY={maxY} minY={minY} axisType='y'/>
-                                    <PlottedData {...linesProps} />  
+                                    <PlottedData {...linesProps} dispatch={this.props.dispatch} />  
                                   </g>
                            }
                           }

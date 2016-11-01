@@ -34,12 +34,17 @@ export default class LedgerTable extends React.Component {
 
   render () {
     const { ledgerItems, typeDropDown, ...other} = this.props.ledger
-    const { types } = this.props.types
+    const { types, distinctTypes } = this.props.types
+    const { typeFilter }= this.props.ledger.filters
     const { axios } = this.props
 
+    console.log('TYPE FILTER: ', typeFilter)
     // Grabs the Ledger items to diplay 
     const filteredLedger = ledgerItems.filter((row, yearMonth)=> { 
-        return row.YearMonth === this.props.ledger.yearMonth.selectedValue
+        return (
+          row.YearMonth === this.props.ledger.yearMonth.selectedValue
+          && (row.BudgetType === typeFilter || typeFilter==='false' ) 
+          )
       })
 
     //Loads in Type drop down constants 
@@ -52,7 +57,7 @@ export default class LedgerTable extends React.Component {
       // Ensures that the changing hover type is only passed to the Drop down that is expanded (to prevent every hidden drop down rendering)
       const hoverTypeForExpandedDropDown = expandTypeDropDown ? hoverType : ''
       //Props to pass to the type drop down
-      const {...typesProps } = {User_Ledger_id, hoverTypeForExpandedDropDown, BudgetType, BudgetSubType, types, expandTypeDropDown, axios}
+      const {...typesProps } = {User_Ledger_id, hoverTypeForExpandedDropDown, BudgetType, BudgetSubType, types, expandTypeDropDown, distinctTypes, axios}
       return <tr key={key} className=''>
                <td className=''>
                  {moment(row.Date).format('YYYY-MM-DD')}
@@ -90,7 +95,7 @@ export default class LedgerTable extends React.Component {
 
         <div>    
           <Sticky>
-            <table className='table table-striped'>
+            <table className='table table-striped' style={{margin:0}}>
               <tbody>
                 <tr>
                   <th>

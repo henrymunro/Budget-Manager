@@ -2,14 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { StickyContainer, Sticky } from 'react-sticky';
 
-import { getAccounts } from '../actions/accountsActions'
-import { getYearMonth, getLedger, updateYearMonth, updateDescription, saveDescription } from '../actions/ledgerActions'
-import { getType } from '../actions/typeActions'
+import { getAccounts } from 'js/actions/accountsActions'
+import { getYearMonth, getLedger, updateDescription, saveDescription } from 'js/actions/ledgerActions'
+import { getType } from 'js/actions/typeActions'
 
-import AccountsDropDown from './Accounts/AccountsDropDown'
-import UploadedFileTable from './FileUpload/UploadedFileTable'
-import YearMonthDropDown from './Ledger/YearMonthDropDown'
-import LedgerTable from './Ledger/LedgerTable'
+import AccountsDropDown from 'js/components/Accounts/AccountsDropDown'
+import UploadedFileTable from 'js/components/FileUpload/UploadedFileTable'
+import LedgerFilter from 'js/components/Ledger/LedgerFilter'
+import LedgerTable from 'js/components/Ledger/LedgerTable'
 
 
 @connect((store) => {
@@ -28,11 +28,6 @@ export default class Ledger extends React.Component {
     this.props.dispatch(getType(this.props.axios))
   }
 
-  updatedYearMonth(e){
-    const yearMonth = e.target.value 
-    this.props.dispatch(updateYearMonth(yearMonth))
-  }
-
 
   render () {
     const { ...other } = this.props // also passes dispatch
@@ -41,8 +36,12 @@ export default class Ledger extends React.Component {
       <div className='container'>
           <h2>Month overview page</h2>
           <StickyContainer>
-              <YearMonthDropDown {...other} onYearMonthChange={this.updatedYearMonth.bind(this)} /> 
-              <LedgerTable {...other} />
+              <Sticky stickyStyle={{width:'100%', background:'white'}}>
+                  <LedgerFilter {...other} />
+              </Sticky>
+              <StickyContainer>
+                <LedgerTable {...other} />
+               </StickyContainer>
           </StickyContainer>
       </div>
     )

@@ -64,33 +64,3 @@ export function updateSelectedTypeForAddNewType(type, type_id){
 }
 
 
-
-// Updates the hovered value in the in the store to reveal subtypes in the open drop down
-export function updateHoveredTypeInDropDown(type){
-  return {
-    type: 'UPDATE_HOVERED_TYPE_IN_DROP_DOWN',
-    payload: type
-  }
-}
-
-
-
-
-//// ############### drop down type test 
-
-export function updatedSelectedType(type, subType){
-  return{
-    type: "UPDATE_SELECTED_TYPE",
-    payload: { 
-      typeSelected: type, 
-      subTypeSelected: subType
-    }
-  }
-}
-
-export function isDropDownVisible(state){
-  return{
-    type: "SHOW_DROP_DOWN",
-    payload: state
-  }
-}

@@ -6,6 +6,9 @@ import Lines from './Lines'
 // import Circles from './Circles'
 
 
+import { updateTypeFilter, updateYearMonth } from 'js/actions/ledgerActions'
+
+
 import CSSstyles from 'styles/components/graphStyles/CirclesStyles.css'
 
 
@@ -32,6 +35,13 @@ export default class PlottedData extends React.Component {
     }
   }
 
+  updateTypeFilterOnCircleClick(e){    
+    const filterType = e.target.attributes.getNamedItem('data-type').value    
+    const yearMonth = e.target.attributes.getNamedItem('data-year-month').value  
+    this.props.dispatch(updateTypeFilter(filterType))    
+    this.props.dispatch(updateYearMonth(yearMonth))
+  }
+
   render () {
 
   	const { linesPlot, xScale, yScale, colourScalePlot, circleRadius, reactMotionKey, lineWidth, distinctTypesShowPlot, springDefault, lineToMakeBold } = this.props
@@ -52,6 +62,7 @@ export default class PlottedData extends React.Component {
             key: reactMotionKey+item.type+key, 
             // Data is constants we can to keep with the element 
             data: {
+              YearMonthOrigionalFormat: row.YearMonthOrigionalFormat,
               YearMonth: row.YearMonth,
               type: item.type,
               plotType: item.plotType
@@ -93,6 +104,9 @@ export default class PlottedData extends React.Component {
                       const {style, data, key} = config
                       return <circle 
                             className={CSSstyles.circle} 
+                            data-type={data.type}
+                            data-year-month={data.YearMonthOrigionalFormat}
+                            onClick={this.updateTypeFilterOnCircleClick.bind(this)}
                             style={{fill: colourScalePlot(data.type)}}
                             r={(style.Radius<0)?0:style.Radius}
                             cx={xScale(d3.timeParse("%d-%m-%Y")(data.YearMonth))} 

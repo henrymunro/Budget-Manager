@@ -7,6 +7,9 @@ export default function reducer (state = {
     typeDropDown:{
       hoverType:'',
       userLedgerDropDownShow:-1
+    }, 
+    filters:{
+      typeFilter: 'false'
     }
   } , action) {
   switch (action.type) {
@@ -97,6 +100,15 @@ export default function reducer (state = {
           ...state.ledgerItems.slice(index + 1)
 
         ]
+      }
+    }
+
+    case "UPDATE_LEDGER_TYPE_FILTER":{
+      return{
+        ...state,
+        filters:{
+          typeFilter: action.payload
+        }
       }
     }
 

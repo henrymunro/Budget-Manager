@@ -91,3 +91,14 @@ export function saveSplitValue(User_Ledger_id, Split, axios){
     payload:axios.request.post(axios.URLS.updateLedgerSplit, { split: Split, user_Ledger_id: User_Ledger_id})
   }
 }
+
+
+
+//************* Filters *************/
+
+export function updateTypeFilter(typeFilter){
+  return {
+    type: "UPDATE_LEDGER_TYPE_FILTER",
+    payload: typeFilter
+  }
+}
