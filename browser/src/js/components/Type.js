@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import cx from 'classnames'
 import styles from 'styles/components/Type.css'
+import baseStyles from 'styles/base.css'
 
 
 import {
@@ -12,7 +13,9 @@ import {
   updateNewSubTypeTextBox,
   saveNewType,
   saveNewSubType,
-  updateSelectedTypeForAddNewType
+  updateSelectedTypeForAddNewType,
+  ceaseType,
+  ceaseSubType
 } from '../actions/typeActions'
 
 import TypeDropDown from './Type/TypeDropDown'
@@ -71,6 +74,21 @@ export default class Type extends React.Component {
         })
   }
 
+  ceaseType(e){
+    const type = e.target.attributes.getNamedItem('data-type').value
+    this.props.dispatch(ceaseType(type, this.props.axios))
+        .then((res)=>{
+          this.props.dispatch(getType(this.props.axios))
+        })
+  }
+
+  ceaseSubType(e){
+    const subType = e.target.attributes.getNamedItem('data-sub-type').value
+    this.props.dispatch(ceaseSubType(subType, this.props.axios))
+        .then((res)=>{
+          this.props.dispatch(getType(this.props.axios))
+        })
+  }
 
   render () {
     const { types, typeHovered, showDropDown, typeSelected, subTypeSelected } = this.props.types
@@ -85,10 +103,26 @@ export default class Type extends React.Component {
 
       }
       const className = cx({
-        [styles.typeListElm_select]: row === selectedType,
-        [styles.typeListElm]: row != selectedType
+        // [styles.typeListElm_select]: row === selectedType,
+        [styles.typeListElm]: true,
+        [baseStyles.cf]: true
       })
-      return <li key={key} data-list-value={row} onClick={this.selectTypeToEdit.bind(this)} className={className}>{row}</li>
+      return <li 
+              key={key}               
+              className={className}>
+                <div
+                className={styles.typeText}
+                data-list-value={row} 
+                onClick={this.selectTypeToEdit.bind(this)} >
+                  {row}
+                </div>
+                <button 
+                  className={'btn btn-xs ' + styles.typeButton}
+                  data-type={row}
+                  onClick={this.ceaseType.bind(this)}>
+                    x
+                </button>
+              </li>
 
     })
 
@@ -101,31 +135,47 @@ export default class Type extends React.Component {
 
     //Chucks the filtered subTypes into a list
     const subTypeList = filteredSubType.map((row, key)=>{
-      return <li key={key}>{row.BudgetSubType}</li>
+      return <li key={key} className={styles.typeListElm}>
+                <div className={baseStyles.cf}>
+                  <div className={styles.type}>
+                    {row.BudgetSubType}
+                  </div>
+                  <button 
+                    className={'btn btn-xs ' + styles.typeButton}  
+                    data-sub-type={row.BudgetSubType}
+                    onClick={this.ceaseSubType.bind(this)}>
+                      x
+                  </button>
+                </div>
+              </li>
     })
 
    
     return (
       <div className='container'>
-        <h3> Types </h3>
-     
-        <div className='container'>
-          <div className={styles.typeList}>
-            <ul>
-              {typeList}
-            </ul> 
-            <input value={addNewTypeText} onChange={this.updateNewTypeText.bind(this)} />   
-            <button onClick={this.saveNewType.bind(this)}>Save Type</button> 
+        <br />
+        <br /> 
+        <div className="panel panel-default">
+          <div className="panel panel-head panel-default">
+            <h3> Types </h3>
           </div>
-          <div className={styles.subTypeList}>
-            <ul>
-              {subTypeList}
-            </ul> 
-            <input value={addNewSubTypeText} onChange={this.updateNewSubTypeText.bind(this)} /> 
-            <button onClick={this.saveNewSubType.bind(this)}>Save SubType</button>
-           </div>
+          <div className="panel panel-body">
+                         <div className={styles.typeList}>
+                <ul>
+                  {typeList}
+                </ul> 
+                <input value={addNewTypeText} onChange={this.updateNewTypeText.bind(this)} />   
+                <button onClick={this.saveNewType.bind(this)}>Save Type</button> 
+              </div>
+              <div className={styles.subTypeList}>
+                <ul>
+                  {subTypeList}
+                </ul> 
+                <input value={addNewSubTypeText} onChange={this.updateNewSubTypeText.bind(this)} /> 
+                <button onClick={this.saveNewSubType.bind(this)}>Save SubType</button>
+               </div>
+            </div>
         </div>
-
       </div>
 
     )

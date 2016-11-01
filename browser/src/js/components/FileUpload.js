@@ -29,8 +29,8 @@ var _ = require('lodash')
 export default class FileUpload extends React.Component {
   componentWillMount () {
     this.props.dispatch(getAccounts(this.props.axios))
-    this.props.dispatch(getYearMonth(this.props.axios))    
-    this.props.dispatch(getLedger(this.props.axios))
+    // this.props.dispatch(getYearMonth(this.props.axios))    
+    // this.props.dispatch(getLedger(this.props.axios))
   }
 
   fileSelected (e) {
@@ -49,27 +49,19 @@ export default class FileUpload extends React.Component {
     this.props.dispatch(saveFileToDB(fileToSave, this.props.axios))
   }
 
-  updatedSelectedAccount(e){
-    const account_id = e.target.value
-    const file_id = e.target.attributes.getNamedItem('data-id').value
-    console.log(account_id, file_id)
-    this.props.dispatch(updateSelectedAccountAction(file_id, account_id))
-  }
-
 
   render () {
     const { user, fileUpload, accounts } = this.props
     let parsedFilesRendered = fileUpload.parsedFiles.map((file, key) => {
       console.log('KEY: ', key)
       return <div key={key}>
-      <UploadedFileTable parsedFile={file} accounts={accounts} onAccountChange={this.updatedSelectedAccount.bind(this)} id={key}/>
       <button className='btn' data-file-id={key} onClick={this.saveFileToDB.bind(this)}>Sav!e</button>
+      <UploadedFileTable parsedFile={file} accounts={accounts} dispatch={this.props.dispatch} id={key}/>
       </div>
     })
 
     return (
       <div className='container'>
-        <Header userName={user.name} />
         <h3>File upload page</h3>
         <div class='container' id='uploadFileCont'>
           <h3>Upload a file:</h3>

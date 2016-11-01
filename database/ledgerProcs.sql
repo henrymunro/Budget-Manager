@@ -8,10 +8,10 @@ CREATE PROCEDURE sp_GetLedger(
 )
 BEGIN
 	
-	SELECT User_Ledger_id, Date, YearMonth, Ammount, Description, UploadedDescription, AccountName, BudgetType, BudgetSubType, FileName, UploadTime
+	SELECT User_Ledger_id, Date, YearMonth, Ammount, Description, UploadedDescription, AccountName, BudgetType, BudgetSubType, Split, FileName, UploadTime
 	FROM (
 		SELECT @row_num := IF(@prev_value=User_id,@row_num+1,1) as User_Ledger_id
-				, Date, YearMonth, Ammount, Description, UploadedDescription, AccountName, BudgetType, BudgetSubType, FileName, UploadTime 
+				, Date, YearMonth, Ammount, Description, UploadedDescription, AccountName, BudgetType, BudgetSubType, Split, FileName, UploadTime 
 				, @prev_value := User_id
 		FROM vw_Ledger,
 		 	(SELECT @row_num := 1) x,
@@ -105,6 +105,38 @@ BEGIN
 	INNER JOIN BudgetType BT on BT.BudgetType = budgetType_in and BT.User_id = user_id_in
 	INNER JOIN BudgetSubType BST on BST.BudgetType_id = BT.BudgetType_id and BST.BudgetSubType = budgetSubType_in
 	SET L.BudgetType_id = BT.BudgetType_id, L.BudgetSubType_id = BST.BudgetSubType_id 
+	WHERE Ledger_id = @Ledger_id;
+
+
+END //
+DELIMITER ;
+
+
+
+DROP PROCEDURE IF EXISTS sp_UpdateLedgerSplit;
+DELIMITER //
+CREATE PROCEDURE sp_UpdateLedgerSplit(
+	in user_id_in int,
+	in split_in int,
+	in user_ledger_id_in int
+)
+BEGIN
+	
+	SELECT @Ledger_id := Ledger_id
+	FROM (
+		SELECT @row_num := IF(@prev_value=User_id,@row_num+1,1) as User_Ledger_id
+				, Ledger_id 
+				, @prev_value := User_id
+		FROM vw_Ledger,
+		 	(SELECT @row_num := 1) x,
+	        (SELECT @prev_value := '') y
+		WHERE User_id = user_id_in 
+		ORDER BY User_id, Ledger_id
+		) subquery
+	WHERE User_Ledger_id = user_ledger_id_in;
+
+	UPDATE Ledger L 
+	SET Split = split_in
 	WHERE Ledger_id = @Ledger_id;
 
 

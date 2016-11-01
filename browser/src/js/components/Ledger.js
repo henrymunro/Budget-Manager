@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { StickyContainer, Sticky } from 'react-sticky';
 
 import { getAccounts } from '../actions/accountsActions'
 import { getYearMonth, getLedger, updateYearMonth, updateDescription, saveDescription } from '../actions/ledgerActions'
@@ -9,9 +10,7 @@ import AccountsDropDown from './Accounts/AccountsDropDown'
 import UploadedFileTable from './FileUpload/UploadedFileTable'
 import YearMonthDropDown from './Ledger/YearMonthDropDown'
 import LedgerTable from './Ledger/LedgerTable'
-// import PhotoGrid from './HomePage/PhotoGrid'
 
-var _ = require('lodash')
 
 @connect((store) => {
   return {
@@ -34,26 +33,17 @@ export default class Ledger extends React.Component {
     this.props.dispatch(updateYearMonth(yearMonth))
   }
 
-  updatedDescription(e){
-    const ledger_id = Object.keys(e)[0]
-    const description = e[ledger_id]
-    this.props.dispatch(updateDescription(ledger_id, description))    
-    this.props.dispatch(saveDescription(ledger_id, description, this.props.axios))
-    
-  }
-
 
   render () {
-    const { ...other } = this.props
-    const changes = {
-      onDescriptionChange: this.updatedDescription.bind(this),
-    }
+    const { ...other } = this.props // also passes dispatch
 
     return (
       <div className='container'>
           <h2>Month overview page</h2>
-          <YearMonthDropDown {...other} onYearMonthChange={this.updatedYearMonth.bind(this)} /> 
-          <LedgerTable {...other} changes={changes}/>
+          <StickyContainer>
+              <YearMonthDropDown {...other} onYearMonthChange={this.updatedYearMonth.bind(this)} /> 
+              <LedgerTable {...other} />
+          </StickyContainer>
       </div>
     )
   }

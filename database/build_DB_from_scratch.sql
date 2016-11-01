@@ -16,5 +16,7 @@ SELECT 'BUILDING TYPE PROCS';
 source typeProcs.sql;
 SELECT 'BUILDING GRAPH PROCS';
 source graphProcs.sql;
+SELECT 'BUILDING LOGGING PROCS';
+source loggingProcs.sql
 
 SELECT 'DONE!';

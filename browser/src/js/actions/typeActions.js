@@ -40,6 +40,21 @@ export function saveNewSubType(subType, type, axios) {
   }
 }
 
+// Ceases a type and all child subtypes in the database 
+export function ceaseType(type, axios){
+  return {
+    type: 'CEASE_TYPE', 
+    payload: axios.request.post(axios.URLS.ceaseType, {budgetType: type})
+  }
+}
+// Ceases a sub type in the database
+export function ceaseSubType(subType, axios){
+  return {
+    type: 'CEASE_SUB_TYPE', 
+    payload: axios.request.post(axios.URLS.ceaseSubType, {budgetSubType: subType})
+  }
+}
+
 // Updates the selected type browser side for the add new type section
 export function updateSelectedTypeForAddNewType(type, type_id){
   return {

@@ -1,5 +1,5 @@
 export default function reducer (state = {
-    ledgerItems: [],
+  ledgerItems: [{}],
     yearMonth:{
         array:[],
         selectedValue:''
@@ -82,6 +82,21 @@ export default function reducer (state = {
 
         ]
 
+      }
+    }
+
+    case "UPDATE_SPLIT_VALUE":{
+      const { Split, User_Ledger_id }  = action.payload
+      const index = _.findIndex(state.ledgerItems, function (obj) {return Number(obj.User_Ledger_id) == Number(User_Ledger_id) })
+      const updatedLedgerItem = Object.assign({}, state.ledgerItems[index], {Split: Split})
+      return{
+        ...state,
+        ledgerItems:[
+          ...state.ledgerItems.slice(0, index),
+          updatedLedgerItem,
+          ...state.ledgerItems.slice(index + 1)
+
+        ]
       }
     }
 

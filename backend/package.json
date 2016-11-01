@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "DEBUG=fileUpload,csvParser,mappings,type,ledger  nodemon -w . -w www"
+    "dev": "DEBUG=fileUpload,csvParser,mappings,type,ledger,graph,databaseConnection,LOG  nodemon -w . -w www"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -12,6 +12,7 @@
     "classnames": "^2.2.5",
     "cookie-parser": "~1.3.5",
     "csvtojson": "^1.0.2",
+    "d3": "^4.2.8",
     "debug": "^2.2.0",
     "express": "~4.13.1",
     "helmet": "^2.3.0",

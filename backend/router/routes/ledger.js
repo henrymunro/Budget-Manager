@@ -1,13 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const _ = require('lodash')
-const validator = require('validator')
-const Escape = validator.escape
 const debug = require('debug')('ledger')
-const csvParser = require('../global_functions/csvParser.js')
-const parseCSV = csvParser.parseCSV
-const moment = require('moment')
 const pool = require('mysql2/promise').createPool({host:'localhost', user: 'root', database: 'Budget'}); 
+
+
+const databaseConnection = require('../globalFunctions/databaseConnection')
+const   { callProcUPDATE, callProcGET } = databaseConnection
 
 $Client_address = 'http://localhost:8080'
 
@@ -19,11 +17,7 @@ router.use(function (req, res, next) {
 })
 
 
-//Route to parse and validate files uploaded 
-//Sends parsed results back to client, doens't save to DB
-// router.post('/', (req, res) => {
 
-// })
 
 // Returns all the users Ledger items
 router.get('/', (req, res)=>{
@@ -111,5 +105,20 @@ router.post('/type', (req, res)=>{
 	     })
 
 })
+
+// Route to update the type/subType of a user mapping
+router.post('/split', (req, res)=>{ 
+  // Gathers infromation
+  let operation = 'update ledger split [user_id, split, user_Ledger_id] '
+  const procedure = 'CALL sp_UpdateLedgerSplit( ?, ?, ?);',
+        user_id = 1, 
+        { split, user_Ledger_id } = req.body,
+        params = [user_id, split, user_Ledger_id]
+  // Updates logging text
+  operation = operation + params.join(', ') 
+  // Makes DB update
+  callProcUPDATE(procedure, params, operation, res)   
+})
+
 
 module.exports = router;

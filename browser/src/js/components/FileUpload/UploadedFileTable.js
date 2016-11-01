@@ -9,6 +9,7 @@ import styles from 'styles/components/UploadedFileTable.css'
 
 export default class UploadedFileTable extends React.Component {
 
+
   render () {
     const { parsedFile, id, ...other } = this.props
     const fatalParseError = parsedFile.result.fileFatalError,
@@ -36,7 +37,7 @@ export default class UploadedFileTable extends React.Component {
                  </td>
                  <td className={descriptionErrorStyle}>
                    {row.description}
-                 </td>
+                 </td>               
                </tr>
       })
 
@@ -44,7 +45,7 @@ export default class UploadedFileTable extends React.Component {
 
         <div>
           <h4>{name}</h4>
-          <AccountsDropDown {...other} selected={parsedFile.selectedAccount} id={id} />         
+          <AccountsDropDown {...other} selected={parsedFile.selectedAccount} dispatch={this.props.dispatch} id={id} />         
            <table className='table table-striped'>
             <tbody>
               <tr>

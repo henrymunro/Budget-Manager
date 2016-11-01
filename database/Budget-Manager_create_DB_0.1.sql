@@ -34,6 +34,17 @@ CREATE TABLE BudgetType (
     CONSTRAINT PK_BudgetType_id PRIMARY KEY (BudgetType_id)
 );
 
+-- Table: ErrorLog
+CREATE TABLE ErrorLog (
+    ErrorLog_id int NOT NULL AUTO_INCREMENT,
+    User_id int,
+    Message varchar(10000),
+    Stack varchar(10000), 
+    ErrorType varchar(500), 
+    LogTime datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT PK_ErrorLog_id PRIMARY KEY (ErrorLog_id)
+);
+
 -- Table: FileUpload
 CREATE TABLE FileUpload (
     FileUpload_id int NOT NULL AUTO_INCREMENT,
@@ -62,6 +73,7 @@ CREATE TABLE Ledger (
    Ammount numeric(10,2) NOT NULL,
    Description varchar(500) NOT NULL,
    UserDescription varchar(500) NULL,
+   Split int NOT NULL DEFAULT 1, 
    FileUploadContents_id int NOT NULL,
    User_id int NOT NULL,
    Account_id int NOT NULL,
@@ -124,6 +136,7 @@ select L.Ledger_id
         ,A.AccountName
         ,BT.BudgetType
         ,BST.BudgetSubType
+        ,L.Split
         ,FU.FileName
         ,FU.UploadTime
         ,L.User_id 

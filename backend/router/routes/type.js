@@ -1,13 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const _ = require('lodash')
-const validator = require('validator')
-const Escape = validator.escape
 const debug = require('debug')('type')
-const csvParser = require('../global_functions/csvParser.js')
-const parseCSV = csvParser.parseCSV
-const moment = require('moment')
 const pool = require('mysql2/promise').createPool({host:'localhost', user: 'root', database: 'Budget'}); 
+
+const databaseConnection = require('../globalFunctions/databaseConnection')
+const   { callProcUPDATE, callProcGET } = databaseConnection
 
 $Client_address = 'http://localhost:8080'
 
@@ -81,6 +78,35 @@ router.post('/addSubType', (req, res)=> {
 	     	res.status(400).send('ERROR: '+ err)
 	     })
 
+})
+
+
+// Route to cease a user type 
+router.post('/ceaseType', (req, res)=>{ 
+  // Gathers infromation
+  let operation = 'cease type [user_id, budgetType] '
+  const procedure = 'CALL sp_CeaseUserType( ?, ?);',
+        user_id = 1, 
+        { budgetType } = req.body,
+        params = [user_id, budgetType]
+  // Updates logging text
+  operation = operation + params.join(', ') 
+  // Makes DB update
+  callProcUPDATE(procedure, params, operation, res)   
+})
+
+// Route to cease a user subtype 
+router.post('/ceaseSubType', (req, res)=>{ 
+  // Gathers infromation
+  let operation = 'cease subType [user_id, budgetSubType] '
+  const procedure = 'CALL sp_CeaseUserSubType( ?, ?);',
+        user_id = 1, 
+        { budgetSubType } = req.body,
+        params = [user_id, budgetSubType]
+  // Updates logging text
+  operation = operation + params.join(', ') 
+  // Makes DB update
+  callProcUPDATE(procedure, params, operation, res)   
 })
 
 

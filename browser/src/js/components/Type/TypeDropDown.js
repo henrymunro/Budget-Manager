@@ -20,6 +20,9 @@ import {
   updateLegerIDToExpandTypeDropDown
 } from '../../actions/ledgerActions'
 
+import { getGraphGroupedByType } from 'js/actions/graphActions'
+
+
 
 export default class TypeDropDown extends React.Component {
 
@@ -44,6 +47,7 @@ export default class TypeDropDown extends React.Component {
     this.props.dispatch(saveNewSelectedType(selectedType, selectedSubType, this.props.User_Ledger_id, this.props.axios))
         .then((res)=>{
           this.props.dispatch(updatedSelectedType(selectedType, selectedSubType, this.props.User_Ledger_id))
+          this.props.dispatch(getGraphGroupedByType(this.props.axios))
         }).catch((err)=>{
           alert('Unable to save change on the server')
         })

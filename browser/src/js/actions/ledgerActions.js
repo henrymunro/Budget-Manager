@@ -72,3 +72,22 @@ export function updatedSelectedType(type, subType, User_Ledger_id){
     }
   }
 }
+
+// Updates the split value in the store 
+export function updateSplitValue(User_Ledger_id, Split){
+  return{
+    type:"UPDATE_SPLIT_VALUE",
+    payload:{
+      User_Ledger_id: User_Ledger_id,
+      Split: Split
+    }
+  }
+}
+
+//Saves the new split value to the DB 
+export function saveSplitValue(User_Ledger_id, Split, axios){
+  return{
+    type:"SAVE_SPLIT_VALUE",
+    payload:axios.request.post(axios.URLS.updateLedgerSplit, { split: Split, user_Ledger_id: User_Ledger_id})
+  }
+}

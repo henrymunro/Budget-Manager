@@ -1,27 +1,36 @@
-.typeListElm_select{
-	background: blue;
-}
 
 .typeListElm{
-	background: red;
+	width: 150px;
+	/*border-width: 2px;
+	border-style: solid;*/
 }
 
 .typeList{
-	background: green;
+	background: white;
 	width: 49%;
+	height:95%;
 	float:left;
 }
 
 .subTypeList{
-	background: grey;
+	background: white;
 	width: 49%;
 	float:right;
+	height:95%;
 }
 
 .panel{
 	min-height: 180px;
 }
 
+
 .dropDown{
 	position: absolute;
+}
+
+.typeButton{
+	float:right;
+}
+.typeText{
+	float:left;
 }

@@ -1,9 +1,19 @@
 import React from 'react'
 
+import {updateSelectedAccountAction } from 'js/actions/fileUploadActions'
+
 
 export default class AccountsDropDown extends React.Component {
   componentWillMount () {
   }
+
+  updatedSelectedAccount(e){
+    const account_id = e.target.value
+    const file_id = e.target.attributes.getNamedItem('data-id').value
+    console.log(account_id, file_id)
+    this.props.dispatch(updateSelectedAccountAction(file_id, account_id))
+  }
+
 
   render () {
 
@@ -19,7 +29,7 @@ export default class AccountsDropDown extends React.Component {
               </option>
     })
 
-    return <select defaultValue={selected} data-id={id} onChange={onAccountChange}>
+    return <select defaultValue={selected} data-id={id} onChange={this.updatedSelectedAccount.bind(this)}>
         {accountSelectList}
     </select>
   }
@@ -28,7 +38,6 @@ export default class AccountsDropDown extends React.Component {
 AccountsDropDown.propTypes = {
   accounts: React.PropTypes.array,
   selected: React.PropTypes.string,
-  onAccountChange: React.PropTypes.function,
   id: React.PropTypes.number
 
 }
