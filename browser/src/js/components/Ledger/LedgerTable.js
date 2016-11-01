@@ -35,15 +35,16 @@ export default class LedgerTable extends React.Component {
   render () {
     const { ledgerItems, typeDropDown, ...other} = this.props.ledger
     const { types, distinctTypes } = this.props.types
-    const { typeFilter }= this.props.ledger.filters
+    const { typeFilter, accountFilter, updatedFilter }= this.props.ledger.filters
     const { axios } = this.props
 
-    console.log('TYPE FILTER: ', typeFilter)
     // Grabs the Ledger items to diplay 
     const filteredLedger = ledgerItems.filter((row, yearMonth)=> { 
         return (
           row.YearMonth === this.props.ledger.yearMonth.selectedValue
-          && (row.BudgetType === typeFilter || typeFilter==='false' ) 
+          && (row.BudgetType === typeFilter || typeFilter==='false' )
+          && (row.AccountName === accountFilter || accountFilter==='false' )  
+          && (updatedFilter==='false' || row.Updated===0)
           )
       })
 

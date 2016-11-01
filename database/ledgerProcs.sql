@@ -8,10 +8,10 @@ CREATE PROCEDURE sp_GetLedger(
 )
 BEGIN
 	
-	SELECT User_Ledger_id, Date, YearMonth, Ammount, Description, UploadedDescription, AccountName, BudgetType, BudgetSubType, Split, FileName, UploadTime
+	SELECT User_Ledger_id, Date, YearMonth, Ammount, Description, UploadedDescription, AccountName, BudgetType, BudgetSubType, Split, FileName, UploadTime, Updated
 	FROM (
 		SELECT @row_num := IF(@prev_value=User_id,@row_num+1,1) as User_Ledger_id
-				, Date, YearMonth, Ammount, Description, UploadedDescription, AccountName, BudgetType, BudgetSubType, Split, FileName, UploadTime 
+				, Date, YearMonth, Ammount, Description, UploadedDescription, AccountName, BudgetType, BudgetSubType, Split, FileName, UploadTime, Updated 
 				, @prev_value := User_id
 		FROM vw_Ledger,
 		 	(SELECT @row_num := 1) x,

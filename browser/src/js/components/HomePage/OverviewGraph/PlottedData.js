@@ -6,7 +6,7 @@ import Lines from './Lines'
 // import Circles from './Circles'
 
 
-import { updateTypeFilter, updateYearMonth } from 'js/actions/ledgerActions'
+import { updateTypeFilter, resetAllFilters, updateYearMonth } from 'js/actions/ledgerActions'
 
 
 import CSSstyles from 'styles/components/graphStyles/CirclesStyles.css'
@@ -38,6 +38,7 @@ export default class PlottedData extends React.Component {
   updateTypeFilterOnCircleClick(e){    
     const filterType = e.target.attributes.getNamedItem('data-type').value    
     const yearMonth = e.target.attributes.getNamedItem('data-year-month').value  
+    this.props.dispatch(resetAllFilters())
     this.props.dispatch(updateTypeFilter(filterType))    
     this.props.dispatch(updateYearMonth(yearMonth))
   }

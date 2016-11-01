@@ -35,7 +35,7 @@ export default class LedgerTypeFilter extends React.Component {
                 value={false}
                 data-type={false}
               >
-                {'No filter selected'}
+                {'Show all types'}
               </option>)
 
 
@@ -47,5 +47,6 @@ export default class LedgerTypeFilter extends React.Component {
 
 
 LedgerTypeFilter.propTypes = {
-  
+  distinctTypes: React.PropTypes.array.isRequired, 
+  typeFilter: React.PropTypes.string.isRequired
 }

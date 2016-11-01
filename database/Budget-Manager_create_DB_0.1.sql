@@ -140,7 +140,7 @@ select L.Ledger_id
         ,FU.FileName
         ,FU.UploadTime
         ,L.User_id 
-
+        ,CASE WHEN L.UserDescription IS NULL AND L.UpdateDate = FU.UploadTime THEN 0 ElSE 1 END as Updated
 from Ledger L
 inner join BudgetType BT on BT.BudgetType_id = L.BudgetType_id
 left join BudgetSubType BST on BST.BudgetSubType_id = L.BudgetSubType_id 

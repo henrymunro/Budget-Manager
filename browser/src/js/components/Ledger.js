@@ -24,8 +24,8 @@ export default class Ledger extends React.Component {
   componentWillMount () {
     this.props.dispatch(getYearMonth(this.props.axios))
     this.props.dispatch(getAccounts(this.props.axios))
-    this.props.dispatch(getLedger(this.props.axios))
     this.props.dispatch(getType(this.props.axios))
+    this.props.dispatch(getLedger(this.props.axios))
   }
 
 

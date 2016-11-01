@@ -102,3 +102,25 @@ export function updateTypeFilter(typeFilter){
     payload: typeFilter
   }
 }
+
+export function updateAccountFilter(accountFilter){
+  return {
+    type: "UPDATE_LEDGER_ACCOUNT_FILTER",
+    payload: accountFilter
+  }
+}
+
+export function updateUpdatedFilter(updatedFilter){
+  return {
+    type: "UPDATE_LEDGER_UPDATED_FILTER",
+    payload: updatedFilter
+  }
+}
+
+
+export function resetAllFilters(){
+return {
+  type: "RESET_ALL_FILTERS",
+  payload: ''
+  }
+}
