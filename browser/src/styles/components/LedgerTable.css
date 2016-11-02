@@ -1,0 +1,14 @@
+.tableHead{
+	background: white;
+}
+
+
+.tableRow{
+	padding: 0;
+}
+
+.splitInput[type=number]{
+	height: inherit;
+	margin: 8px 0;
+	width: 90%;
+}

@@ -34,14 +34,15 @@ export default class Ledger extends React.Component {
 
     return (
       <div className='container'>
-          <h2>Month overview page</h2>
           <StickyContainer>
+            <div className="card hoverable">
               <Sticky stickyStyle={{width:'100%', background:'white'}}>
                   <LedgerFilter {...other} />
               </Sticky>
               <StickyContainer>
                 <LedgerTable {...other} />
-               </StickyContainer>
+              </StickyContainer>
+            </div>
           </StickyContainer>
       </div>
     )

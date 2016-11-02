@@ -3,9 +3,16 @@ import React from 'react'
 
 import { updateYearMonth } from 'js/actions/ledgerActions'
 
+// var $ = require( 'jquery')
+
 
 export default class YearMonthDropDown extends React.Component {
   componentWillMount () {
+  }
+
+  componentDidUpdate(){
+    console.log('UPDATE: ', $('select'))
+    $('select').material_select();
   }
 
   updatedYearMonth(e){
@@ -25,9 +32,14 @@ export default class YearMonthDropDown extends React.Component {
               </option>
     })
 
-    return <select value={yearMonth.selectedValue} data-id='' onChange={this.updatedYearMonth.bind(this)}>
-        {yearMonthSelectList}
-    </select>
+    return   <div className='input-field col s12' onChange={this.updatedYearMonth.bind(this)}>
+              <select           
+                    value={yearMonth.selectedValue} 
+                    data-id='' 
+                    onChange={this.updatedYearMonth.bind(this)}>
+                  {yearMonthSelectList}
+              </select>
+          </div>
   }
 }
 
@@ -35,3 +47,5 @@ export default class YearMonthDropDown extends React.Component {
 YearMonthDropDown.propTypes = {
   yearMonth: React.PropTypes.object
 }
+
+

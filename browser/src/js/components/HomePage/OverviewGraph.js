@@ -92,7 +92,7 @@ export default class OverviewGraph extends React.Component {
     const graphElement = 
       <div >
           <Sticky>
-            <div style={{width:'100%', background:'white'}} className={baseStyles.cf}>
+            <div style={{width:'100%', background:'white'}} className={baseStyles.cf + ' card'}>
               <div className="container">
                 <svg className={styles.graphArea} id='chartID' width={svgWidth} height={svgHeight}>
                      <g transform={transform}>

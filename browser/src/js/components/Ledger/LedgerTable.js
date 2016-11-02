@@ -7,7 +7,7 @@ import { StickyContainer, Sticky } from 'react-sticky';
 import { updateDescription, saveDescription, updateSplitValue, saveSplitValue } from 'js/actions/ledgerActions'
 import { getGraphGroupedByType } from 'js/actions/graphActions'
 
-
+import styles from 'styles/components/LedgerTable.css'
 import baseStyles from 'styles/base.css'
 import TypeDropDown from '../Type/TypeDropDown'
 
@@ -60,14 +60,14 @@ export default class LedgerTable extends React.Component {
       //Props to pass to the type drop down
       const {...typesProps } = {User_Ledger_id, hoverTypeForExpandedDropDown, BudgetType, BudgetSubType, types, expandTypeDropDown, distinctTypes, axios}
       return <tr key={key} className=''>
-               <td className=''>
+               <td className={styles.tableRow}>
                  {moment(row.Date).format('YYYY-MM-DD')}
                </td>
-               <td className=''>
+               <td className={styles.tableRow}>
                  {Ammount}
                </td>
 
-               <td className=''>
+               <td className={styles.tableRow}>
                 <span title={UploadedDescription}>
                    <InlineEdit
                     data-ledger-id={User_Ledger_id}
@@ -77,11 +77,12 @@ export default class LedgerTable extends React.Component {
                     change={this.updatedDescription.bind(this)} />
                   </span>
                </td>
-               <td className=''>
+               <td className={styles.tableRow}>
                   <TypeDropDown {...typesProps } dispatch={this.props.dispatch} />
                 </td>
-                <td>
+                <td className={styles.tableRow}>
                   <input 
+                  className={styles.splitInput}
                   type='number'  
                   min='1' 
                   max='10' 
@@ -96,8 +97,8 @@ export default class LedgerTable extends React.Component {
 
         <div>    
           <Sticky>
-            <table className='table table-striped' style={{margin:0}}>
-              <tbody>
+            <table className={'striped '+ styles.tableHead}>
+              <thead>
                 <tr>
                   <th>
                     Date
@@ -115,10 +116,10 @@ export default class LedgerTable extends React.Component {
                     Split
                   </th>
                 </tr>
-              </tbody>
+              </thead>
             </table>
           </Sticky>
-          <table className='table table-striped'>
+          <table className='striped'>
             <tbody>
               {tableRows}
             </tbody>

@@ -8,6 +8,7 @@ import LedgerUpdatedFilter from 'js/components/Ledger/LedgerUpdatedFilter'
 import { resetAllFilters } from 'js/actions/ledgerActions'
 
 import baseStyles from 'styles/base.css'
+import styles from 'styles/components/LedgerFilter.css'
 
 export default class LedgerFilter extends React.Component {
   componentWillMount () {
@@ -23,11 +24,25 @@ export default class LedgerFilter extends React.Component {
 
     return <div className={baseStyles.cf}>
         <h4> Filter Ledger: </h4>
-        <YearMonthDropDown {...other} /> 
-        <LedgerTypeFilter {...other} />
-        <LedgerAccountFilter {...other} />
-        <LedgerUpdatedFilter {...other} />
-        <button className='btn btn-danger btn-sm' onClick={this.resetAllFilters.bind(this)}> Reset Filters</button>
+        <div className={styles.filter}>
+          <p> Month: </p>
+          <YearMonthDropDown {...other} /> 
+        </div>
+        <div className={styles.filter}>
+          Type: 
+          <LedgerTypeFilter {...other} />
+        </div>
+        <div className={styles.filter}>
+          Account: 
+          <LedgerAccountFilter {...other} />
+        </div>
+        <div className={styles.filter}>
+          Updated: 
+          <LedgerUpdatedFilter {...other} />
+        </div>
+        <div className={styles.filter}>
+          <button className='btn btn-danger btn-sm' onClick={this.resetAllFilters.bind(this)}> Reset Filters</button>
+        </div>
       </div>
   }
 }
