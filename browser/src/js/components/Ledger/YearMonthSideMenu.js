@@ -9,11 +9,15 @@ export default class YearMonthSideMenu extends React.Component {
   }
 
   componentDidUpdate(){
-    $(document).ready(function(){
-      $('.scrollspy').scrollSpy();
-    });
+    $('.scrollspy').scrollSpy({
+        scrollParent: '#scrollableLedgerTable',
+        offsetTop: 0
+    })
   }
 
+  componentDidMount(){
+     
+  }
 
 
   render () {

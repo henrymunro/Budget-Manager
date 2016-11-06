@@ -30,11 +30,11 @@ export default class LedgerFilter extends React.Component {
                 <a class="waves-effect waves-light btn" onClick={this.resetAllFilters.bind(this)}> Reset Filters</a>     
               </p>
     const noReset = <div />
-    const showReset = (updatedFilter|| accountFilter|| typeFilter)=='true'? resetFilterButton:noReset
+    const showReset = (updatedFilter!='false'|| accountFilter!='false'|| typeFilter!='false')? resetFilterButton:noReset
 
     return <ul className="collapsible" data-collapsible="accordion">
           <li>
-            <div className="collapsible-header"><i className="material-icons">filter_drama</i>Filter</div>
+            <div className="collapsible-header"><i className="material-icons">find_in_page</i>Filter</div>
             <div className="collapsible-body">
               <p style={{ paddingBottom: 0, paddingTop: '15px' }}>
                 Type:

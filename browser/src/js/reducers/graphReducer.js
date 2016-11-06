@@ -249,6 +249,7 @@ function calculateRangeFromShowData(dataToShow){
 	        return Number(d.Amount);
 	    })
 	const  extent_X = [x[0], x[1]]
-    const   extent_Y = [y[0], y[1]*1.1]
+    // const   extent_Y = [y[0], y[1]*1.1] // allow Y less than 0
+    const   extent_Y = [0, y[1]*1.1]
     return{ extent_X, extent_Y}
 }

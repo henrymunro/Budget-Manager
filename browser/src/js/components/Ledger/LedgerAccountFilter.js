@@ -52,5 +52,5 @@ export default class LedgerAccountFilter extends React.Component {
 
 LedgerAccountFilter.propTypes = {
   accounts: React.PropTypes.array.isRequired, 
-  accountFilter: React.PropTypes.string.isRequired
+  // accountFilter: React.PropTypes.string.isRequired
 }

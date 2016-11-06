@@ -2736,7 +2736,6 @@ $(document).ready(function(){
                 /* MOD START */
                 //var top = jWindow.offset() ? jWindow.offset().top : jWindow.scrollTop()
                 
-                console.log(this.hash + ' offset: ' + offset);
 
                 //          offset - 200 allows elements near bottom of page to scroll
 
@@ -2750,8 +2749,10 @@ $(document).ready(function(){
                         easing: 'easeOutCubic'
                     });
                 } else {
-                    var offset = $(this.hash).position().top - jWindow.offset().top + 1;
-                    jWindow.animate({
+                	//HM Edit
+                    var offset = $(this.hash).position().top;// - jWindow.offset().top + 445;   
+                    //HM Edit End                 
+	                jWindow.animate({
                         scrollTop: jWindow.scrollTop() + offset
                     }, {
                         duration: 400,

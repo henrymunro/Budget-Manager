@@ -1,5 +1,6 @@
 .tableHead{
 	background: white;
+	width: 97%;
 }
 
 
@@ -11,4 +12,22 @@
 	height: inherit;
 	margin: 8px 0;
 	width: 90%;
+}
+
+.dateCol{
+	width: 15%;
+}
+
+.amountCol{
+	width: 15%;
+}
+
+.descriptionCol{
+	width: 40%;
+}
+.typeCol{
+	width: 24%;
+}
+.splitCol{
+	width: 5%;
 }

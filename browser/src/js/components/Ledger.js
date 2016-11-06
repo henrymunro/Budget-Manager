@@ -12,6 +12,7 @@ import LedgerFilter from 'js/components/Ledger/LedgerFilter'
 import LedgerTableTitle from 'js/components/Ledger/LedgerTableTitle'
 import LedgerTable from 'js/components/Ledger/LedgerTable'
 import YearMonthSideMenu from 'js/components/Ledger/YearMonthSideMenu'
+import LeftCard from 'js/components/Ledger/LeftCard'
 
 import baseStyles from 'styles/base.css'
 
@@ -61,7 +62,11 @@ export default class Ledger extends React.Component {
     const ledgerItemsYearMonth3 = this.filterLedgerItems("2016-Aug")
 
     const ledgerTables = yearMonthArray.map((row, key)=>{
-      return <div id={row.YearMonth+'yearMonthKey'} class="section scrollspy" key={key}>
+      return <div 
+              id={row.YearMonth+'yearMonthKey'} 
+              className="section scrollspy" 
+              key={key}
+              style={{paddingTop:0, position:'relative'}}>
             <LedgerTable {...other} data={this.filterLedgerItems(row.YearMonth)}/>
         </div>
     })
@@ -69,7 +74,7 @@ export default class Ledger extends React.Component {
 
     return (
       <StickyContainer>
-        <div className={'row '+ baseStyles.cf} >        
+        <div className={'row '} >        
           <div className='col s12 l2'>
             <Sticky>
               <div className="card">
@@ -77,15 +82,20 @@ export default class Ledger extends React.Component {
               </div>
             </Sticky>  
           </div>
-          <div className='col s12 l7'>  
+          <div className='col s12 l7'> 
+            <div className="card"> 
               <Sticky>        
                 <div className="">  
                   <LedgerTableTitle />     
                 </div> 
               </Sticky>  
-              <div className="card" style={{height: '500px', overflowY: 'auto'}}>
+              <div 
+              id='scrollableLedgerTable'
+              className=""
+              style={{height: '450px', overflowY: 'auto', overflowX: 'hidden', position:'relative'}}>
                 {ledgerTables}   
               </div>
+            </div>
           </div>
           <div className='col s12 l3'>               
             <Sticky>

@@ -50,6 +50,6 @@ export default class LedgerTypeFilter extends React.Component {
 
 
 LedgerTypeFilter.propTypes = {
-  distinctTypes: React.PropTypes.array.isRequired, 
-  typeFilter: React.PropTypes.string.isRequired
+  // distinctTypes: React.PropTypes.array.isRequired, 
+  // typeFilter: React.PropTypes.string.isRequired
 }
