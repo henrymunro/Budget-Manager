@@ -30,16 +30,20 @@ export default class LedgerAccountFilter extends React.Component {
               </option>
     })
 
-    const accountFilterList = accountList.concat(<option 
+    const accountFilterList = [<option 
                 key={'no filter'} 
                 value={false}
                 data-account={false}
               >
                 {'Show all accounts'}
-              </option>)
+              </option>].concat(accountList)
 
 
-    return <select value={accountFilter} data-id='accountFilter' onChange={this.updateAccountFilterSelect.bind(this)}>
+    return <select             
+            className='browser-default' 
+            value={accountFilter} 
+            data-id='accountFilter' 
+            onChange={this.updateAccountFilterSelect.bind(this)}>
         {accountFilterList}
     </select>
   }

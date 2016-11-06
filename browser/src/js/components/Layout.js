@@ -104,10 +104,11 @@ export default class Layout extends React.Component {
   }
 
     return <div>
-
               <StickyContainer>
                 <NavBar />
-                <OverviewGraph />
+                <Sticky>
+                  <OverviewGraph />
+                </Sticky>
                 {display}
               </StickyContainer>
            </div>

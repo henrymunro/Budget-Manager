@@ -20,7 +20,14 @@ export default class LedgerUpdatedFilter extends React.Component {
    
     const { updatedFilter } = this.props.ledger.filters
 
-    return <input type='radio' checked={updatedFilter==='true'} onChange={this.updateUpdatedFilter.bind(this)}/> 
+    return <div className="input-field">
+              <form action="#">
+                <p style={{ paddingBottom: '25px', paddingTop: 0, paddingLeft:'50px', top: 0 }}>
+                  <input id="test5" type='checkbox' checked={updatedFilter==='true'} onChange={this.updateUpdatedFilter.bind(this)}/> 
+                  <label for="test5">Still To Update</label>
+                </p>
+              </form>
+            </div>
   }
 }
 

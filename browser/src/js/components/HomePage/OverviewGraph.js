@@ -89,10 +89,7 @@ export default class OverviewGraph extends React.Component {
 
     const {...legendProps} = {colourScale, colourScaleSubType, distinctTypesShow, showSubType, subTypeParent, distinctSubTypesShow, axios}
 
-    const graphElement = 
-      <div >
-          <Sticky>
-            <div style={{width:'100%', background:'white'}} className={baseStyles.cf + ' card'}>
+    const graphElement = <div className={baseStyles.cf + ' card'}>
               <div className="container">
                 <svg className={styles.graphArea} id='chartID' width={svgWidth} height={svgHeight}>
                      <g transform={transform}>
@@ -129,8 +126,6 @@ export default class OverviewGraph extends React.Component {
                 </div> 
               </div>
             </div>
-          </Sticky>
-      </div>
 
     this.props.dispatch(updateGraphElement(graphElement)) 
 

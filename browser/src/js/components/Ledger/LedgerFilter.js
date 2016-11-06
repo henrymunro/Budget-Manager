@@ -22,13 +22,37 @@ export default class LedgerFilter extends React.Component {
    
     const {...other } = this.props
 
-    return <div className={baseStyles.cf}>
-        <h4> Filter Ledger: </h4>
-        <div className={styles.filter}>
-          <p> Month: </p>
-          <YearMonthDropDown {...other} /> 
-        </div>
-        <div className={styles.filter}>
+    const { updatedFilter, accountFilter, typeFilter } = this.props.ledger.filters
+
+    console.log(updatedFilter, accountFilter, typeFilter )
+
+    const resetFilterButton = <p>      
+                <a class="waves-effect waves-light btn" onClick={this.resetAllFilters.bind(this)}> Reset Filters</a>     
+              </p>
+    const noReset = <div />
+    const showReset = (updatedFilter|| accountFilter|| typeFilter)=='true'? resetFilterButton:noReset
+
+    return <ul className="collapsible" data-collapsible="accordion">
+          <li>
+            <div className="collapsible-header"><i className="material-icons">filter_drama</i>Filter</div>
+            <div className="collapsible-body">
+              <p style={{ paddingBottom: 0, paddingTop: '15px' }}>
+                Type:
+                <LedgerTypeFilter {...other} />
+              </p>
+              <p style={{ paddingBottom: 0, paddingTop: 0 }}>
+                Account: 
+                <LedgerAccountFilter {...other} />
+              </p>              
+              <LedgerUpdatedFilter {...other} />  
+              {showReset}          
+            </div>
+          </li>
+        </ul>    
+  }
+}
+
+/*<div className={styles.filter}>
           Type: 
           <LedgerTypeFilter {...other} />
         </div>
@@ -42,11 +66,7 @@ export default class LedgerFilter extends React.Component {
         </div>
         <div className={styles.filter}>
           <button className='btn btn-danger btn-sm' onClick={this.resetAllFilters.bind(this)}> Reset Filters</button>
-        </div>
-      </div>
-  }
-}
-
+        </div>*/
 
 LedgerFilter.propTypes = {
   

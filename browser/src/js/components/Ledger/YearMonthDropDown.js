@@ -1,19 +1,13 @@
 import React from 'react'
 
-
 import { updateYearMonth } from 'js/actions/ledgerActions'
 
-// var $ = require( 'jquery')
 
 
 export default class YearMonthDropDown extends React.Component {
   componentWillMount () {
   }
 
-  componentDidUpdate(){
-    console.log('UPDATE: ', $('select'))
-    $('select').material_select();
-  }
 
   updatedYearMonth(e){
     const yearMonth = e.target.value 
@@ -32,8 +26,9 @@ export default class YearMonthDropDown extends React.Component {
               </option>
     })
 
-    return   <div className='input-field col s12' onChange={this.updatedYearMonth.bind(this)}>
-              <select           
+    return    <div className='col s12' onChange={this.updatedYearMonth.bind(this)}>
+              <select    
+                    className='browser-default'       
                     value={yearMonth.selectedValue} 
                     data-id='' 
                     onChange={this.updatedYearMonth.bind(this)}>
@@ -42,6 +37,9 @@ export default class YearMonthDropDown extends React.Component {
           </div>
   }
 }
+                    // value={yearMonth.selectedValue} 
+                    // data-id='' 
+                    // onChange={this.updatedYearMonth.bind(this)}>
 
 
 YearMonthDropDown.propTypes = {

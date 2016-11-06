@@ -35,23 +35,23 @@ export default class LedgerTable extends React.Component {
   render () {
     const { ledgerItems, typeDropDown, ...other} = this.props.ledger
     const { types, distinctTypes } = this.props.types
-    const { typeFilter, accountFilter, updatedFilter }= this.props.ledger.filters
-    const { axios } = this.props
+    // const { typeFilter, accountFilter, updatedFilter }= this.props.ledger.filters
+    const { axios, data } = this.props
 
-    // Grabs the Ledger items to diplay 
-    const filteredLedger = ledgerItems.filter((row, yearMonth)=> { 
-        return (
-          row.YearMonth === this.props.ledger.yearMonth.selectedValue
-          && (row.BudgetType === typeFilter || typeFilter==='false' )
-          && (row.AccountName === accountFilter || accountFilter==='false' )  
-          && (updatedFilter==='false' || row.Updated===0)
-          )
-      })
+    // // Grabs the Ledger items to diplay 
+    // const filteredLedger = ledgerItems.filter((row, yearMonth)=> { 
+    //     return (
+    //       row.YearMonth === this.props.ledger.yearMonth.selectedValue
+    //       && (row.BudgetType === typeFilter || typeFilter==='false' )
+    //       && (row.AccountName === accountFilter || accountFilter==='false' )  
+    //       && (updatedFilter==='false' || row.Updated===0)
+    //       )
+    //   })
 
     //Loads in Type drop down constants 
     const { userLedgerDropDownShow, hoverType } = typeDropDown
 
-    const tableRows = filteredLedger.map((row, key) => {
+    const tableRows = data.map((row, key) => {
       const { Ammount, User_Ledger_id, Description, UploadedDescription, BudgetType, BudgetSubType, Split } = row
       //Logic to work out if drop down should be showing
       const expandTypeDropDown = (Number(userLedgerDropDownShow) === Number(User_Ledger_id))
@@ -95,36 +95,11 @@ export default class LedgerTable extends React.Component {
 
       return (
 
-        <div>    
-          <Sticky>
-            <table className={'striped '+ styles.tableHead}>
-              <thead>
-                <tr>
-                  <th>
-                    Date
-                  </th>
-                  <th>
-                    Ammount
-                  </th>
-                  <th>
-                    Description
-                  </th>
-                  <th>
-                    Type
-                  </th>
-                  <th> 
-                    Split
-                  </th>
-                </tr>
-              </thead>
-            </table>
-          </Sticky>
-          <table className='striped'>
+          <table className='striped'> 
             <tbody>
               {tableRows}
             </tbody>
           </table>
-        </div>
       )
     }
 

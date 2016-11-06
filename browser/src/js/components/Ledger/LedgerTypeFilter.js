@@ -30,16 +30,19 @@ export default class LedgerTypeFilter extends React.Component {
               </option>
     })
 
-    const typeFilterList = typeList.concat(<option 
+    const typeFilterList = [<option 
                 key={'no filter'} 
                 value={false}
                 data-type={false}
               >
                 {'Show all types'}
-              </option>)
+              </option>].concat(typeList)
 
-
-    return <select value={typeFilter} data-id='typeFilter' onChange={this.updateTypeFilterSelect.bind(this)}>
+    return <select 
+            className='browser-default'  
+            value={typeFilter} 
+            data-id='typeFilter' 
+            onChange={this.updateTypeFilterSelect.bind(this)}>
         {typeFilterList}
     </select>
   }
