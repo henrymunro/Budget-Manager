@@ -16,6 +16,10 @@ import { getType } from '../actions/typeActions'
 import MappingTypeDropDown from './Type/MappingTypeDropDown'
 
 
+import styles from 'styles/components/Mappings.css'
+import baseStyles from 'styles/base.css'
+
+
 
 @connect((store) => {
   return {
@@ -42,10 +46,12 @@ export default class Mappings extends React.Component {
     console.log('BUTTON CLICKED ')
     const { addNewMappingText, addNewMapToText } = this.props.mappings
     console.log(addNewMappingText, addNewMapToText)
-    this.props.dispatch(saveNewMapping(addNewMappingText, addNewMapToText, this.props.axios))
-      .then((res)=>{
-          this.props.dispatch(getMappings(this.props.axios))
-        })
+    if ( addNewMappingText!='' && addNewMapToText!='' ) {
+      this.props.dispatch(saveNewMapping(addNewMappingText, addNewMapToText, this.props.axios))
+        .then((res)=>{
+            this.props.dispatch(getMappings(this.props.axios))
+          })
+    }
   }
   deleteUserMapping(e){
     console.log('Delete button pushed')
@@ -75,32 +81,56 @@ export default class Mappings extends React.Component {
         const {...typesProps } = {UserMapping_id, hoverTypeForExpandedDropDown, BudgetType, BudgetSubType, types, expandTypeDropDown, axios}
 
       return <tr key={key}>
-          <td>{Mapping}</td>
-          <td>{MapTo}</td>
-          <td><MappingTypeDropDown {...typesProps } dispatch={this.props.dispatch} /></td>
-          <td><button data-usermapping-id={UserMapping_id} onClick={this.deleteUserMapping.bind(this)} > DEL </button></td>
+          <td className={baseStyles.tableRow + ' ' + styles.mappingCol} >{Mapping}</td>
+          <td className={baseStyles.tableRow + ' ' + styles.mapToCol} >{MapTo}</td>
+          <td className={baseStyles.tableRow + ' ' + styles.typeCol} >
+            <MappingTypeDropDown {...typesProps } dispatch={this.props.dispatch} />
+          </td>
+          <td className={baseStyles.tableRow + ' ' + styles.deleteCol}>
+            <button className={baseStyles.deleteButton}>
+            <i className="tiny material-icons"
+               data-usermapping-id={UserMapping_id}
+               onClick={this.deleteUserMapping.bind(this)}>delete</i>
+            </button>
+          </td>
       </tr>
     })
 
     
     return (
-      <div className='container'>
-        <h3> Mappings </h3>
+      <div>
+        <div className='col s12 l9'> 
+          <div className="card"> 
+            <table className={'striped ' + baseStyles.tableHead} >
+              <tbody className={baseStyles.tableHead}>
+                <tr className={baseStyles.tableHead}>
+                  <th className={baseStyles.white}>Mapping</th>
+                  <th className={baseStyles.white}>Map To</th>
+                  <th className={baseStyles.white}>Type</th>
+                  <th className={baseStyles.white}></th>
+                </tr>
+              </tbody>
+            </table>
+            <div style={{height: '450px', overflowY: 'auto', overflowX: 'hidden', position:'relative'}}>
+              <table className='striped'>
+                <tbody>
+                  { mappingTableRows }
+                </tbody>
+              </table>
+            </div>
 
-        <table className='table table-striped'>
-          <tbody>
-            <tr>
-              <th>Mapping</th>
-              <th>Map To</th>
-              <th>Type</th>
-            </tr>
-            { mappingTableRows }
-          </tbody>
-        </table>
-
-        <input value={addNewMappingText} onChange={this.updateNewMappingText.bind(this)} />        
-        <input value={addNewMapToText} onChange={this.updateNewMapToText.bind(this)} />
-        <button onClick={this.saveNewMapping.bind(this)}>Save Mapping</button> 
+          </div>
+        </div>
+        <div className='col s12 l3'>
+          <div className="card">
+            <div className={styles.addNewMappingBox}>
+              <p>Add new mapping: </p> 
+              <input placeholder="Mapping" value={addNewMappingText} onChange={this.updateNewMappingText.bind(this)}/>     
+              <input placeholder="Map To" value={addNewMapToText} onChange={this.updateNewMapToText.bind(this)} />
+              <a class="waves-effect waves-light btn" onClick={this.saveNewMapping.bind(this)}>Save Mapping</a>
+            </div>
+          </div>
+        </div>
       </div>
 
     )

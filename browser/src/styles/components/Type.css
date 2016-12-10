@@ -1,26 +1,34 @@
 
+#typeCard{
+	padding: 10px;
+
+}
+
 .typeListElm{
 	width: 150px;
+	height: 30px;
+	padding: 0;
 	/*border-width: 2px;
 	border-style: solid;*/
 }
+.typeListElm button{
+	float: right;
+}
 
 .typeList{
-	background: white;
-	width: 49%;
+	/*background: white;*/
+	width: 48%;
 	height:95%;
 	float:left;
 }
 
+
+
 .subTypeList{
-	background: white;
-	width: 49%;
+	/*background: white;*/
+	width: 48%;
 	float:right;
 	height:95%;
-}
-
-.panel{
-	min-height: 180px;
 }
 
 
@@ -33,4 +41,23 @@
 }
 .typeText{
 	float:left;
+	width: 90%;
+}
+
+#typeSelected{
+	background: #dadada;
+}
+
+.inputs{ 
+	width: 100%;
+}
+
+.typeInput{
+	width: 45%;
+	float:left;
+}
+
+.subTypeInput{
+	width: 45%;
+	float:right;
 }

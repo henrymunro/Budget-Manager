@@ -26,11 +26,14 @@ export default class Accounts extends React.Component {
 
   saveNewAccount(e){
     console.log('BUTTON CLICKED ')
-    this.props.dispatch(saveNewAccount(this.props.addNewAccountText, this.props.axios))
-      .then((res)=>{
-          this.props.dispatch(getAccounts(this.props.axios))          
-          this.props.dispatch(updateNewAccountTextBox(''))
-        })
+    const account = this.props.addNewAccountText 
+    if ( account!= ''){
+      this.props.dispatch(saveNewAccount(account, this.props.axios))
+        .then((res)=>{
+            this.props.dispatch(getAccounts(this.props.axios))          
+            this.props.dispatch(updateNewAccountTextBox(''))
+          })
+    }
   }
 
   UpdateDropDown(e){
@@ -48,14 +51,14 @@ export default class Accounts extends React.Component {
     })
     const accountsList = <ul className="list-group">{accountsListElements}</ul>
 
-    return <div className='container'>
+    return <div className='card'>
             <h4>Accounts</h4>
             <AccountsDropDown accounts={accounts} selectedAccount='amex' onChange={this.UpdateDropDown} />
               <div className="container">
                 {accountsList}
               </div>
-             <input value={this.props.addNewAccountText} onChange={this.updateNewAccountText.bind(this)} /> 
-             <button className='button' onClick={this.saveNewAccount.bind(this)}> Add Account </button>       
+             <input placeholder="Add New Account" value={this.props.addNewAccountText} onChange={this.updateNewAccountText.bind(this)} /> 
+             <a class="waves-effect waves-light btn" onClick={this.saveNewAccount.bind(this)}>Save Account</a>      
            </div>
   }
 }

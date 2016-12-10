@@ -60,14 +60,14 @@ export default class LedgerTable extends React.Component {
       //Props to pass to the type drop down
       const {...typesProps } = {User_Ledger_id, hoverTypeForExpandedDropDown, BudgetType, BudgetSubType, types, expandTypeDropDown, distinctTypes, axios}
       return <tr key={key} className=''>
-               <td className={styles.tableRow + ' ' + styles.dateCol}>
+               <td className={baseStyles.tableRow + ' ' + styles.dateCol}>
                  {moment(row.Date).format('YYYY-MM-DD')}
                </td>
-               <td className={styles.tableRow + ' ' + styles.amountCol}>
+               <td className={baseStyles.tableRow + ' ' + styles.amountCol}>
                  {Ammount}
                </td>
 
-               <td className={styles.tableRow + ' ' + styles.descriptionCol}>
+               <td className={baseStyles.tableRow + ' ' + styles.descriptionCol}>
                 <span title={UploadedDescription}>
                    <InlineEdit
                     data-ledger-id={User_Ledger_id}
@@ -77,10 +77,10 @@ export default class LedgerTable extends React.Component {
                     change={this.updatedDescription.bind(this)} />
                   </span>
                </td>
-               <td className={styles.tableRow + ' ' + styles.typeCol}>
+               <td className={baseStyles.tableRow + ' ' + styles.typeCol}>
                   <TypeDropDown {...typesProps } dispatch={this.props.dispatch} />
                 </td>
-                <td className={styles.tableRow + ' ' + styles.splitCol}>
+                <td className={baseStyles.tableRow + ' ' + styles.splitCol}>
                   <input 
                   className={styles.splitInput}
                   type='number'  

@@ -1,3 +1,4 @@
+/*General table sytyles*/
 .tableHead{
 	background: white;
 	width: 97%;
@@ -6,11 +7,19 @@
 
 .tableRow{
 	padding: 0;
+	height: 34px;
 }
 
+.white{
+	background: white;
+}
+
+
+
+/*Specific ledger table styles*/
 .splitInput[type=number]{
 	height: inherit;
-	margin: 8px 0;
+	margin: 0;
 	width: 90%;
 }
 

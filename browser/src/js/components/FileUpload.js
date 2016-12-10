@@ -42,30 +42,22 @@ export default class FileUpload extends React.Component {
     this.props.dispatch(filesUploaded(filesArray, this.props.axios))
   }
 
-  saveFileToDB(e){
-    const fileKey = e.target.attributes.getNamedItem('data-file-id').value
-    const fileToSave = this.props.fileUpload.parsedFiles[fileKey]
-    console.log('Saving file to DB: ', fileToSave)
-    this.props.dispatch(saveFileToDB(fileToSave, this.props.axios))
-  }
-
 
   render () {
     const { user, fileUpload, accounts } = this.props
+    const { ...other } = this.props
     let parsedFilesRendered = fileUpload.parsedFiles.map((file, key) => {
       console.log('KEY: ', key)
-      return <div key={key}>
-      <button className='btn' data-file-id={key} onClick={this.saveFileToDB.bind(this)}>Sav!e</button>
-      <UploadedFileTable parsedFile={file} accounts={accounts} dispatch={this.props.dispatch} id={key}/>
+      return <div key={key} className='row'>      
+      <UploadedFileTable {...other} parsedFile={file} accounts={accounts} dispatch={this.props.dispatch} id={key}/>
       </div>
     })
 
     return (
-      <div className='container'>
-        <h3>File upload page</h3>
-        <div class='container' id='uploadFileCont'>
-          <h3>Upload a file:</h3>
-          <div class='container'>
+      <div>
+        <div className="col s12 l9 card">
+          <h4>Upload a file:</h4>
+          <div>
             <input
               type='file'
               id='selectFiles'
@@ -75,7 +67,7 @@ export default class FileUpload extends React.Component {
               onChange={this.fileSelected.bind(this)} />
           </div>
         </div>
-        <div className='container'>
+        <div>
           {parsedFilesRendered}
         </div>
       </div>

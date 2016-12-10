@@ -1,14 +1,23 @@
 import React from 'react'
 import InlineEdit from 'react-edit-inline'
 import cx from 'classnames'
+import { StickyContainer, Sticky } from 'react-sticky'
 
-import AccountsDropDown from '../Accounts/AccountsDropDown'
+import { saveFileToDB } from 'js/actions/fileUploadActions'
+
+import AccountsDropDown from 'js/components/Accounts/AccountsDropDown'
 
 import baseStyles from 'styles/base.css'
 import styles from 'styles/components/UploadedFileTable.css'
 
 export default class UploadedFileTable extends React.Component {
 
+  saveFileToDB(e){
+    const fileKey = e.target.attributes.getNamedItem('data-file-id').value
+    const fileToSave = this.props.fileUpload.parsedFiles[fileKey]
+    console.log('Saving file to DB: ', fileToSave)
+    this.props.dispatch(saveFileToDB(fileToSave, this.props.axios))
+  }
 
   render () {
     const { parsedFile, id, ...other } = this.props
@@ -29,39 +38,48 @@ export default class UploadedFileTable extends React.Component {
           descriptionErrorStyle = cx({[styles.elementError]: row.Errors.descriptionError}),
           rowErrorStyle = cx({[styles.rowError]: row.Errors.rowError})
         return <tr key={key} className={rowErrorStyle}>
-                 <td className={dateErrorStyle}>
+                 <td className={dateErrorStyle + ' ' + baseStyles.tableRow}>
                    {row.date}
                  </td>
-                 <td className={ammountErrorStyle}>
+                 <td className={ammountErrorStyle + ' ' + baseStyles.tableRow}>
                    {row.ammount}
                  </td>
-                 <td className={descriptionErrorStyle}>
+                 <td className={descriptionErrorStyle + ' ' + baseStyles.tableRow}>
                    {row.description}
                  </td>               
                </tr>
       })
 
       return (
-
         <div>
-          <h4>{name}</h4>
-          <AccountsDropDown {...other} selected={parsedFile.selectedAccount} dispatch={this.props.dispatch} id={id} />         
-           <table className='table table-striped'>
-            <tbody>
-              <tr>
-                <th>
-                  Date
-                </th>
-                <th>
-                  Ammount
-                </th>
-                <th>
-                  Description
-                </th>
-              </tr>
-              {tableRows}
-            </tbody>
-          </table>
+          <StickyContainer>
+            <div className='col s12 l9 card'>
+              <h4>{name}</h4>
+                     
+               <table className='striped'>
+                <tbody>
+                  <tr>
+                    <th className={baseStyles.tableRow}>
+                      Date
+                    </th>
+                    <th className={baseStyles.tableRow}>
+                      Ammount
+                    </th>
+                    <th className={baseStyles.tableRow}>
+                      Description
+                    </th>
+                  </tr>
+                  {tableRows}
+                </tbody>
+              </table>
+            </div>
+            <Sticky>
+              <div className="col s12 l3 card">
+                <AccountsDropDown {...other} selected={this.props.parsedFile.selectedAccount} dispatch={this.props.dispatch} />  
+                <button className='btn' data-file-id={this.props.id} onClick={this.saveFileToDB.bind(this)}>Sav!e</button>
+              </div>
+            </Sticky>
+          </StickyContainer>
         </div>
       )
     }

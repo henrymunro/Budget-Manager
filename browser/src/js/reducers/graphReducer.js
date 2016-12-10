@@ -8,8 +8,8 @@ export default function reducer(state={
 	    subTypeParent: '',
 	    showSubType: false, 
 	    svgWidth: 800,
-	    svgHeight: 300,
-	    svgHeightMax: 300, //constant
+	    svgHeight: 200,
+	    svgHeightMax: 200, //constant
 	    svgHeightMin: 150, //constant
         // innerHeight: 10, 
         // innerWidth: 10,

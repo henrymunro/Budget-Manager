@@ -8,12 +8,7 @@ import { updateGraphWidth, updateGraphHeight } from 'js/actions/graphActions'
 
 
 import HomePage from './HomePage'
-import FileUpload from './FileUpload'
-import Mappings from './Mappings'
-import Accounts from './Accounts'
-import Ledger from './Ledger'
-import Type from './Type'
-import NavBar from './HomePage/NavBar'
+import LowerHome from 'js/components/LowerHome'
 import OverviewGraph from './HomePage/OverviewGraph'
 
 
@@ -75,45 +70,18 @@ export default class Layout extends React.Component {
     xhr.send(JSON.stringify(log)) 
   })
 
-  // Sets default routing to ledger 
-  const hash = this.props.hash || "ledger"
-  let display  = <Ledger />
 
-  // Updates the compnents shown based on route
-  switch(hash) {
-    case "#mappings": {
-      display = <Mappings />
-      break
-    }
-    case "#accounts": {
-      display = <Accounts />
-      break
-    }
-    case "#ledger": {
-      display = <Ledger />
-      break
-    }   
-    case "#fileUpload": {
-      display = <FileUpload />
-      break
-    }
-    case "#type": {
-      display = <Type /> 
-      break
-    }
-  }
 
     return <div>
-              <StickyContainer>
-                <NavBar />
-                <Sticky>
                   <OverviewGraph />
-                </Sticky>
-                {display}
+               
+              <StickyContainer>
+                <LowerHome />
               </StickyContainer>
            </div>
   }
 }
+                // <NavBar />
              // <FileUpload />
              // <Accounts />
              // <Mappings />

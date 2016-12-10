@@ -29,7 +29,11 @@ export default class AccountsDropDown extends React.Component {
               </option>
     })
 
-    return <select defaultValue={selected} data-id={id} onChange={this.updatedSelectedAccount.bind(this)}>
+    return <select 
+            className='browser-default'  
+            defaultValue={selected} 
+            data-id={id} 
+            onChange={this.updatedSelectedAccount.bind(this)}>
         {accountSelectList}
     </select>
   }

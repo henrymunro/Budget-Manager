@@ -6,27 +6,21 @@ import { getAccounts } from 'js/actions/accountsActions'
 import { getYearMonth, getLedger, updateDescription, saveDescription } from 'js/actions/ledgerActions'
 import { getType } from 'js/actions/typeActions'
 
+import NavBar from 'js/components/HomePage/NavBar'
 import AccountsDropDown from 'js/components/Accounts/AccountsDropDown'
 import UploadedFileTable from 'js/components/FileUpload/UploadedFileTable'
 import LedgerFilter from 'js/components/Ledger/LedgerFilter'
 import LedgerTableTitle from 'js/components/Ledger/LedgerTableTitle'
 import LedgerTable from 'js/components/Ledger/LedgerTable'
 import YearMonthSideMenu from 'js/components/Ledger/YearMonthSideMenu'
-import LeftCard from 'js/components/Ledger/LeftCard'
 
 import baseStyles from 'styles/base.css'
 
 
-@connect((store) => {
-  return {
-    axios: store.axios.axios, 
-    accounts: store.accounts.accounts,
-    ledger: store.ledger,
-    types: store.types
-  }
-})
 export default class Ledger extends React.Component {
   componentWillMount () {
+    const axios = this.props
+    console.log('This is axiso: ', axios)
     this.props.dispatch(getYearMonth(this.props.axios))
     this.props.dispatch(getAccounts(this.props.axios))
     this.props.dispatch(getType(this.props.axios))
@@ -57,9 +51,6 @@ export default class Ledger extends React.Component {
   render () {
     const { ...other } = this.props // also passes dispatch
     const yearMonthArray = this.props.ledger.yearMonth.array
-    const ledgerItemsYearMonth1 = this.filterLedgerItems(this.props.ledger.yearMonth.selectedValue)
-    const ledgerItemsYearMonth2 = this.filterLedgerItems("2016-Sep")
-    const ledgerItemsYearMonth3 = this.filterLedgerItems("2016-Aug")
 
     const ledgerTables = yearMonthArray.map((row, key)=>{
       return <div 
@@ -73,16 +64,8 @@ export default class Ledger extends React.Component {
 
 
     return (
-      <StickyContainer>
-        <div className={'row '} >        
-          <div className='col s12 l2'>
-            <Sticky>
-              <div className="card">
-                col1
-              </div>
-            </Sticky>  
-          </div>
-          <div className='col s12 l7'> 
+        <div>
+          <div className='col s12 l9'> 
             <div className="card"> 
               <Sticky>        
                 <div className="">  
@@ -102,40 +85,15 @@ export default class Ledger extends React.Component {
               <LedgerFilter {...other} />
               <div className="card">
                 <YearMonthSideMenu {...other} />
+                
               </div>
             </Sticky> 
           </div>
         </div>
-      </StickyContainer>
     )
   }
 }
-/*
-<StickyContainer>
-          <div className='row'>        
-        <Sticky>
-            <div className='col s12 l2 card'>
-              col1
-            </div>
-            <div className='col s12 l7 card hoverable z-depth-2'>          
-                <LedgerFilter {...other} />
-                <LedgerTableTitle />      
-            </div>
-            <div className='col s12 l3 card'>
-                <YearMonthSideMenu {...other} />
-            </div>
-       
-        </Sticky>     
-          <div className='col s12 l2'>
-          </div>
-          <div className='col s12 l7 card z-depth-1'>     
-            {ledgerTables}         
-          </div>
-          <div className='col s12 l3'>
-          </div>
-        </div>
-      </StickyContainer>
-*/
+
 
 Ledger.propTypes = {
 

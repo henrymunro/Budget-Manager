@@ -4,7 +4,6 @@ export default class NavBar extends React.Component {
   render () {
     return (
       <div>
-        <nav className='navbar navbar-light bg-faded'>
         	<ul className='nav navbar-nav'>
         		<li className='nav-item'><a className='nav-link' href="#ledger">Ledger</a></li>
         		<li className='nav-item'><a className='nav-link' href="#mappings">Mappings</a></li>
@@ -12,7 +11,6 @@ export default class NavBar extends React.Component {
         		<li className='nav-item'><a className='nav-link' href="#fileUpload">File Upload</a></li>      		
         		<li className='nav-item'><a className='nav-link' href="#type">Type</a></li>
         	</ul>
-        </nav>
       </div>
     )
   }
