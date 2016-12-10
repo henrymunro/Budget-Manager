@@ -217,7 +217,7 @@ export default function reducer(state={
 		case "UPDATE_GRAPH_WIDTH":{
 			return {
 				...state, 
-				svgWidth: action.payload * 0.65,
+				svgWidth: action.payload,
 				shouldGraphRender: 1 
 			}
 		}

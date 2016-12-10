@@ -68,7 +68,7 @@ export function makeLineBoldOnHover(type){
 export function updateGraphWidth(innerWidth){
 	return{
 		type:"UPDATE_GRAPH_WIDTH",
-		payload: innerWidth
+		payload: innerWidth 
 	}
 }
 

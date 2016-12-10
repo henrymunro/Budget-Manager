@@ -32,8 +32,11 @@ export default class Layout extends React.Component {
   }
 
   onWindowResize(e){
-    const windowWidth = e.target.innerWidth
-    this.props.dispatch(updateGraphWidth(windowWidth))
+    const newGraphWidth = e.target.innerWidth * 0.65
+    const graphWidth = this.props.graph.svgWidth
+    if ( newGraphWidth > graphWidth + 10 || newGraphWidth < graphWidth - 10){
+      this.props.dispatch(updateGraphWidth(newGraphWidth))
+    }
   }
   onScroll(e){
     const {svgHeightMin, svgHeightMax, svgHeight } = this.props.graph
