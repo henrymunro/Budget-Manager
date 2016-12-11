@@ -49,12 +49,15 @@ export default class LegendElement extends React.Component {
 
     const showColour = show?colour: this.colourLightener(colour) 
     const showText = show? 'white' : 'black'
-    const subTypeToggle = <div data-type={type}         
+    const subTypeToggle = <div data-type={type}  
+        style={{background: showColour, padding: '0px', margin: '0px'}}       
         className={styles.SubTypeToggleDiv}    
         onClick={this.onShowSubTypeClick.bind(this)}>
-            <input type='radio' checked={(subTypeParent==type)} />
+                <p style={{background: showColour, padding: '0px', margin: '0px'}}  className={baseStyles.cf}>
+                  <input class="with-gap" name="group3" type="radio" id="test5" checked={(subTypeParent==type)} />
+                  <label for="test5"></label>
+                </p>
         </div>
-    
     const showSubTypeToggle = (legendType=='TYPE')? subTypeToggle : <div />
     
     return (
