@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "DEBUG=fileUpload,csvParser,mappings,type,ledger,graph,databaseConnection,LOG  nodemon -w . -w www"
+    "dev": "DEBUG=fileUpload,csvParser,mappings,type,ledger,graph,databaseConnection,LOG,fileUploadValidation  nodemon -w . -w www"
   },
   "dependencies": {
     "body-parser": "~1.13.2",

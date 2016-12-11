@@ -6,6 +6,7 @@ const Escape = validator.escape
 const debug = require('debug')('fileUpload')
 const csvParser = require('../globalFunctions/csvParser.js')
 const parseCSV = csvParser.parseCSV
+const validateUploadedFile = require('../globalFunctions/fileUploadValidation.js').validateUploadedFile
 const moment = require('moment')
 const pool = require('mysql2/promise').createPool({host:'localhost', user: 'root', database: 'Budget'}); 
 
@@ -42,9 +43,20 @@ router.post('/', (req, res) => {
         parsedFile.account = ''
         parsedFile.selectedAccount = 1
         parsedFile.lastModifiedDate = file.lastModifiedDate
-        parsedFiles.push(parsedFile)
         debug('File parsed: '+file.name)
-        resolve()
+
+        //Validating file contents and meta data
+        debug('Validating file: '+ file.name)
+        validateUploadedFile(parsedFile).then((result)=>{
+          const { validationFailCount, validatedUploadFileFail } = result
+          parsedFile.validationFailCount = validationFailCount
+          parsedFile.validatedUploadFileFail = validatedUploadFileFail
+          debug('Validated file: ' + file.name)
+          parsedFiles.push(parsedFile)
+          resolve()
+        }).catch((err)=>{
+          debug('ERROR validating file: ' + file.name + err)
+        })
       }).catch(function (err) {
         debug('ERROR with file  '+file.name+': ' + err)
         reject(err)

@@ -80,3 +80,50 @@ BEGIN
 
 END //
 DELIMITER ;
+
+
+/* #############  Validate Files ############# */
+
+DROP PROCEDURE IF EXISTS sp_ValidateUploadFile;
+DELIMITER //
+CREATE PROCEDURE sp_ValidateUploadFile(
+	in fileName varchar(500),
+	in fileLastEditTime datetime,
+	in user_id_in int
+)
+BEGIN
+	
+	SELECT CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END AS FileAlreadyUploaded
+	FROM FileUpload FU 
+	WHERE User_id = user_id_in
+		AND FileName = fileName
+		AND FileLastEditTime = fileLastEditTime;
+
+
+
+END //
+DELIMITER ;
+
+
+
+DROP PROCEDURE IF EXISTS sp_ValidateUploadFileContents;
+DELIMITER //
+CREATE PROCEDURE sp_ValidateUploadFileContents(
+	in date date, 
+	in ammount numeric(10,2),
+	in description varchar(500),
+	in user_id_in int
+)
+BEGIN
+	
+	SELECT CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END AS FileContentsAlreadyUploaded
+	FROM Ledger 
+	WHERE User_id = user_id_in
+	 	AND Date = date
+	 	AND Ammount = ammount
+	 	AND Description = description; 
+
+
+
+END //
+DELIMITER ;
