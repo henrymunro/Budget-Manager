@@ -6,6 +6,7 @@ import { StickyContainer, Sticky } from 'react-sticky'
 import { saveFileToDB } from 'js/actions/fileUploadActions'
 
 import AccountsDropDown from 'js/components/Accounts/AccountsDropDown'
+import { getGraphGroupedByType } from 'js/actions/graphActions'
 
 import baseStyles from 'styles/base.css'
 import styles from 'styles/components/UploadedFileTable.css'
@@ -17,14 +18,16 @@ export default class UploadedFileTable extends React.Component {
     const fileToSave = this.props.fileUpload.parsedFiles[fileKey]
     console.log('Saving file to DB: ', fileToSave)
     this.props.dispatch(saveFileToDB(fileToSave, this.props.axios))
+        .then((res)=>{
+          this.props.dispatch(getGraphGroupedByType(this.props.axios)) //update graph 
+        })
   }
 
   render () {
     const { parsedFile, id, ...other } = this.props
     const fatalParseError = parsedFile.result.fileFatalError,
-      contents = parsedFile.result.contents,
-      name = parsedFile.name,
-      error = parsedFile.error
+          contents = parsedFile.result.contents
+    const { name, error, validatedUploadFileFail, validationFailCount } = parsedFile
 
     if (error) {
       return (<div>
@@ -37,6 +40,10 @@ export default class UploadedFileTable extends React.Component {
           ammountErrorStyle = cx({[styles.elementError]: row.Errors.ammountError}),
           descriptionErrorStyle = cx({[styles.elementError]: row.Errors.descriptionError}),
           rowErrorStyle = cx({[styles.rowError]: row.Errors.rowError})
+
+
+        const rowAlreadyUploaded = (row.fileContentsAlreadyUploaded==1) ? <span title="Entry had previously been uploaded"><i className="tiny material-icons">error</i></span>: <div/>
+
         return <tr key={key} className={rowErrorStyle}>
                  <td className={dateErrorStyle + ' ' + baseStyles.tableRow}>
                    {row.date}
@@ -46,9 +53,14 @@ export default class UploadedFileTable extends React.Component {
                  </td>
                  <td className={descriptionErrorStyle + ' ' + baseStyles.tableRow}>
                    {row.description}
-                 </td>               
+                 </td>   
+                 <td className= {baseStyles.tableRow}>
+                   {rowAlreadyUploaded}
+                 </td>            
                </tr>
       })
+
+      const fileFailValidation = (validatedUploadFileFail == 1 )? <a href="#!" className="collection-item" id={styles.fileFailValidation}>File has previsouly been uploaded!</a>:<div/>  
 
       return (
         <div>
@@ -68,6 +80,7 @@ export default class UploadedFileTable extends React.Component {
                     <th className={baseStyles.tableRow}>
                       Description
                     </th>
+                    <th className={baseStyles.tableRow}></th>
                   </tr>
                   {tableRows}
                 </tbody>
@@ -75,8 +88,16 @@ export default class UploadedFileTable extends React.Component {
             </div>
             <Sticky>
               <div className="col s12 l3 card">
+                 <div className="collection">
+                  {fileFailValidation}
+                  <a href="#!" className="collection-item"><span className="new badge">{contents.length - validationFailCount}</span>New entries</a>
+                  <a href="#!" className="collection-item"><span className="badge red">{validationFailCount}</span>Previously uploaded</a>
+                  
+                </div>
                 <AccountsDropDown {...other} selected={this.props.parsedFile.selectedAccount} dispatch={this.props.dispatch} />  
-                <button className='btn' data-file-id={this.props.id} onClick={this.saveFileToDB.bind(this)}>Sav!e</button>
+                <a className="waves-effect waves-light btn center-align" 
+                    data-file-id={this.props.id}
+                    onClick={this.saveFileToDB.bind(this)}>Save</a>
               </div>
             </Sticky>
           </StickyContainer>
