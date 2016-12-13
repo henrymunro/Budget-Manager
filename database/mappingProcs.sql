@@ -8,24 +8,32 @@ CREATE PROCEDURE sp_GetUserMappings(
 )
 BEGIN
 	
-	SELECT subquery.UserMapping_id, subquery.Mapping, subquery.MapTo, BT.BudgetType, BST.BudgetSubType
+	SELECT subquery.UserMapping_id, subquery.Mapping, subquery.MapTo, BT.BudgetType, BST.BudgetSubType, MC.MappingCount
 	FROM (
 		SELECT @row_num := IF(@prev_value=User_id,@row_num+1,1) as UserMapping_id
-				,Mapping_id
+				,M.Mapping_id
 				,Mapping
 				,MapTo
 				,BudgetType_id
 				,BudgetSubType_id
 				,@prev_value := User_id
-		FROM Mapping,
+		FROM Mapping M,
 		 	(SELECT @row_num := 1) x,
 	        (SELECT @prev_value := '') y
 		WHERE User_id = user_id_in and EndDate is null
 		ORDER BY User_id, Mapping_id
 		) subquery
+	LEFT JOIN (
+	    	SELECT MAP.Mapping_id, count(*) MappingCount
+			FROM Mapping MAP 
+			LEFT JOIN Ledger L on MAP.MapTo = L.UserDescription and L.User_id = user_id_in 
+			WHERE MAP.User_id = user_id_in
+			GROUP BY MAP.Mapping_id
+		) MC on MC.Mapping_id = subquery.Mapping_id
 	LEFT JOIN BudgetType BT on BT.BudgetType_id = subquery.BudgetType_id
 	LEFT JOIN BudgetSubType BST on BST.BudgetSubType_id = subquery.BudgetSubType_id
 	ORDER BY UserMapping_id;
+
 	
 END //
 DELIMITER ;

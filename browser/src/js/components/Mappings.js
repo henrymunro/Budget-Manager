@@ -90,7 +90,7 @@ export default class Mappings extends React.Component {
 
 
     const mappingTableRows = mappings.mappings.map((row, key)=> {
-      const { Mapping, MapTo, UserMapping_id, BudgetType, BudgetSubType}  = row 
+      const { Mapping, MapTo, UserMapping_id, BudgetType, BudgetSubType, MappingCount}  = row 
 
        //Logic to work out if drop down should be showing
         const expandTypeDropDown = (Number(userMappingsDropDownShow) === Number(UserMapping_id))
@@ -105,6 +105,7 @@ export default class Mappings extends React.Component {
           <td className={baseStyles.tableRow + ' ' + styles.typeCol} >
             <MappingTypeDropDown {...typesProps } dispatch={this.props.dispatch} />
           </td>
+          <td className={baseStyles.tableRow + ' ' + styles.mappingCountCol} >{MappingCount}</td>
           <td className={baseStyles.tableRow + ' ' + styles.deleteCol}>
             <button className={baseStyles.deleteButton}>
             <i className="tiny material-icons"
@@ -123,10 +124,11 @@ export default class Mappings extends React.Component {
             <table className={'striped ' + baseStyles.tableHead} >
               <tbody className={baseStyles.tableHead}>
                 <tr className={baseStyles.tableHead}>
-                  <th className={baseStyles.white}>Mapping</th>
-                  <th className={baseStyles.white}>Map To</th>
-                  <th className={baseStyles.white}>Type</th>
-                  <th className={baseStyles.white}></th>
+                  <th className={baseStyles.white + ' ' + styles.mappingCol}>Mapping</th>
+                  <th className={baseStyles.white + ' ' + styles.mapToCol}>Map To</th>
+                  <th className={baseStyles.white + ' ' + styles.typeCol}>Type</th>
+                  <th className={baseStyles.white + ' ' + styles.mappingCountCol}>Hit Count</th>
+                  <th className={baseStyles.white + ' ' + styles.deleteCol}></th>
                 </tr>
               </tbody>
             </table>

@@ -4,19 +4,23 @@
 }
 
 
-/*
+
 .mappingCol{
-	width: 15%;
+	width: 30%;
 }
 
 .mapToCol{
-	width: 15%;
+	width: 20%;
 }
 
 .typeCol{
-	width: 40%;
+	width: 30%;
 }
+
+.mappingCountCol{
+	width: 14%;
+}
+
 .deleteCol{
-	width: 24%;
+	width: 6%;
 }
-*/
