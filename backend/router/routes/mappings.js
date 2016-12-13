@@ -80,7 +80,7 @@ router.post('/type', (req, res)=>{
 
 
 // Route to apply mappings to existing entries
-router.post('/type', (req, res)=>{ 
+router.post('/applyMappings', (req, res)=>{ 
   // Gathers infromation
   let operation = 'apply mappings [user_id, onlyApplyToNewEntries] '
   const procedure = 'CALL sp_ApplyMappings( ?, ?);',
