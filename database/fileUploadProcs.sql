@@ -1,4 +1,35 @@
 use Budget;
+
+
+/* #############  View uploaded files ############# */
+
+DROP PROCEDURE IF EXISTS sp_GetUserUploadFiles;
+DELIMITER //
+CREATE PROCEDURE sp_GetUserUploadFiles(
+	in user_id_in int
+)
+BEGIN
+
+	SELECT FU.FileName
+			,cast(FU.UploadTime as date) as UploadDate
+			,A.AccountName
+			,COUNT(*) as NumberOfRecords
+			,MIN(FUC.Date) as MinEntryDate
+			,MAX(FUC.Date) as MaxEntryDate
+			,SUM(CASE WHEN FUC.Ammount > 0 THEN FUC.Ammount ELSE 0 END) as PositiveTotal			
+			,SUM(CASE WHEN FUC.Ammount < 0 THEN FUC.Ammount ELSE 0 END) as NegativeTotal
+	FROM FileUpload FU
+	LEFT JOIN Account A on A.Account_id = FU.Account_id
+	LEFT JOIN FileUploadContents FUC on FUC.FileUpload_id = FU.FileUpload_id 
+	WHERE FU.User_id = user_id_in
+	GROUP BY FU.FileName
+			,cast(FU.UploadTime as date)
+			,A.AccountName
+	ORDER BY cast(FU.UploadTime as date) desc;
+END //
+DELIMITER ;
+
+
 /* #############  File Loading ############# */
 
 DROP PROCEDURE IF EXISTS sp_SaveNewFile;

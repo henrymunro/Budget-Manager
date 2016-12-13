@@ -20,6 +20,27 @@ router.use(function (req, res, next) {
 })
 
 
+
+//Route to get users previously updated files
+router.get('/', (req, res)=>{
+  debug('Request to get user upload files')
+pool.getConnection()
+     .then((conn) => {
+      const user_id = 1 
+       const res = conn.query('CALL sp_GetUserUploadFiles(?);', [user_id])
+       conn.release()
+       return res;
+     })
+     .then((result) => {
+      debug('GET user upload files SUCCESSFUL')
+      res.status(200).send(result[0][0])
+     }).catch((err)=>{
+      debug('ERROR: getting upload files', err)
+      res.status(400).send('ERROR: ', err)
+     })
+})
+
+
 //Route to parse and validate files uploaded 
 //Sends parsed results back to client, doens't save to DB
 router.post('/', (req, res) => {
@@ -151,6 +172,12 @@ router.post('/save', (req, res)=>{
      })
 
 })
+
+
+
+
+
+
 
 /*
 File Upload Post:
