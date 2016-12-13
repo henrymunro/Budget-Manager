@@ -24,7 +24,7 @@ BEGIN
 		ORDER BY User_id, Mapping_id
 		) subquery
 	LEFT JOIN (
-	    	SELECT MAP.Mapping_id, count(*) MappingCount
+	    	SELECT MAP.Mapping_id, count(distinct L.Ledger_id) MappingCount
 			FROM Mapping MAP 
 			LEFT JOIN Ledger L on MAP.MapTo = L.UserDescription and L.User_id = user_id_in 
 			WHERE MAP.User_id = user_id_in

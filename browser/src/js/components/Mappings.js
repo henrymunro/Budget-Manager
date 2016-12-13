@@ -69,6 +69,7 @@ export default class Mappings extends React.Component {
     this.props.dispatch(applyMappings(applyMappingsToOnlyNewEntries, this.props.axios))
         .then((res)=>{
           this.props.dispatch(getGraphGroupedByType(this.props.axios))
+          this.props.dispatch(getMappings(this.props.axios))
         })
   }
 
