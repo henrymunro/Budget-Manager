@@ -2,6 +2,7 @@ export default function reducer(state={
     mappings:[],
     addNewMappingText: '',
     addNewMapToText: '',
+    applyMappingsToAllEntries: false,
     typeDropDown:{
       hoverType:'',
       userMappingsDropDownShow:-1
@@ -66,6 +67,12 @@ export default function reducer(state={
           ]
 
         }
+      }
+
+      //TOGGLE_APPLY_MAPPINGS_TO_ALL_ENTRIES_SWITCH
+      case "TOGGLE_APPLY_MAPPINGS_TO_ALL_ENTRIES_SWITCH":{
+        const newValue = action.payload
+        return {...state, applyMappingsToAllEntries:newValue}
       }
   }
 

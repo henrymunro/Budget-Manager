@@ -17,6 +17,7 @@ export default function reducer (state = {
         addMapping: 'mappings/add',
         deleteMapping: 'mappings/delete',        
         updateMappingType: 'mappings/type',
+        applyMappings: 'mappings/applyMappings',
         // Account
         accounts: 'accounts',
         addAccount: 'accounts/add',

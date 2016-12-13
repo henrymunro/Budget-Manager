@@ -6,11 +6,15 @@ import {
   updateNewMappingTextBox, 
   updateNewMapToTextBox, 
   saveNewMapping, 
-  deleteUserMapping
+  deleteUserMapping,
+  applyMappings,
+  toggleApplyMappingToAllEntiresSwitch
 }  from '../actions/mappingsActions'
 
 import { getAccounts } from '../actions/accountsActions'
 import { getType } from '../actions/typeActions'
+import { getGraphGroupedByType } from 'js/actions/graphActions'
+
 
 
 import MappingTypeDropDown from './Type/MappingTypeDropDown'
@@ -53,6 +57,21 @@ export default class Mappings extends React.Component {
           })
     }
   }
+  toggleApplyMappingToAllEntiresSwitch(e){
+    const currentValue = this.props.mappings.applyMappingsToAllEntries 
+    this.props.dispatch(toggleApplyMappingToAllEntiresSwitch(currentValue))
+
+  }
+  applyMappings(e){
+    const applyMappingsToAllEntries = this.props.mappings.applyMappingsToAllEntries 
+    const applyMappingsToOnlyNewEntries = applyMappingsToAllEntries ? 0 : 1
+    console.log('onlyApplyToNewEntries: ', applyMappingsToOnlyNewEntries)
+    this.props.dispatch(applyMappings(applyMappingsToOnlyNewEntries, this.props.axios))
+        .then((res)=>{
+          this.props.dispatch(getGraphGroupedByType(this.props.axios))
+        })
+  }
+
   deleteUserMapping(e){
     console.log('Delete button pushed')
     const userMapping_id = e.target.attributes.getNamedItem('data-usermapping-id').value
@@ -122,6 +141,22 @@ export default class Mappings extends React.Component {
           </div>
         </div>
         <div className='col s12 l3'>
+          <div className="card">
+            <div className={styles.addNewMappingBox}>
+              <p>Allow overwrite: </p> 
+              <div class="switch"
+                    onChange={this.toggleApplyMappingToAllEntiresSwitch.bind(this)}>
+                <label>
+                  Off
+                  <input type="checkbox" checked={this.props.mappings.applyMappingsToAllEntries}/>
+                  <span class="lever"></span>
+                  On
+                </label>
+              </div>
+              <p/>
+              <a class="waves-effect waves-light btn" onClick={this.applyMappings.bind(this)}>Apply Mapping</a>
+            </div>
+          </div>
           <div className="card">
             <div className={styles.addNewMappingBox}>
               <p>Add new mapping: </p> 

@@ -76,4 +76,18 @@ export function updatedSelectedType(type, subType, UserMapping_id){
   }
 }
 
+//Allows a user to apply mappings (either to entries that haven't yet been updated (onlyApplyToNewEntries = 1) or to all entries)
+export function applyMappings(onlyApplyToNewEntries, axios){
+  return {
+    type: 'APPLY_MAPPINGS',
+    payload: axios.request.post(axios.URLS.applyMappings, { onlyApplyToNewEntries: onlyApplyToNewEntries})
+  }
+}
 
+export function toggleApplyMappingToAllEntiresSwitch(currentValue){
+  const newValue = !currentValue
+  return {
+    type: 'TOGGLE_APPLY_MAPPINGS_TO_ALL_ENTRIES_SWITCH',
+    payload: newValue
+  }
+}

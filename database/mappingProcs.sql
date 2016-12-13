@@ -130,11 +130,22 @@ CREATE PROCEDURE sp_ApplyMappings(
 )
 BEGIN
 	
-	UPDATE Ledger 
-	SET UserDescription = fn_getMappedValue(Description, User_id)	
-		,BudgetType_id 	= IFNULL(fn_getMappedBudgetType(Description, User_id), 1)
-		,BudgetSubType_id = IFNULL(fn_getMappedBudgetSubType(Description, User_id),1)
-	WHERE User_id = user_id_in;
+	IF onlyApplyToNewEntries = 1 THEN 
+		UPDATE Ledger 
+		SET UserDescription = fn_getMappedValue(Description, User_id)	
+			,BudgetType_id 	= IFNULL(fn_getMappedBudgetType(Description, User_id), 1)
+			,BudgetSubType_id = IFNULL(fn_getMappedBudgetSubType(Description, User_id),1)
+		WHERE User_id = user_id_in
+			AND UserDescription is null;
+	END IF;
+
+	IF onlyApplyToNewEntries = 0 THEN 
+		UPDATE Ledger 
+		SET UserDescription = fn_getMappedValue(Description, User_id)	
+			,BudgetType_id 	= IFNULL(fn_getMappedBudgetType(Description, User_id), 1)
+			,BudgetSubType_id = IFNULL(fn_getMappedBudgetSubType(Description, User_id),1)
+		WHERE User_id = user_id_in;
+	END IF;
 
 END //
 DELIMITER ;
