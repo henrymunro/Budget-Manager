@@ -2,7 +2,8 @@ export default function reducer (state = {
     fetching: false,
     fetched: false,
     error: null,
-    parsedFiles: []
+    parsedFiles: [],
+    previouslyUploadedFiles: [],
   } , action) {
   switch (action.type) {
     case 'FILES_UPLOADED_FULFILLED': {
@@ -21,6 +22,12 @@ export default function reducer (state = {
           ...state.parsedFiles.slice(file_id + 1)
       ]}
     }
+
+    case 'GET_PREVIOUS_UPLOAD_FILES_FULFILLED': {
+      const previouslyUploadedFiles = action.payload.data
+      return {...state, previouslyUploadedFiles: previouslyUploadedFiles}
+    }
+
   }
 
   return state

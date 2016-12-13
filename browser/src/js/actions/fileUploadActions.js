@@ -56,3 +56,11 @@ export function updateSelectedAccountAction (file_id, account_id) {
     payload: {file_id:file_id, account_id:account_id}
   }
 }
+
+// Gets details about the files a user has previously uploaded
+export function getPreviousUploadFiles (axios) {
+  return {
+    type: 'GET_PREVIOUS_UPLOAD_FILES',
+    payload: axios.request.get(axios.URLS.fileUpload)
+  }
+}
