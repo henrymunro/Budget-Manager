@@ -79,6 +79,20 @@ router.post('/type', (req, res)=>{
 })
 
 
+// Route to apply mappings to existing entries
+router.post('/type', (req, res)=>{ 
+  // Gathers infromation
+  let operation = 'apply mappings [user_id, onlyApplyToNewEntries] '
+  const procedure = 'CALL sp_ApplyMappings( ?, ?);',
+        user_id = 1, 
+        { onlyApplyToNewEntries } = req.body,
+        params = [user_id, onlyApplyToNewEntries]
+  // Updates logging text
+  operation = operation + params.join(', ') 
+  // Makes DB update
+  callProcUPDATE(procedure, params, operation, res)   
+})
+
 function callProcUPDATE(procedure, parameters, operation, res){
   debug('Request RECIEVED: '+ operation)
   pool.getConnection()

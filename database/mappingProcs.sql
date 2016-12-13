@@ -120,6 +120,25 @@ END //
 DELIMITER ;
 
 
+/* ######################### Apply Mappings to non updated entries ####################### */ 
+
+DROP PROCEDURE IF EXISTS sp_ApplyMappings;
+DELIMITER //
+CREATE PROCEDURE sp_ApplyMappings(
+	in user_id_in int,
+	in onlyApplyToNewEntries int
+)
+BEGIN
+	
+	UPDATE Ledger 
+	SET UserDescription = fn_getMappedValue(Description, User_id)	
+		,BudgetType_id 	= IFNULL(fn_getMappedBudgetType(Description, User_id), 1)
+		,BudgetSubType_id = IFNULL(fn_getMappedBudgetSubType(Description, User_id),1)
+	WHERE User_id = user_id_in;
+
+END //
+DELIMITER ;
+
 
 /* ######################### Functions ####################### */ 
 
