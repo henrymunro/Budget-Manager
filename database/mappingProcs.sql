@@ -68,17 +68,33 @@ BEGIN
 		AND EndDate IS NULL;
 	
 	/*Get info about rows the mapping would hit */
-	SELECT Description, 
+	IF testMapping_in = '' THEN
+	   SELECT Description, 
 			Count(*) as Count,
 			Sum(Ammount) as Sum,
 			Sum(CASE WHEN UserDescription IS NULL THEN 1 ELSE 0 END) as CountNotMapped
-	FROM Ledger 
-	WHERE Description LIKE CONCAT('%', testMapping_in, '%')
-		AND User_id = user_id_in
-		AND EndDate is NULL
-	GROUP BY Description
-	ORDER BY Sum(CASE WHEN UserDescription IS NULL THEN 1 ELSE 0 END) DESC, SUM(Ammount) DESC
-	LIMIT 20;
+		FROM Ledger 
+		WHERE Description LIKE CONCAT('%', testMapping_in, '%')
+			AND User_id = user_id_in
+			AND EndDate is NULL
+		GROUP BY Description
+		HAVING Sum(CASE WHEN UserDescription IS NULL THEN 1 ELSE 0 END) > 1
+		ORDER BY Sum(CASE WHEN UserDescription IS NULL THEN 1 ELSE 0 END) DESC, SUM(Ammount) DESC		
+		LIMIT 20;
+	ELSE
+	   SELECT Description, 
+			Count(*) as Count,
+			Sum(Ammount) as Sum,
+			Sum(CASE WHEN UserDescription IS NULL THEN 1 ELSE 0 END) as CountNotMapped
+		FROM Ledger 
+		WHERE Description LIKE CONCAT('%', testMapping_in, '%')
+			AND User_id = user_id_in
+			AND EndDate is NULL
+		GROUP BY Description
+		ORDER BY Sum(CASE WHEN UserDescription IS NULL THEN 1 ELSE 0 END) DESC, SUM(Ammount) DESC
+		LIMIT 20;
+	END IF;
+	
 
 END //
 DELIMITER ;
@@ -123,12 +139,29 @@ DELIMITER //
 CREATE PROCEDURE sp_AddNewUserMapping(
 	in mapping varchar(500),
 	in mapTo varchar(500),
+	in type varchar(500),
+	in subType varchar(500),
 	in user_id int
 )
 BEGIN
+
+	SELECT @BudgetType_id := BudgetType_id
+	FROM BudgetType
+	WHERE BudgetType = type
+		AND User_id = user_id;
+
+	SELECT @BudgetSubType_id := BudgetSubType_id
+	FROM BudgetType BT 
+	INNER JOIN BudgetSubType BST on BT.BudgetType_id = BST.BudgetType_id
+	WHERE BT.BudgetType = type
+		AND BST.BudgetSubType = subType
+		AND User_id = user_id;
+
+
 	INSERT INTO Mapping(Mapping, MapTo, User_id, BudgetType_id, BudgetSubType_id)
-	VALUES(mapping, mapTo, user_id, 1, 1);
-	
+	VALUES (mapping, mapTo, user_id, IFNULL(@BudgetType_id, 1), IFNULL(@BudgetSubType_id, 1));
+
+
 END //
 DELIMITER ;
 

@@ -8,10 +8,15 @@ export function getMappings (axios) {
 }
 
 // Saves a new mapping to the database 
-export function saveNewMapping ( mapping, mapTo, axios) {
+export function saveNewMapping ( mapping, mapTo, type, subType, axios) {
   return {
     type: 'SAVE_NEW_MAPPING',
-    payload: axios.request.post(axios.URLS.addMapping, {mapping: mapping, mapTo:mapTo })
+    payload: axios.request.post(axios.URLS.addMapping, {
+      mapping: mapping, 
+      mapTo:mapTo,
+      type: type,
+      subType: subType 
+    })
   }
 }
 
@@ -89,14 +94,6 @@ export function toggleApplyMappingToAllEntiresSwitch(currentValue){
   return {
     type: 'TOGGLE_APPLY_MAPPINGS_TO_ALL_ENTRIES_SWITCH',
     payload: newValue
-  }
-}
-
-// Updates the test mapping to text box in the browser 
-export function updateTestMappingText(text){
-    return {
-    type: 'UPDATE_TEST_MAPPING_TEXT',
-    payload: text
   }
 }
 

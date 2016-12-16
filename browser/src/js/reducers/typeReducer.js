@@ -6,6 +6,12 @@ export default function reducer(state={
       addNewTypeText: '',
       addNewSubTypeText: ''
     },
+    addNewMapping:{
+      selectedType: 'other',
+      selectedSubType: 'other',
+      isDropDownVisible: false,
+      hoverType: ''
+    }
     
   }, action) {
 
@@ -70,6 +76,54 @@ export default function reducer(state={
             selectedType: action.payload,
             addNewTypeText: state.addNew.addNewTypeText,
             addNewSubTypeText: ''
+          }
+        }
+      }
+
+      case "UPDATE_ADD_NEW_MAPPING_TYPE":{
+        return {
+          ...state, 
+          addNewMapping:{ 
+            selectedType: action.payload.selectedType,
+            selectedSubType: action.payload.selectedSubType,
+            isDropDownVisible: false,
+            hoverType: ''
+          }
+        }
+      }
+
+      case "EXPAND_NEW_MAPPING_TYPE_DROP_DOWN":{
+        return {
+          ...state,
+          addNewMapping:{ 
+            selectedType: state.addNewMapping.selectedType,
+            selectedSubType: state.addNewMapping.selectedSubType,
+            isDropDownVisible: true,
+            hoverType: ''
+          }
+        }
+      }
+
+      case "COLLAPSE_NEW_MAPPING_TYPE_DROP_DOWN":{
+        return {
+          ...state,
+          addNewMapping:{ 
+            selectedType: state.addNewMapping.selectedType,
+            selectedSubType: state.addNewMapping.selectedSubType,
+            isDropDownVisible: false,
+            hoverType: ''
+          }
+        }
+      }
+
+      case "UPDATE_NEW_MAPPING_HOVER_TYPE":{
+        return {
+          ...state,
+          addNewMapping:{ 
+            selectedType: state.addNewMapping.selectedType,
+            selectedSubType: state.addNewMapping.selectedSubType,
+            isDropDownVisible: true,
+            hoverType: action.payload
           }
         }
       }

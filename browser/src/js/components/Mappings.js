@@ -8,7 +8,8 @@ import {
   saveNewMapping, 
   deleteUserMapping,
   applyMappings,
-  toggleApplyMappingToAllEntiresSwitch
+  toggleApplyMappingToAllEntiresSwitch,
+  getTestMappingData
 }  from '../actions/mappingsActions'
 
 import { getAccounts } from '../actions/accountsActions'
@@ -38,25 +39,7 @@ export default class Mappings extends React.Component {
     this.props.dispatch(getMappings(this.props.axios))    
     this.props.dispatch(getType(this.props.axios))
   }
-  updateNewMappingText(e){
-    const text = e.target.value
-    this.props.dispatch(updateNewMappingTextBox(text))
-  }
-  updateNewMapToText(e){
-       const text = e.target.value
-    this.props.dispatch(updateNewMapToTextBox(text))
-  }
-  saveNewMapping(e){
-    console.log('BUTTON CLICKED ')
-    const { addNewMappingText, addNewMapToText } = this.props.mappings
-    console.log(addNewMappingText, addNewMapToText)
-    if ( addNewMappingText!='' && addNewMapToText!='' ) {
-      this.props.dispatch(saveNewMapping(addNewMappingText, addNewMapToText, this.props.axios))
-        .then((res)=>{
-            this.props.dispatch(getMappings(this.props.axios))
-          })
-    }
-  }
+  
   toggleApplyMappingToAllEntiresSwitch(e){
     const currentValue = this.props.mappings.applyMappingsToAllEntries 
     this.props.dispatch(toggleApplyMappingToAllEntiresSwitch(currentValue))
@@ -70,6 +53,7 @@ export default class Mappings extends React.Component {
         .then((res)=>{
           this.props.dispatch(getGraphGroupedByType(this.props.axios))
           this.props.dispatch(getMappings(this.props.axios))
+          this.props.dispatch(getTestMappingData('', this.props.axios))
         })
   }
 
@@ -88,6 +72,11 @@ export default class Mappings extends React.Component {
     const { types } = this.props.types
 
     const { hoverType, userMappingsDropDownShow } = typeDropDown
+
+    const newMappingsProps = { 
+                              mappings:mappings, 
+                              types: this.props.types
+                            }
 
     const mappingTableRows = mappings.mappings.map((row, key)=> {
       const { Mapping, MapTo, UserMapping_id, BudgetType, BudgetSubType, MappingCount}  = row 
@@ -119,7 +108,7 @@ export default class Mappings extends React.Component {
     
     return (
       <div>
-        <TestMappings {...mappings} dispatch={this.props.dispatch} axios={this.props.axios} />
+        <TestMappings {...newMappingsProps} dispatch={this.props.dispatch} axios={this.props.axios} />
         <div className='col s12 l9'> 
           <div className="card"> 
             <table className={'striped ' + baseStyles.tableHead} >
@@ -158,14 +147,6 @@ export default class Mappings extends React.Component {
               </div>
               <p/>
               <a class="waves-effect waves-light btn" onClick={this.applyMappings.bind(this)}>Apply Mapping</a>
-            </div>
-          </div>
-          <div className="card">
-            <div className={styles.addNewMappingBox}>
-              <p>Add new mapping: </p> 
-              <input placeholder="Mapping" value={addNewMappingText} onChange={this.updateNewMappingText.bind(this)}/>     
-              <input placeholder="Map To" value={addNewMapToText} onChange={this.updateNewMapToText.bind(this)} />
-              <a class="waves-effect waves-light btn" onClick={this.saveNewMapping.bind(this)}>Save Mapping</a>
             </div>
           </div>
         </div>

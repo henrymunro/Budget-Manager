@@ -38,11 +38,11 @@ pool.getConnection()
 //Route to add a new users mappings
 router.post('/add', (req, res)=>{
   // Gathers infromation
-  let operation = 'add user mapping [mapping, mapTo, user_id] '
-  const procedure = 'CALL sp_AddNewUserMapping( ?, ?, ?);',
+  let operation = 'add user mapping [mapping, mapTo, type, subType, user_id] '
+  const procedure = 'CALL sp_AddNewUserMapping( ?, ?, ?, ?, ?);',
         user_id = 1, 
-        { mapping, mapTo } = req.body,
-        params = [mapping, mapTo, user_id]
+        { mapping, mapTo, type, subType } = req.body,
+        params = [mapping, mapTo, type, subType, user_id]
   // Updates logging text
   operation = operation + params.join(', ') 
   // Makes DB update

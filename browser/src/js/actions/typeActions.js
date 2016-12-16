@@ -64,3 +64,36 @@ export function updateSelectedTypeForAddNewType(type, type_id){
 }
 
 
+
+// Drop down for add new Mapping page
+export function updateAddNewMappingType(selectedType, selectedSubType){
+  return{
+    type: "UPDATE_ADD_NEW_MAPPING_TYPE",
+    payload: { 
+            selectedType: selectedType,
+            selectedSubType: selectedSubType
+          }
+  }
+}
+
+export function expandAddNewMappingTypeDropDown(){
+  return{
+    type: "EXPAND_NEW_MAPPING_TYPE_DROP_DOWN",
+    payload: ''
+  }
+}
+
+export function collapseAddNewMappingTypeDropDown(){
+  return{
+    type: "COLLAPSE_NEW_MAPPING_TYPE_DROP_DOWN",
+    payload: ''
+  }
+}
+
+export function updateNewMappingHoverType(type){
+  return{
+      type: 'UPDATE_NEW_MAPPING_HOVER_TYPE',
+      payload: type
+  }
+}
+
