@@ -100,7 +100,7 @@ router.post('/testMappings', (req, res)=>{
   const procedure = 'CALL sp_TestNewMappings( ?, ?);',
         user_id = 1, 
         { testMapping } = req.body,
-        params = [user_id, onlyApplyToNewEntries]
+        params = [user_id, testMapping]
   // Updates logging text
   operation = operation + params.join(', ') 
   // Makes DB update
@@ -136,7 +136,7 @@ function callProcSENDDATA(procedure, parameters, operation, res){
        })
        .then((result) => {
         debug('Request SUCCESS: ' + operation)
-        res.status(200).send({ data: result})
+        res.status(200).send({ data: result[0]})
        }).catch((err)=>{
         debug('Request ERROR: ' + operation + ', error: ' +  err)
         res.status(400).send('ERROR: '+  err)

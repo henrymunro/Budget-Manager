@@ -91,3 +91,18 @@ export function toggleApplyMappingToAllEntiresSwitch(currentValue){
     payload: newValue
   }
 }
+
+// Updates the test mapping to text box in the browser 
+export function updateTestMappingText(text){
+    return {
+    type: 'UPDATE_TEST_MAPPING_TEXT',
+    payload: text
+  }
+}
+
+export function getTestMappingData(text, axios){
+  return {
+    type: 'UPDATE_TEST_MAPPING_DATA',
+    payload: axios.request.post(axios.URLS.testMappings, { testMapping: text})
+  }
+}

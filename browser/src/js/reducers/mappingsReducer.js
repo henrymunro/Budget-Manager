@@ -6,7 +6,14 @@ export default function reducer(state={
     typeDropDown:{
       hoverType:'',
       userMappingsDropDownShow:-1
-    }
+    },
+    testMappingText: '',
+    testMappingCollision: [],
+    testMappingOverviewCount:[{
+      DistinctDescriptions: 0, 
+      TotalCount: 0
+    }],
+    testMappingRowHits: [],
   }, action) {
 
     switch (action.type) {
@@ -73,6 +80,19 @@ export default function reducer(state={
       case "TOGGLE_APPLY_MAPPINGS_TO_ALL_ENTRIES_SWITCH":{
         const newValue = action.payload
         return {...state, applyMappingsToAllEntries:newValue}
+      }
+
+      case "UPDATE_TEST_MAPPING_TEXT":{
+        return {...state, testMappingText: action.payload}
+      }
+
+      case "UPDATE_TEST_MAPPING_DATA_FULFILLED":{
+        const data = action.payload.data.data
+        return {...state, 
+            testMappingCollision: data[0],
+            testMappingOverviewCount:data[1],
+            testMappingRowHits: data[2],
+          }
       }
   }
 

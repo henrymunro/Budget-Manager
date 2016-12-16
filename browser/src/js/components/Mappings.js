@@ -18,7 +18,7 @@ import { getGraphGroupedByType } from 'js/actions/graphActions'
 
 
 import MappingTypeDropDown from './Type/MappingTypeDropDown'
-
+import TestMappings from 'js/components/Mappings/TestMappings'
 
 import styles from 'styles/components/Mappings.css'
 import baseStyles from 'styles/base.css'
@@ -89,7 +89,6 @@ export default class Mappings extends React.Component {
 
     const { hoverType, userMappingsDropDownShow } = typeDropDown
 
-
     const mappingTableRows = mappings.mappings.map((row, key)=> {
       const { Mapping, MapTo, UserMapping_id, BudgetType, BudgetSubType, MappingCount}  = row 
 
@@ -120,6 +119,7 @@ export default class Mappings extends React.Component {
     
     return (
       <div>
+        <TestMappings {...mappings} dispatch={this.props.dispatch} axios={this.props.axios} />
         <div className='col s12 l9'> 
           <div className="card"> 
             <table className={'striped ' + baseStyles.tableHead} >
