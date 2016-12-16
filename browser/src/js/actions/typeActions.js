@@ -64,7 +64,7 @@ export function updateSelectedTypeForAddNewType(type, type_id){
 }
 
 
-
+/**************   Add new mappings type drop down ****************/
 // Drop down for add new Mapping page
 export function updateAddNewMappingType(selectedType, selectedSubType){
   return{

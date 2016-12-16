@@ -18,6 +18,7 @@
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
     "d3": "^4.2.8",
+    "jquery": "^3.1.1",
     "materialize-css": "^0.97.8",
     "moment": "^2.15.1",
     "react": "^0.14.6",

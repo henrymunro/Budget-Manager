@@ -69,6 +69,8 @@ export default function reducer(state={
         }
       }
 
+      /**************   Add new mappings type drop down ****************/
+
       case "UPDATE_SELECTED_TYPE_IN_ADD_NEW_SECTION":{
         return {
           ...state, 

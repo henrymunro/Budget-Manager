@@ -12,6 +12,12 @@ import styles from 'styles/components/LedgerFilter.css'
 
 export default class LedgerFilter extends React.Component {
   componentWillMount () {
+
+  }
+
+  componentDidMount () {
+    $('.collapsible').collapsible()
+    
   }
 
   resetAllFilters(){
