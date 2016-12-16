@@ -70,13 +70,14 @@ BEGIN
 	/*Get info about rows the mapping would hit */
 	SELECT Description, 
 			Count(*) as Count,
-			Sum(Ammount) as Sum
+			Sum(Ammount) as Sum,
+			Sum(CASE WHEN UserDescription IS NULL THEN 1 ELSE 0 END) as CountNotMapped
 	FROM Ledger 
 	WHERE Description LIKE CONCAT('%', testMapping_in, '%')
 		AND User_id = user_id_in
 		AND EndDate is NULL
 	GROUP BY Description
-	ORDER BY Count(*) DESC, SUM(Ammount) DESC
+	ORDER BY Sum(CASE WHEN UserDescription IS NULL THEN 1 ELSE 0 END) DESC, SUM(Ammount) DESC
 	LIMIT 20;
 
 END //

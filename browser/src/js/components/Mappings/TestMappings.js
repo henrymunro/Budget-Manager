@@ -12,6 +12,7 @@ import baseStyles from 'styles/base.css'
 
 export default class TestMappings extends React.Component {
   componentWillMount () {
+    this.props.dispatch(getTestMappingData('', this.props.axios))
 
   }
   updateTestMappingText(e){
@@ -36,6 +37,7 @@ export default class TestMappings extends React.Component {
         return <tr key={key}>
           <td className={baseStyles.tableRow + ' ' + styles.mappingCol} >{row.Description}</td>
           <td className={baseStyles.tableRow + ' ' + styles.mappingCol} >{row.Count}</td>
+          <td className={baseStyles.tableRow + ' ' + styles.mappingCol} >{row.CountNotMapped}</td>
           <td className={baseStyles.tableRow + ' ' + styles.mappingCol} >{row.Sum}</td>
         </tr>
 
@@ -56,6 +58,7 @@ export default class TestMappings extends React.Component {
                 <tr>
                   <th className={baseStyles.white}>Description</th>
                   <th className={baseStyles.white}>Count</th>
+                  <th className={baseStyles.white}>Count Not Mapped</th>
                   <th className={baseStyles.white}>Sum</th>
                 </tr>
                 <tbody>
