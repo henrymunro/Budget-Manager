@@ -93,6 +93,22 @@ router.post('/applyMappings', (req, res)=>{
   callProcUPDATE(procedure, params, operation, res)   
 })
 
+// Route to test new user mappings  sp_TestNewMappings
+router.post('/testMappings', (req, res)=>{ 
+  // Gathers infromation
+  let operation = 'test mapping [user_id, testMapping] '
+  const procedure = 'CALL sp_TestNewMappings( ?, ?);',
+        user_id = 1, 
+        { testMapping } = req.body,
+        params = [user_id, onlyApplyToNewEntries]
+  // Updates logging text
+  operation = operation + params.join(', ') 
+  // Makes DB update
+  callProcSENDDATA(procedure, params, operation, res)   
+})
+
+
+
 function callProcUPDATE(procedure, parameters, operation, res){
   debug('Request RECIEVED: '+ operation)
   pool.getConnection()
@@ -104,6 +120,23 @@ function callProcUPDATE(procedure, parameters, operation, res){
        .then((result) => {
         debug('Request SUCCESS: ' + operation)
         res.status(200).send('SUCCESS')
+       }).catch((err)=>{
+        debug('Request ERROR: ' + operation + ', error: ' +  err)
+        res.status(400).send('ERROR: '+  err)
+       })
+}
+
+function callProcSENDDATA(procedure, parameters, operation, res){
+  debug('Request RECIEVED: '+ operation)
+  pool.getConnection()
+       .then((conn) => {
+         const result = conn.query(procedure, parameters)
+         conn.release()
+         return result;
+       })
+       .then((result) => {
+        debug('Request SUCCESS: ' + operation)
+        res.status(200).send({ data: result})
        }).catch((err)=>{
         debug('Request ERROR: ' + operation + ', error: ' +  err)
         res.status(400).send('ERROR: '+  err)

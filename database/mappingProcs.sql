@@ -32,13 +32,55 @@ BEGIN
 		) MC on MC.Mapping_id = subquery.Mapping_id
 	LEFT JOIN BudgetType BT on BT.BudgetType_id = subquery.BudgetType_id
 	LEFT JOIN BudgetSubType BST on BST.BudgetSubType_id = subquery.BudgetSubType_id
-	ORDER BY UserMapping_id;
+	ORDER BY UserMapping_id desc;
 
 	
 END //
 DELIMITER ;
 
 
+DROP PROCEDURE IF EXISTS sp_TestNewMappings;
+DELIMITER //
+CREATE PROCEDURE sp_TestNewMappings(
+	in user_id_in int,
+	in testMapping_in varchar(400)
+)
+BEGIN
+	
+	/*Get mapping collisions*/ 
+	SELECT Mapping, 
+			MapTo,
+			BT.BudgetType,
+			BST.BudgetSubType
+	FROM Mapping M
+	LEFT JOIN BudgetType BT on BT.BudgetType_id = M.BudgetType_id
+	LEFT JOIN BudgetSubType BST on BST.BudgetSubType_id = M.BudgetSubType_id
+	WHERE Mapping LIKE CONCAT('%', testMapping_in, '%')
+		AND M.User_id = user_id_in
+		AND M.EndDate IS NULL;
+
+	/*Get Overview Of rows hit*/ 
+	SELECT count(*) as TotalCount,
+			count(distinct Description) as DistinctDescriptions
+	FROM Ledger 
+	WHERE Description LIKE CONCAT('%', testMapping_in, '%')
+		AND User_id = user_id_in
+		AND EndDate IS NULL;
+	
+	/*Get info about rows the mapping would hit */
+	SELECT Description, 
+			Count(*) as Count,
+			Sum(Ammount) as Sum
+	FROM Ledger 
+	WHERE Description LIKE CONCAT('%', testMapping_in, '%')
+		AND User_id = user_id_in
+		AND EndDate is NULL
+	GROUP BY Description
+	ORDER BY Count(*) DESC, SUM(Ammount) DESC
+	LIMIT 20;
+
+END //
+DELIMITER ;
 
 /* ###################### Update ########################## */
 
@@ -226,3 +268,6 @@ BEGIN
 
 END //
 DELIMITER ;
+
+
+
