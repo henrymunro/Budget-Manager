@@ -4,6 +4,7 @@
 	position: absolute;
  	list-style-type: none;
  	padding: 0;
+ 	z-index: 10;
 }
 .typeListElement{
 	width: 100px;

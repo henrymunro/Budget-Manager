@@ -19,11 +19,11 @@ export default class LedgerTableTitle extends React.Component {
                   <th className={styles.amountCol}>
                     Ammount
                   </th>
-                  <th className={styles.descriptionCol}>
-                    Description
-                  </th>
                   <th className={styles.typeCol}>
                     Type
+                  </th>
+                  <th className={styles.descriptionCol}>
+                    Description
                   </th>
                   <th className={styles.splitCol}> 
                     Split

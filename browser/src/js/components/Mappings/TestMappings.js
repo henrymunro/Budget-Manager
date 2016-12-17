@@ -87,6 +87,15 @@ export default class TestMappings extends React.Component {
         </tr>
 
      })
+
+     let mappingCollisionBadge 
+     if (testMappingCollisionCount == 0 ){
+      mappingCollisionBadge = <span class="new badge">4</span>
+     } else if (addNewMappingText == '' ){
+      mappingCollisionBadge = <div/>
+     } else if (testMappingCollisionCount > 0 ){
+      mappingCollisionBadge = <span class="badge red">{testMappingCollisionCount} collisions</span>
+     }
     
     return (
       <div className='col s12 l12'>
@@ -94,13 +103,17 @@ export default class TestMappings extends React.Component {
               <p>Test new mapping: </p> 
               <div className={styles.addNewMappingDiv}>
                 <div className="row">
-                  <div className='col s6 l3'>
-                    <input placeholder="Mapping" value={addNewMappingText} onChange={this.updateTestMappingText.bind(this)}/>     
+                  <div className='col s5 l3'>
+                    <input placeholder="Mapping" value={addNewMappingText} onChange={this.updateTestMappingText.bind(this)}/>  
+                    {mappingCollisionBadge}   
                   </div>
-                  <div className='col s6 l3'>
+                  <div className="col s1 l1">
+                      {mappingCollisionBadge}
+                  </div>
+                  <div className='col s5 l3'>
                     <input placeholder="Map To" value={addNewMapToText} onChange={this.updateNewMapToText.bind(this)} />
                   </div>
-                  <div className='col s6 l3'>
+                  <div className='col s6 l2'>
                     <NewMappingTypeDropDown {...typesProps } dispatch={this.props.dispatch} />
                   </div>
                   <div className='col s2 l1'>

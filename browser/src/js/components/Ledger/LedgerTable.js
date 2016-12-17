@@ -61,11 +61,14 @@ export default class LedgerTable extends React.Component {
       const {...typesProps } = {User_Ledger_id, hoverTypeForExpandedDropDown, BudgetType, BudgetSubType, types, expandTypeDropDown, distinctTypes, axios}
       return <tr key={key} className=''>
                <td className={baseStyles.tableRow + ' ' + styles.dateCol}>
-                 {moment(row.Date).format('YYYY-MM-DD')}
+                 {moment(row.Date).format('MMM-DD')}
                </td>
                <td className={baseStyles.tableRow + ' ' + styles.amountCol}>
                  {Ammount}
                </td>
+               <td className={baseStyles.tableRow + ' ' + styles.typeCol}>
+                  <TypeDropDown {...typesProps } dispatch={this.props.dispatch} />
+                </td>
 
                <td className={baseStyles.tableRow + ' ' + styles.descriptionCol}>
                 <span title={UploadedDescription}>
@@ -74,12 +77,10 @@ export default class LedgerTable extends React.Component {
                     activeClassName=''
                     text={Description}
                     paramName={String(User_Ledger_id)}
-                    change={this.updatedDescription.bind(this)} />
+                    change={this.updatedDescription.bind(this)} 
+                    />
                   </span>
                </td>
-               <td className={baseStyles.tableRow + ' ' + styles.typeCol}>
-                  <TypeDropDown {...typesProps } dispatch={this.props.dispatch} />
-                </td>
                 <td className={baseStyles.tableRow + ' ' + styles.splitCol}>
                   <input 
                   className={styles.splitInput}

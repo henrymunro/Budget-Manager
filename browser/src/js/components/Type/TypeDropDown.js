@@ -115,10 +115,10 @@ export default class TypeDropDown extends React.Component {
         <div>
           <div onClick={this.toggleDropDown.bind(this)}>
             {BudgetType +', '+BudgetSubType}
-          </div>
-          <ul className={dropDownClass} onMouseLeave={this.collapseAllDropDowns.bind(this)}>
-            {typeList}
-          </ul>
+          </div>          
+            <ul className={dropDownClass + ' z-depth-5'} onMouseLeave={this.collapseAllDropDowns.bind(this)}>
+              {typeList}
+            </ul>
         </div>
       )
     }

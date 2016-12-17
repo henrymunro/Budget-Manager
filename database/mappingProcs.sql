@@ -78,20 +78,20 @@ BEGIN
 			AND User_id = user_id_in
 			AND EndDate is NULL
 		GROUP BY Description
-		HAVING Sum(CASE WHEN UserDescription IS NULL THEN 1 ELSE 0 END) > 1
-		ORDER BY Sum(CASE WHEN UserDescription IS NULL THEN 1 ELSE 0 END) DESC, SUM(Ammount) DESC		
+		HAVING Sum(CASE WHEN UpdateDate = StartDate THEN 1 ELSE 0 END) > 1
+		ORDER BY Sum(CASE WHEN UpdateDate = StartDate  THEN 1 ELSE 0 END) DESC, SUM(Ammount) DESC		
 		LIMIT 20;
 	ELSE
 	   SELECT Description, 
 			Count(*) as Count,
 			Sum(Ammount) as Sum,
-			Sum(CASE WHEN UserDescription IS NULL THEN 1 ELSE 0 END) as CountNotMapped
+			Sum(CASE WHEN UpdateDate = StartDate  THEN 1 ELSE 0 END) as CountNotMapped
 		FROM Ledger 
 		WHERE Description LIKE CONCAT('%', testMapping_in, '%')
 			AND User_id = user_id_in
 			AND EndDate is NULL
 		GROUP BY Description
-		ORDER BY Sum(CASE WHEN UserDescription IS NULL THEN 1 ELSE 0 END) DESC, SUM(Ammount) DESC
+		ORDER BY Sum(CASE WHEN UpdateDate = StartDate  THEN 1 ELSE 0 END) DESC, SUM(Ammount) DESC
 		LIMIT 20;
 	END IF;
 	
@@ -220,7 +220,7 @@ BEGIN
 			,BudgetType_id 	= IFNULL(fn_getMappedBudgetType(Description, User_id), 1)
 			,BudgetSubType_id = IFNULL(fn_getMappedBudgetSubType(Description, User_id),1)
 		WHERE User_id = user_id_in
-			AND UserDescription is null;
+			AND UpdateDate = StartDate ;
 	END IF;
 
 	IF onlyApplyToNewEntries = 0 THEN 

@@ -16,7 +16,7 @@ export default class LedgerFilter extends React.Component {
   }
 
   componentDidMount () {
-    $('.collapsible').collapsible()
+    //$('.collapsible').collapsible()
     
   }
 
