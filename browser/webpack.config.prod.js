@@ -30,7 +30,7 @@ module.exports = {
   },
   output: {
     path: 'build',
-    filename: 'client.min.js'
+    filename: 'app.min.js'
   },
   resolve: {
     modulesDirectories: ['src', 'node_modules']

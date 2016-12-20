@@ -1,0 +1,337 @@
+.base__clearfix___3IDCI:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+
+.base__cf___1qG1C:before,
+.base__cf___1qG1C:after   { content: " "; display: table; }
+.base__cf___1qG1C:after   { clear: both; }
+.base__cf___1qG1C         { *zoom: 1; }
+
+
+.base__white___3xt69{
+	background: white;
+}
+
+.base__resetPadding___3ZiyI{
+	padding: 0;
+	margin: 0;
+}
+
+/*General table sytyles*/
+.base__tableHead___29wGZ{
+	background: white;
+	width: 97%;
+}
+
+.base__tableRow___2zGCl{
+	padding: 0;
+	height: 34px;
+}
+
+
+.base__deleteButton___3686L{
+	background: #ffffff00;
+	border-width: 0;
+}
+
+
+/* Card styles */
+
+.base__cardOverflow___sfPPA{
+	height: 450px; 
+	overflowY: auto; 
+	overflowX: hidden;
+	position: relative;
+}.UploadedFileTable__fatalError___f9Zrc{
+
+}
+
+.UploadedFileTable__rowError___1QSSv{
+	border-color: red;
+	border-style: solid;
+	border-width: 2px;
+
+	
+}
+
+.UploadedFileTable__elementError___3lX19{
+	background: green;
+}
+
+#UploadedFileTable__fileFailValidation___30R_r {
+	background: #F44336;
+	color: white;
+}
+
+#UploadedFileTable__selectFiles___2ifZ1{
+	margin-bottom: 10px;
+}/*General table sytyles*/
+.LedgerTable__tableHead___1r4GR{
+	background: white;
+	width: 97%;
+}
+
+
+.LedgerTable__tableRow___dsxo6{
+	padding: 0;
+	height: 34px;
+}
+
+.LedgerTable__white___2tq4Z{
+	background: white;
+}
+
+
+
+/*Specific ledger table styles*/
+.LedgerTable__splitInput___21Yp5[type=number]{
+	height: inherit;
+	margin: 0;
+	width: 90%;
+}
+
+.LedgerTable__dateCol___1ZHRI{
+	width: 12%;
+	padding-left: 5px;
+	font-size: small;
+}
+
+.LedgerTable__amountCol___18H-J{
+	width: 12%;
+	font-size: small;
+}
+
+.LedgerTable__descriptionCol___3bB3n{
+	width: 48%;
+	font-size: small;
+}
+.LedgerTable__typeCol___23zdN{
+	width: 22%;
+	font-size: small;
+}
+.LedgerTable__splitCol___18onr{
+	width: 5%;
+	font-size: small;
+}
+/*Type drop down*/
+.TypeDropDown__dropDown___2rjc4{
+	position: absolute;
+ 	list-style-type: none;
+ 	padding: 0;
+ 	z-index: 10;
+}
+.TypeDropDown__typeListElement___zkppG{
+	width: 100px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #cccccc;
+	background: #e8e8e8;
+	position: relative;
+}
+.TypeDropDown__hideDropDown___1Mklb{
+	visibility: hidden;
+}
+.TypeDropDown__typeListHover___1QDsO{
+	border-top: 1px;
+	border-color: black;
+	background: white;
+}
+
+/* Subtype list styles */
+.TypeDropDown__subTypeList___3h5Sb{
+	padding:0;
+	width: 100px;
+	position: absolute;    
+	left: 99px;
+	bottom: -18px;
+ 	list-style-type: none;
+}
+.TypeDropDown__subTypeListElement___3fuit{
+	border-style: solid;
+	border-width: 1px;
+	border-color: #cccccc;
+	background: #e8e8e8;	
+}
+.TypeDropDown__subTypeListHide___1v69G{
+	visibility: hidden;	
+	position: absolute;
+}
+
+
+
+
+
+
+
+
+.PreviousUploadFiles__uploadDateRow___PxN3S {
+	width: 12%;
+}
+
+.PreviousUploadFiles__fileNameRow___ijUf3   {
+	width: 34%;
+}
+
+.PreviousUploadFiles__accountNameRow___3fNtJ {
+	width: 20%;
+}
+
+.PreviousUploadFiles__rowCountRow___1gUuS    {
+	width: 12%;
+}
+
+.PreviousUploadFiles__minDateRow___l0shI    {
+	width: 11%;
+}
+ 
+.PreviousUploadFiles__maxDateRow___1wLpm     {
+	width: 11%;
+}
+
+.Mappings__addNewMappingBox___1jroi{
+	padding: 5px;
+}
+
+
+
+.Mappings__mappingCol___X95eB{
+	width: 30%;
+}
+
+.Mappings__mapToCol___OlzVA{
+	width: 20%;
+}
+
+.Mappings__typeCol___khofA{
+	width: 30%;
+}
+
+.Mappings__mappingCountCol___3FHqu{
+	width: 14%;
+}
+
+.Mappings__deleteCol___3b5o8{
+	width: 6%;
+}
+#Type__typeCard___1LRYB{
+	padding: 10px;
+
+}
+
+.Type__typeListElm___2KZgQ{
+	width: 150px;
+	height: 30px;
+	padding: 0;
+	/*border-width: 2px;
+	border-style: solid;*/
+}
+.Type__typeListElm___2KZgQ button{
+	float: right;
+}
+
+.Type__typeList___3xJOK{
+	/*background: white;*/
+	width: 48%;
+	height:95%;
+	float:left;
+}
+
+
+
+.Type__subTypeList___5XrXB{
+	/*background: white;*/
+	width: 48%;
+	float:right;
+	height:95%;
+}
+
+
+.Type__dropDown___kaL9Q{
+	position: absolute;
+}
+
+.Type__typeButton___25Bbd{
+	float:right;
+}
+.Type__typeText___NG37q{
+	float:left;
+	width: 90%;
+}
+
+#Type__typeSelected___3Pn2L{
+	background: #dadada;
+}
+
+.Type__inputs___3iyxb{ 
+	width: 100%;
+}
+
+.Type__typeInput___2b9ov{
+	width: 45%;
+	float:left;
+}
+
+.Type__subTypeInput___2p9AQ{
+	width: 45%;
+	float:right;
+}.LineStyles__line___tW1Vl {
+  fill: none;
+  /*stroke-width: 4px;*/
+}.CirclesStyles__circle___3Q8yE{
+	/*fill: #7dc7f4;*/
+    stroke: white; 
+    stroke-width: 3px;
+    z-index: 2;
+}.Legend__LegendElement___3SD8g{
+	/*width: 100px;*/
+	/*display: block;*/
+	/*margin: 50px 0;*/
+}
+
+.Legend__LegendColourSquare___1Bv4t{
+	margin: 5px;
+	width: 10px;
+	height: 10px;
+	/*float:left;*/
+}
+
+.Legend__LegendTextDiv___1EW9p{
+	width:85%;
+	float:left;
+}
+
+.Legend__SubTypeToggleDiv___uib3y{
+	width:14%;
+	float: right;
+}
+.Legend__Legend___6fuDs{
+
+}
+.Legend__LegendType___HnoPR{
+	width:48%;
+	float:right;
+	padding: 0;
+}
+
+.Legend__LegendSubType___QD-8j{
+	width: 48%;
+	float: left;
+}
+
+.GraphOverview__graphArea___gY0QY{
+	width: 79%;
+	background-color:  white; 
+	float:left;
+}
+
+.GraphOverview__Legend___3IJAn{ 
+	width: 20%;
+	float: right;
+ }
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzdHlsZXMuY3NzIiwic291cmNlUm9vdCI6IiJ9*/
