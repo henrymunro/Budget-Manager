@@ -76,7 +76,12 @@ export default class Layout extends React.Component {
 
 
     return <div>
+              <div className="row">
+                <div className='col s12 l3'></div>
+                <div className='col s12 l9'>
                   <OverviewGraph />
+                </div>               
+              </div>
                
               <StickyContainer>
                 <LowerHome />

@@ -31,7 +31,7 @@ export default class Legend extends React.Component {
 
     return (
       <div className={styles.Legend}>
-      	<div className={styles.LegendType}>
+      	<div className='collection' id={styles.LegendType}>
   	      {Legend} 
   	   	</div>
         <div className={styles.LegendSubType}>

@@ -24,7 +24,7 @@ import styles from 'styles/components/Mappings.css'
 import baseStyles from 'styles/base.css'
 
 
-export default class TestMappings extends React.Component {
+export default class AddNewMappings extends React.Component {
   componentWillMount () {
     this.props.dispatch(getTestMappingData('', this.props.axios))
 
@@ -138,14 +138,15 @@ export default class TestMappings extends React.Component {
                   {rowHitsTableBody}
                 </tbody>
               </table>
-        </div>
+        </div>     
+          
       </div>
     )
   }
 }
 
 
-TestMappings.propTypes = {
+AddNewMappings.propTypes = {
  
 }
 

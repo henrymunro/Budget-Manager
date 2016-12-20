@@ -10,6 +10,7 @@ import NavBar from 'js/components/HomePage/NavBar'
 import Ledger from 'js/components/Ledger' 
 import FileUpload from 'js/components//FileUpload'
 import Mappings from 'js/components//Mappings'
+import AddNewMappings from 'js/components/Mappings/AddNewMappings'
 import Accounts from 'js/components//Accounts'
 import Type from 'js/components//Type'
 
@@ -23,7 +24,8 @@ import baseStyles from 'styles/base.css'
     accounts: store.accounts.accounts,
     ledger: store.ledger,
     hash: store.nav.hash,
-    types: store.types
+    types: store.types,
+    mappings: store.mappings
   }
 })
 export default class LowerHome extends React.Component {
@@ -38,6 +40,10 @@ export default class LowerHome extends React.Component {
 
   render () {
     const { ...other } = this.props // also passes dispatch
+    const newMappingsProps = { 
+                              mappings: this.props.mappings, 
+                              types: this.props.types
+                            }
 
       // Sets default routing to ledger 
     const hash = this.props.hash || "ledger"
@@ -47,6 +53,10 @@ export default class LowerHome extends React.Component {
     switch(hash) {
       case "#mappings": {
         display = <Mappings />
+        break
+      }
+      case "#addNewMappings":{
+        display = <AddNewMappings {...newMappingsProps} dispatch={this.props.dispatch} axios={this.props.axios} />
         break
       }
       case "#accounts": {

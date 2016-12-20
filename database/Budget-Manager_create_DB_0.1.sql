@@ -105,6 +105,8 @@ CREATE TABLE Users (
     FirstName varchar(500) NULL,
     LastName varchar(500) NULL,
     Email varchar(500) NOT NULL,
+    Password varchar(1000) NOT NULL, 
+    Salt varchar(1000) NOT NULL, 
     Role_id int NOT NULL,
     StartDate datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     EndDate datetime NULL,

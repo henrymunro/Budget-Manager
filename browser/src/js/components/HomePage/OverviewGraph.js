@@ -76,7 +76,7 @@ export default class OverviewGraph extends React.Component {
     // Sets the X scale based on the min and max X
     const xScale = d3.scaleTime()
               .domain(extent_X)
-              .rangeRound([0, innerWidth])
+              .rangeRound([0, innerWidth-125])
    
 
 
@@ -89,8 +89,8 @@ export default class OverviewGraph extends React.Component {
 
     const {...legendProps} = {colourScale, colourScaleSubType, distinctTypesShow, showSubType, subTypeParent, distinctSubTypesShow, axios}
 
-    const graphElement = <div className={baseStyles.cf + ' card'}>
-              <div className="container">
+    const graphElement = <div className={baseStyles.cf + ' card'}
+                              style={{padding: '10px'}}>
                 <svg className={styles.graphArea} id='chartID' width={svgWidth} height={svgHeight}>
                      <g transform={transform}>
                         <Motion style={{
@@ -125,7 +125,6 @@ export default class OverviewGraph extends React.Component {
                     <Legend {...legendProps} dispatch={this.props.dispatch}/> 
                 </div> 
               </div>
-            </div>
 
     this.props.dispatch(updateGraphElement(graphElement)) 
 

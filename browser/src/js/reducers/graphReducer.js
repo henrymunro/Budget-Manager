@@ -14,7 +14,7 @@ export default function reducer(state={
         // innerHeight: 10, 
         // innerWidth: 10,
         transform: '',
-        margin: {top: 5, right: 50, bottom: 20, left: 100},
+        margin: {top: 5, right: 10, bottom: 20, left: 50},
         rangeXValue: [d3.timeParse("%m-%d-%Y")('2016-10-10'),d3.timeParse("%m-%d-%Y")('2016-10-11')],
         rangeYValue: [0, 10],
         xScale: d3.scaleTime(), 

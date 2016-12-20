@@ -26,7 +26,9 @@
 .LegendType{
 	width:48%;
 	float:right;
+	padding: 0;
 }
+
 .LegendSubType{
 	width: 48%;
 	float: left;

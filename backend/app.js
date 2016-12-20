@@ -6,12 +6,14 @@ var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
 var helmet = require('helmet') // Security Module
 var expressSanitized = require('express-sanitized')
+var session = require('client-sessions');
 
 var app = express()
 app.use(helmet())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
+app.use('/', express.static(__dirname + '/views'))
 app.set('view engine', 'hjs')
 
 // uncomment after placing your favicon in /public
@@ -31,6 +33,10 @@ app.use(function (req, res, next) {
   err.status = 404
   next(err)
 })
+
+
+// Session management 
+
 
 // error handlers
 

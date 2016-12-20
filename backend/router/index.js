@@ -10,4 +10,5 @@ module.exports = function (app) {
   app.use('/type', require('./routes/type'))
   app.use('/graph', require('./routes/graph'))
   app.use('/log', require('./routes/log'))
+  app.use('/login', require('./routes/login'))
 }

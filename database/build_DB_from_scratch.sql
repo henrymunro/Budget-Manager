@@ -18,5 +18,7 @@ SELECT 'BUILDING GRAPH PROCS';
 source graphProcs.sql;
 SELECT 'BUILDING LOGGING PROCS';
 source loggingProcs.sql
+SELECT 'BUILDING USER PROCS';
+source userProcs.sql
 
 SELECT 'DONE!';
