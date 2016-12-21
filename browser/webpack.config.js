@@ -8,7 +8,8 @@ var path = require('path')
 module.exports = {
   context: path.join(__dirname, 'src'),
   devtool: debug ? 'inline-sourcemap' : null,
-  entry: './js/client.js',
+  //entry: './js/appEntry.js',
+  entry: './js/loginEntry.js',
   module: {
     loaders: [
       {
@@ -44,7 +45,7 @@ module.exports = {
   },
   output: {
     // path: 'build',
-    filename: 'client.min.js'
+    filename: 'app.min.js'
   },
   resolve: {
     modulesDirectories: ['src', 'node_modules']

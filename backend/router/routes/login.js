@@ -33,16 +33,16 @@ router.post('/', (req, res)=>{
     if(response){
       const user_id = response.User_id 
       debug('Request SUCCESS to authenticate user: '+username+', user_id: ', user_id)
-      res.send('\nLogin successful\n')
+      res.send({loggedIn:true, shouldRedirect:true})
     }else{
       debug('Request ERROR unable to authenticate user: '+username)
-      res.send('\nLogin failed, please enter correct credentials\n')
+      res.send({loggedIn:false, shouldRedirect:false, errorMessage: 'Incorrect Username or password please try again'})
     }
     
 
   }).catch((error)=>{
     debug('Request ERROR authenticating user: '+username+ ', error: ' +  err)
-    res.send('\nLogin failed\n')
+    res.send({loggedIn:false, shouldRedirect:false, errorMessage: 'Unable to authenticate user please try again'})
 
   })
   
