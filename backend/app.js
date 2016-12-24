@@ -12,8 +12,8 @@ var app = express()
 app.use(helmet())
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'))
-app.use('/', express.static(__dirname + '/views'))
+app.set('views', path.join(__dirname, 'build'))
+app.use('/', express.static(__dirname + '/build'))
 app.set('view engine', 'hjs')
 
 // uncomment after placing your favicon in /public
@@ -22,7 +22,7 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
-app.use(express.static(path.join(__dirname, 'static')))
+app.use(express.static(path.join(__dirname, 'build')))
 // Loads Routes
 var router = require('./router/index')(app)
 
