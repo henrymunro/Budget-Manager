@@ -1,0 +1,10 @@
+.graphArea{
+	width: 79%;
+	background-color:  white; 
+	float:left;
+}
+
+.Legend{ 
+	width: 20%;
+	float: right;
+ }

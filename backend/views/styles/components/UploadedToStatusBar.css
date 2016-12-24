@@ -1,0 +1,55 @@
+.UploadedToStatusBar_div{
+	float:right;
+}
+
+.mappedUploadedToStatus_ul{
+	padding: 0;
+}
+
+.websiteUpdate_div{
+	position: absolute;
+	right: 50px;
+	height: 100px;
+	background: red;
+	z-index: 1;
+	visibility: hidden;
+}
+
+.website {
+	background: blue;
+	border-color: gray;
+	border: 3px;
+	border-style: solid;
+    padding: 0 5px;
+    margin: 0 5px;
+    border-radius: 2px;
+}
+
+.website_shutterStock {
+	background: red;
+}
+
+.website_shutterStock:hover {
+	background: blue;
+}
+
+.website_bigStock {
+	background: black;
+}
+
+.website_bigStock:hover {
+	background: gray;
+}
+
+/* Status */
+.pending { 
+	border-style: dashed;
+}
+
+.rejected{
+	border-color: red;
+}
+
+.accepted{
+	border-color: green;
+}

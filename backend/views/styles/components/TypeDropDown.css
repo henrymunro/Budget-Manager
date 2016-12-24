@@ -1,0 +1,49 @@
+
+/*Type drop down*/
+.dropDown{
+	position: absolute;
+ 	list-style-type: none;
+ 	padding: 0;
+ 	z-index: 10;
+}
+.typeListElement{
+	width: 100px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #cccccc;
+	background: #e8e8e8;
+	position: relative;
+}
+.hideDropDown{
+	visibility: hidden;
+}
+.typeListHover{
+	border-top: 1px;
+	border-color: black;
+	background: white;
+}
+
+/* Subtype list styles */
+.subTypeList{
+	padding:0;
+	width: 100px;
+	position: absolute;    
+	left: 99px;
+	bottom: -18px;
+ 	list-style-type: none;
+}
+.subTypeListElement{
+	border-style: solid;
+	border-width: 1px;
+	border-color: #cccccc;
+	background: #e8e8e8;	
+}
+.subTypeListHide{
+	visibility: hidden;	
+	position: absolute;
+}
+
+
+
+
+
