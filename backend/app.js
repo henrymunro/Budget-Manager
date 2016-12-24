@@ -7,7 +7,6 @@ var bodyParser = require('body-parser')
 var helmet = require('helmet') // Security Module
 var expressSanitized = require('express-sanitized')
 var session = require('client-sessions');
-
 var app = express()
 app.use(helmet())
 
@@ -25,6 +24,8 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'build')))
 // Loads Routes
 var router = require('./router/index')(app)
+
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

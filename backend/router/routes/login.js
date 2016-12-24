@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const debug = require('debug')('login')
 const pool = require('mysql2/promise').createPool({host:'localhost', user: 'root', database: 'Budget'}); 
-const path = require('path');
+const path = require('path')
 
 const user = require('../globalFunctions/authenticateUser')
 const   { authenticateUser } = user
@@ -22,7 +22,7 @@ router.use(function(req, res, next){
 router.get('/', (req, res)=>{
 
   console.log(path.join(__dirname,'/../views/login.html'))
-  res.sendFile(path.join('login.html'))
+  res.sendFile('login.html', { root: path.join(__dirname, '../../build') })
 
 })
 
