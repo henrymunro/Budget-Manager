@@ -12,7 +12,7 @@ $Client_address = 'http://localhost:8080';
 
 
 router.use(function(req, res, next){
-  res.header('Access-Control-Allow-Origin', $Client_address);
+  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST');
   res.header('Access-Control-Allow-Headers', 'Content-type');
   next();
@@ -33,7 +33,8 @@ router.post('/', (req, res)=>{
     if(response){
       const user_id = response.User_id 
       debug('Request SUCCESS to authenticate user: '+username+', user_id: ', user_id)
-      res.send({loggedIn:true, shouldRedirect:true})
+      //res.send({loggedIn:true, shouldRedirect:true})
+      res.redirect('/home');
     }else{
       debug('Request ERROR unable to authenticate user: '+username)
       res.send({loggedIn:false, shouldRedirect:false, errorMessage: 'Incorrect Username or password please try again'})
