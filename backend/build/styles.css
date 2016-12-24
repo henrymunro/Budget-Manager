@@ -1,0 +1,52 @@
+.base__clearfix___3IDCI:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+
+.base__cf___1qG1C:before,
+.base__cf___1qG1C:after   { content: " "; display: table; }
+.base__cf___1qG1C:after   { clear: both; }
+.base__cf___1qG1C         { *zoom: 1; }
+
+
+.base__white___3xt69{
+	background: white;
+}
+
+.base__resetPadding___3ZiyI{
+	padding: 0;
+	margin: 0;
+}
+
+/*General table sytyles*/
+.base__tableHead___29wGZ{
+	background: white;
+	width: 97%;
+}
+
+.base__tableRow___2zGCl{
+	padding: 0;
+	height: 34px;
+}
+
+
+.base__deleteButton___3686L{
+	background: #ffffff00;
+	border-width: 0;
+}
+
+
+/* Card styles */
+
+.base__cardOverflow___sfPPA{
+	height: 450px; 
+	overflowY: auto; 
+	overflowX: hidden;
+	position: relative;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzdHlsZXMuY3NzIiwic291cmNlUm9vdCI6IiJ9*/
