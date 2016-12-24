@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "webpack": "webpack --config webpack.config.prod.js",
     "start": "node ./bin/www",
     "dev": "DEBUG=authenticateUser,login,fileUpload,csvParser,mappings,type,ledger,graph,databaseConnection,LOG,fileUploadValidation  nodemon -w . -w www"
   },
