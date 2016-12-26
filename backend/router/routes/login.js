@@ -30,26 +30,60 @@ router.get('/', (req, res)=>{
 router.post('/', (req, res)=>{
   const {username, password} = req.body
   debug('Request RECIEVED to authenticate user: '+username)
-  authenticateUser(username, password).then((response)=>{
-    if(response){
-      const user_id = response.User_id 
-      debug('Request SUCCESS to authenticate user: '+username+', user_id: '+ user_id)
-      // Session info
-      req.session.user_id = user_id
-      req.session.username = username
-      console.log('SESSION: ', req.session)
-      res.status(200).send({loggedIn:true, shouldRedirect:true})
-    }else{
-      debug('Request ERROR unable to authenticate user: '+username)
-      res.send({loggedIn:false, shouldRedirect:false, errorMessage: 'Incorrect Username or password please try again'})
-    }
+
+  // Grabs the users concatonted hash and salt from the DB
+  pool.getConnection()
+         .then((conn) => {
+           const result = conn.query('call sp_GetUserCredentials(?)', [username])
+           conn.release()
+           return result;
+         })
+         .then((result) => {
+          // Compares DB hash and salt to password sent
+          const { Hash, Email, User_id } = result[0][0][0]
+          debug('Checking user credentials: '+username)
+          bcrypt.compare(password, Hash, function(err, passwordValid) {
+              // passwordValid == true means password is valid 
+              if (passwordValid){
+                // User has sucessfully logged in
+                debug('Request SUCCESS to authenticate user: '+username+', user_id: '+ User_id)
+                // Session info
+                req.session.user_id = User_id
+                req.session.username = username
+                console.log('SESSION: ', req.session)
+                res.status(200).send({loggedIn:true, shouldRedirect:true})
+              }else{
+                // Incorrect username or password given
+                debug('Request FAIL unable to authenticate user: '+username)
+                res.send({loggedIn:false, shouldRedirect:false, errorMessage: 'Incorrect Username or password please try again'})
+              }
+          })
+         }).catch((err)=>{
+          debug('Request ERROR authenticating user: '+username+ ', error: ' +  err)
+          res.send({loggedIn:false, shouldRedirect:false, errorMessage: 'Unable to authenticate user please try again'})
+         })
+
+
+  // authenticateUser(username).then((response)=>{
+  //   if(response){
+  //     const user_id = response.User_id 
+  //     debug('Request SUCCESS to authenticate user: '+username+', user_id: '+ user_id)
+  //     // Session info
+  //     req.session.user_id = user_id
+  //     req.session.username = username
+  //     console.log('SESSION: ', req.session)
+  //     res.status(200).send({loggedIn:true, shouldRedirect:true})
+  //   }else{
+  //     debug('Request ERROR unable to authenticate user: '+username)
+  //     res.send({loggedIn:false, shouldRedirect:false, errorMessage: 'Incorrect Username or password please try again'})
+  //   }
     
 
-  }).catch((error)=>{
-    debug('Request ERROR authenticating user: '+username+ ', error: ' +  err)
-    res.send({loggedIn:false, shouldRedirect:false, errorMessage: 'Unable to authenticate user please try again'})
+  // }).catch((error)=>{
+  //   debug('Request ERROR authenticating user: '+username+ ', error: ' +  err)
+  //   res.send({loggedIn:false, shouldRedirect:false, errorMessage: 'Unable to authenticate user please try again'})
 
-  })
+  // })
 })
 
 
@@ -57,7 +91,8 @@ router.post('/', (req, res)=>{
 router.post('/create', (req, res)=>{
   const {username, firstname, lastname, email, password} = req.body
   debug('Request RECIEVED to create user: '+username)
-  // create SALT for new user
+  // bcrypt creates a salt for the user and then the hash 
+  // these are then concatonated and stored in the database
   bcrypt.hash(password, saltRounds, function(err, hash) {
     // Store hash in your password DB.
     createNewUser(username, firstname, lastname, email, hash).then((response)=>{

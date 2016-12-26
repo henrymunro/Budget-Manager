@@ -2,6 +2,23 @@ use Budget;
 
 /*   ###############   Authenticate  ############### */
 
+DROP PROCEDURE IF EXISTS sp_GetUserCredentials;
+DELIMITER //
+CREATE PROCEDURE sp_GetUserCredentials(
+	in username_in varchar(500)
+)
+BEGIN
+
+	SELECT Password as Hash, Email, User_id 
+	FROM Users 
+	WHERE Username = username_in 
+	AND EndDate is null; 
+
+	
+END //
+DELIMITER ;
+
+
 DROP PROCEDURE IF EXISTS sp_AuthenticateUser;
 DELIMITER //
 CREATE PROCEDURE sp_AuthenticateUser(
