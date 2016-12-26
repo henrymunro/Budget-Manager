@@ -24,7 +24,7 @@ router.get('/', (req, res)=>{
   debug('Request to get user upload files')
 pool.getConnection()
      .then((conn) => {
-      const user_id = 1 
+      const user_id = req.session.user_id 
        const res = conn.query('CALL sp_GetUserUploadFiles(?);', [user_id])
        conn.release()
        return res;
@@ -61,7 +61,7 @@ router.post('/', (req, res) => {
         // Adds required infromation from input to result
         parsedFile.name = file.name
         parsedFile.account = ''
-        parsedFile.selectedAccount = 1
+        parsedFile.selectedAccount = req.session.user_id
         parsedFile.lastModifiedDate = file.lastModifiedDate
         debug('File parsed: '+file.name)
 
