@@ -10,16 +10,15 @@ const pool = require('mysql2/promise').createPool({host:'localhost', user: 'root
 const databaseConnection = require('../globalFunctions/databaseConnection')
 const   { callProcUPDATE, callProcGET } = databaseConnection
 
-$Client_address = 'http://localhost:8080';
 
 
 router.use(function(req, res, next){
-  res.header('Access-Control-Allow-Origin', $Client_address);
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST');
+  res.header('Access-Control-Allow-Methods', 'GET,POST');
   res.header('Access-Control-Allow-Headers', 'Content-type');
   next();
 });
 
+debug('Startup: Loading in GRAPH routes')
 
 // Route to get graph data grouped by type 
 router.get('/type', (req, res)=>{ 

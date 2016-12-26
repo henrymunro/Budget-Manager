@@ -19,6 +19,7 @@ router.use(function (req, res, next) {
   next()
 })
 
+debug('Startup: Loading in FILE UPLOAD routes')
 
 
 //Route to get users previously updated files

@@ -6,13 +6,11 @@ var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
 var helmet = require('helmet') // Security Module
 var expressSanitized = require('express-sanitized')
-var session = require('client-sessions');
 var app = express()
 app.use(helmet())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'build'))
-app.use('/', express.static(__dirname + '/build'))
 app.set('view engine', 'hjs')
 
 // uncomment after placing your favicon in /public
@@ -36,20 +34,12 @@ app.use(function (req, res, next) {
 
 //CORS
 app.all('/*', function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
+  //res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,HEAD,DELETE,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'content-Type,x-requested-with');
   next();
 });
 
-
-// Session management 
-app.use(session({
-  cookieName: 'session',
-  secret: 'random_string_goes_here',
-  duration: 30 * 60 * 1000,
-  activeDuration: 5 * 60 * 1000,
-}));
 
 // error handlers
 

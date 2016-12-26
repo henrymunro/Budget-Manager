@@ -34,12 +34,13 @@ export default class Login extends React.Component {
 
     const {shouldRedirect, loggedIn, errorMessage } = this.props.login
 
-    if(shouldRedirect){
-      this.props.dispatch(redirectToHome(this.props.axios))
+    if(shouldRedirect){      
+      window.location = "http://localhost:3000/home"
     }
 
     return (
-        <div class="row">
+      <div class="row">
+        <div>{errorMessage}</div>
         <form class="col s12">
           <div class="row">
             <div class="input-field col s12">

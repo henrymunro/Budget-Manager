@@ -17,6 +17,7 @@ router.use(function(req, res, next){
   next();
 });
 
+debug('Startup: Loading in LOG routes')
 
 //Route to log browser errors 
 router.post('/browserError', (req, res)=>{

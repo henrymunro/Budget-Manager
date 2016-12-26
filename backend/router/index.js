@@ -1,5 +1,6 @@
 var express = require('express')
-var router = express.Router()
+var router = require('./router')
+
 
 
 module.exports = function (app) {
@@ -12,4 +13,6 @@ module.exports = function (app) {
   app.use('/log', require('./routes/log'))
   app.use('/login', require('./routes/login'))  
   app.use('/home', require('./routes/home'))
+
 }
+

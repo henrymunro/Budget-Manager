@@ -15,6 +15,7 @@ router.use(function (req, res, next) {
   next()
 })
 
+debug('Startup: Loading in TYPE routes')
 
 //Route to get types 
 router.get('/', (req, res)=> {

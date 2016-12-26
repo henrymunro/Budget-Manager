@@ -15,6 +15,14 @@ export default function reducer(state={
         	}
       	}
 
+      	case "AUTHENTICATE_USER_REJECTED": {
+      		return {...state, 
+        		loggedIn: false,
+        		shouldRedirect: false,
+        		errorMessage: "Error connecting to the server please try again." 
+        	}
+      	}
+
   }
 
 	return state

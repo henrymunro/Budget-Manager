@@ -18,6 +18,8 @@ router.use(function(req, res, next){
 });
 
 
+debug('Startup: Loading in ACCOUNT routes')
+
 //Route to get users accounts
 router.get('/', (req, res)=>{
 pool.getConnection()

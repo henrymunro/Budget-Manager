@@ -15,6 +15,8 @@ router.use(function(req, res, next){
   next();
 });
 
+debug('Startup: Loading in MAPPING routes')
+
 
 //Route to get users mappings
 router.get('/', (req, res)=>{

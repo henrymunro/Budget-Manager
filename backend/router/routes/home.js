@@ -1,12 +1,13 @@
 var express = require('express');
-var router = express.Router();
+var Router = require('../router') //import router class 
+var router = new Router().router
 const debug = require('debug')('home')
 const pool = require('mysql2/promise').createPool({host:'localhost', user: 'root', database: 'Budget'}); 
 const path = require('path')
-var rfr = require('rfr')
-
 
 $Client_address = 'http://localhost:8080';
+
+debug('Startup: Loading in HOME routes')
 
 
 router.use(function(req, res, next){
@@ -18,8 +19,8 @@ router.use(function(req, res, next){
 
 //Route to get users mappings
 router.get('/', (req, res)=>{
-
-  res.sendFile('index.html', { root: path.join(__dirname, '../../build') })
+	debug('Request recieved to GET home page')
+  	res.sendFile('index.html', { root: path.join(__dirname, '../../build') })
 
 })
 

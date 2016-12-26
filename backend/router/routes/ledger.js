@@ -1,5 +1,6 @@
 const express = require('express')
-const router = express.Router()
+const Router = require('../router')
+const router = new Router().router
 const debug = require('debug')('ledger')
 const pool = require('mysql2/promise').createPool({host:'localhost', user: 'root', database: 'Budget'}); 
 
@@ -16,7 +17,7 @@ router.use(function (req, res, next) {
   next()
 })
 
-
+debug('Startup: Loading in LEDGER routes')
 
 
 // Returns all the users Ledger items
