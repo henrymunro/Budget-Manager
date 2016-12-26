@@ -4,12 +4,12 @@ const debug = require('debug')('router')
 
 debug('Startup: Loading in router')
 
+
 module.exports =  class Router {
 	constructor() {
     	
 		var router = express.Router()
-		
-
+	
 		// Session management 
 		router.use(session({
 			cookieName: 'session',

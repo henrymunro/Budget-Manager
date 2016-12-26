@@ -1,6 +1,6 @@
 const express = require('express')
-const router = express.Router()
-// const _ = require('lodash')
+const Router = require('../router')
+const router = new Router().router
 const validator = require('validator')
 const Escape = validator.escape
 const debug = require('debug')('fileUpload')

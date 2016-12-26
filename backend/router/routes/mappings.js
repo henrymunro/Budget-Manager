@@ -1,6 +1,6 @@
 var express = require('express');
-var router = express.Router();
-
+const Router = require('../router')
+const router = new Router().router
 const Escape = require('validator').escape
 const debug = require('debug')('mappings')
 const pool = require('mysql2/promise').createPool({host:'localhost', user: 'root', database: 'Budget'}); 

@@ -2,7 +2,8 @@ var d3 = require('d3')
 
 
 var express = require('express');
-var router = express.Router();
+const Router = require('../router')
+const router = new Router().router
 
 const debug = require('debug')('graph')
 const pool = require('mysql2/promise').createPool({host:'localhost', user: 'root', database: 'Budget'}); 
