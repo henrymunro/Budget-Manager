@@ -15,7 +15,7 @@ debug('Startup: Loading in ACCOUNT routes')
 router.get('/', (req, res)=>{
 pool.getConnection()
      .then((conn) => {
-     	const user_id = 1 
+     	const user_id = req.session.user_id
        const res = conn.query('CALL sp_GetUserAccounts( ?);', [user_id])
        conn.release()
        return res;
@@ -33,8 +33,8 @@ pool.getConnection()
 router.post('/add', (req, res)=>{
 pool.getConnection()
      .then((conn) => {
-     	const accountName = req.body.accountName,
-     		user_id = 1
+     	const accountName = req.body.accountName
+     	const user_id = req.session.user_id
         console.log(req.body)
        const res = conn.query('CALL sp_AddUserAccounts( ?, ?);', [accountName, user_id])
        conn.release()
@@ -52,8 +52,8 @@ pool.getConnection()
 // router.post('/delete', (req, res)=>{
 // pool.getConnection()
 //      .then((conn) => {
-//      	const userMapping_id = req.body.userMapping_id,
-//      			user_id = 1 
+//      	const userMapping_id = req.body.userMapping_id
+//      	const user_id = req.session.user_id
 //        const res = conn.query('CALL sp_DeleteUserMapping( ?, ?);', [userMapping_id, user_id])
 //        conn.release()
 //        return res;

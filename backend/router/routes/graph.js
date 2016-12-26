@@ -15,11 +15,12 @@ debug('Startup: Loading in GRAPH routes')
 
 // Route to get graph data grouped by type 
 router.get('/type', (req, res)=>{ 
+  debug(req.session)
   // Gathers infromation
   let operation = 'gets user graph data grouped by type [user_id] '
   const procedure = 'CALL sp_GetTypeOverview( ?);',
-        user_id = 1
-        params = [user_id]
+        user_id = req.session.user_id
+  const params = [user_id]
   // Updates logging text
   operation = operation + params.join(', ') 
   debug("Request RECIEVED: "+ operation)
@@ -47,7 +48,7 @@ router.post('/subType', (req, res)=>{
   // Gathers infromation
   let operation = 'gets user graph data grouped by subType [user_id, type] '
   const procedure = 'CALL sp_GetSubTypeOverview( ?, ?);',
-        user_id = 1,
+        user_id = req.session.user_id,
         { type } = req.body
         params = [user_id, type]
   // Updates logging text
