@@ -1,6 +1,14 @@
 import React from 'react'
 
+import {logUserOut} from 'js/actions/navActions'
+
 export default class NavBar extends React.Component {
+
+  logUserOut(){
+    this.props.dispatch(logUserOut(this.props.axios))
+  }
+
+
   render () {
     return (
       <div>
@@ -12,6 +20,7 @@ export default class NavBar extends React.Component {
         		<li className='nav-item'><a className='nav-link' href="#fileUpload">File Upload</a></li>      		
         		<li className='nav-item'><a className='nav-link' href="#type">Type</a></li>
         	</ul>
+          <button onClick={this.logUserOut.bind(this)}>Logout</button>
       </div>
     )
   }

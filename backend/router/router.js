@@ -42,8 +42,16 @@ module.exports =  class Router {
 				debug('Checking user session: ', req.session)
 				if(!req.session || !req.session.username){
 					debug('Session expired')
-					// req.session.reset()
-        			res.redirect('/login')
+					if(req.baseUrl === '/home'){
+						debug('Redirecting to login page')
+						req.session.reset()
+	        			res.redirect('/login')
+	        		}else{
+	        			debug('Sending session expiry to client')
+	        			req.session.reset()
+	        			res.send({userTimeout: true})
+	        		}
+
 				}else{
 					debug('Session okay moving on ...')
 					next()	

@@ -18,11 +18,20 @@ const   { createNewUser } = user
 
 debug('Startup: Loading in LOGIN routes')
 
-//Route to get users mappings
+//Route to get login page
 router.get('/', (req, res)=>{
   debug('Request recieved to GET login page')
   res.sendFile('login.html', { root: path.join(__dirname, '../../build') })
 
+})
+
+//Route to log user out
+router.get('/logout', (req, res)=>{
+  const {user_id, username} = req.session
+  debug('Request recieved to log user out: ', username)  
+  req.session.reset()
+  // res.redirect('/login')
+  res.send({userTimeout: true})
 })
 
 

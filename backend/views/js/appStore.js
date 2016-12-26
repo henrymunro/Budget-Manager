@@ -9,14 +9,17 @@ import reducer from "./reducers/appReducers"
 
 const userAuthentication = store => next => action => {
 	const payload = action.payload
-	console.log('Payload: ',payload, payload?'yes':'no')
-	const userTimeout = payload ? payload.userTimeout : false
-	console.log('CHECKING User userAuthentication: ')
 
+	// Checking to see if session has expired
+	const userTimeout = (((action || {}).payload || {}).data || {}).userTimeout
+	// Redirect on timeout 
 	if (userTimeout) {
 		console.log('AXIOS: ', userTimeout)
+		window.location = "http://localhost:3000/login"
+	}else{
+		return next(action)
 	}
-	return next(action)
+
 }
 
 const middleware = applyMiddleware(promise(), thunk, logger(), userAuthentication)

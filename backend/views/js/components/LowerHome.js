@@ -83,7 +83,7 @@ export default class LowerHome extends React.Component {
           <div className='col s12 l2'>
             <Sticky>
               <div className="card">
-                <NavBar /> 
+                <NavBar dispatch={this.props.dispatch} axios={this.props.axios}/> 
               </div>
             </Sticky>  
           </div>
