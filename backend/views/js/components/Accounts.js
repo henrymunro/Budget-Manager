@@ -39,10 +39,6 @@ export default class Accounts extends React.Component {
     }
   }
 
-  UpdateDropDown(e){
-    console.log('Account: ', e.target.value)
-  }
-
   deleteAccount(e){
     const UserAccount_id = e.target.attributes.getNamedItem('data-useraccount-id').value
     console.log('USER: ', UserAccount_id)
@@ -56,9 +52,10 @@ export default class Accounts extends React.Component {
 
     const { accounts } = this.props
     const accountsListElements = accounts.map((account, key)=>{
-      return <li data-account-id={account.UserAccount_id} key={key} className="list-group-item">
+      return <li data-account-id={account.UserAccount_id} key={key} style={{width:'100%', marginBottom:'5px'}}>
                 {account.AccountName}
-                <button className={baseStyles.deleteButton}>
+                <button className={baseStyles.deleteButton}
+                  style={{float:'Right'}}>
                   <i className="tiny material-icons"
                      data-useraccount-id={account.UserAccount_id}
                      onClick={this.deleteAccount.bind(this)}
@@ -68,15 +65,16 @@ export default class Accounts extends React.Component {
     })
     const accountsList = <ul className="list-group">{accountsListElements}</ul>
 
-    return <div className='card'>
-            <h4>Accounts</h4>
-            <AccountsDropDown accounts={accounts} selectedAccount='amex' onChange={this.UpdateDropDown} />
-              <div className="container">
-                {accountsList}
-              </div>
-             <input placeholder="Add New Account" value={this.props.addNewAccountText} onChange={this.updateNewAccountText.bind(this)} /> 
-             <a class="waves-effect waves-light btn" onClick={this.saveNewAccount.bind(this)}>Save Account</a>      
-           </div>
+    return <div className='col s12 l3 card'> 
+              <div className={baseStyles.cf}>
+                <h4>Accounts</h4>
+                  <div className="container">
+                    {accountsList}
+                  </div>
+                 <input placeholder="Add New Account" value={this.props.addNewAccountText} onChange={this.updateNewAccountText.bind(this)} /> 
+                 <a class="waves-effect waves-light btn" onClick={this.saveNewAccount.bind(this)}>Save Account</a>      
+             </div>
+          </div>
   }
 }
 

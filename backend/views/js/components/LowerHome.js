@@ -72,7 +72,10 @@ export default class LowerHome extends React.Component {
         break
       }
       case "#type": {
-        display = <Type /> 
+        display = <div>
+                    <Type /> 
+                    <Accounts />
+                  </div>
         break
       }
     }

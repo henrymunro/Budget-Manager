@@ -16,9 +16,8 @@ export default class NavBar extends React.Component {
         		<li className='nav-item'><a className='nav-link' href="#ledger">Ledger</a></li>
         		<li className='nav-item'><a className='nav-link' href="#mappings">Mappings - Edit</a></li>            
             <li className='nav-item'><a className='nav-link' href="#addNewMappings">Mappings - Add New</a></li>
-        		<li className='nav-item'><a className='nav-link' href="#accounts">Accounts</a></li>
         		<li className='nav-item'><a className='nav-link' href="#fileUpload">File Upload</a></li>      		
-        		<li className='nav-item'><a className='nav-link' href="#type">Type</a></li>
+        		<li className='nav-item'><a className='nav-link' href="#type">Type & Account</a></li>
         	</ul>
           <button onClick={this.logUserOut.bind(this)}>Logout</button>
       </div>
