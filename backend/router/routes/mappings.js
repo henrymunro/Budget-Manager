@@ -1,17 +1,12 @@
-var express = require('express');
+const debug = require('debug')('mappings')
+
+//Load in router class
 const Router = require('../router')
 const router = new Router().router
-const Escape = require('validator').escape
-const debug = require('debug')('mappings')
+
+//Load in database connection
 const pool = require('../databaseConnection')
 
-
-router.use(function(req, res, next){
-  res.header('Access-Control-Allow-Origin', $Client_address);
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST');
-  res.header('Access-Control-Allow-Headers', 'Content-type');
-  next();
-});
 
 debug('Startup: Loading in MAPPING routes')
 

@@ -1,23 +1,15 @@
 var d3 = require('d3')
+const debug = require('debug')('graph')
 
-
-var express = require('express');
+//Load in router class
 const Router = require('../router')
 const router = new Router().router
 
-const debug = require('debug')('graph')
+//Load in database connection
 const pool = require('../databaseConnection')
-
 const databaseProcedures = require('../globalFunctions/databaseProcedures')
 const   { callProcUPDATE, callProcGET } = databaseProcedures
 
-
-
-router.use(function(req, res, next){
-  res.header('Access-Control-Allow-Methods', 'GET,POST');
-  res.header('Access-Control-Allow-Headers', 'Content-type');
-  next();
-});
 
 debug('Startup: Loading in GRAPH routes')
 

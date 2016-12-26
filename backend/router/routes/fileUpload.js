@@ -1,23 +1,20 @@
-const express = require('express')
-const Router = require('../router')
-const router = new Router().router
+const debug = require('debug')('fileUpload')
+const moment = require('moment')
 const validator = require('validator')
 const Escape = validator.escape
-const debug = require('debug')('fileUpload')
+
+//Load in router class
+const Router = require('../router')
+const router = new Router().router
+
+//Load in database connection
+const pool = require('../databaseConnection')
+
+//Load in other functions
 const csvParser = require('../globalFunctions/csvParser.js')
 const parseCSV = csvParser.parseCSV
 const validateUploadedFile = require('../globalFunctions/fileUploadValidation.js').validateUploadedFile
-const moment = require('moment')
-const pool = require('../databaseConnection')
 
-$Client_address = 'http://localhost:8080'
-
-router.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', $Client_address)
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS')
-  res.header('Access-Control-Allow-Headers', 'Content-type')
-  next()
-})
 
 debug('Startup: Loading in FILE UPLOAD routes')
 
@@ -54,7 +51,8 @@ router.post('/', (req, res) => {
     return new Promise(function (resolve, reject) {
     	//Logs possible XSS
       if (file.content != Escape(file.content)) {
-        debug('Input Santised: '+ file.name)
+        debug('INPUT SHOULD BE SANITIESED: '+ file.name)
+        
       }
       //Sanitises input
       // file.content = Escape(file.content)

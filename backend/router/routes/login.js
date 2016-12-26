@@ -1,12 +1,17 @@
-var express = require('express');
-var Router = require('../router')
-var router = new Router().router
 const debug = require('debug')('login')
-const pool = require('../databaseConnection')
 const path = require('path')
 
+//Load in router class
+const Router = require('../router')
+const router = new Router().router
+
+//Load in database connection
+const pool = require('../databaseConnection')
+
+//Load in other functions
 const user = require('../globalFunctions/authenticateUser')
 const   { authenticateUser } = user
+
 
 debug('Startup: Loading in LOGIN routes')
 

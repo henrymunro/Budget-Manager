@@ -1,22 +1,12 @@
-var express = require('express');
+const debug = require('debug')('account')
+const Escape = require('validator').escape
+
+//Load in router class
 const Router = require('../router')
 const router = new Router().router
 
-const Escape = require('validator').escape
-const debug = require('debug')('account')
+//Load in database connection
 const pool = require('../databaseConnection')
-
-$Client_address = 'http://localhost:8080';
-
-
-
-
-router.use(function(req, res, next){
-  res.header('Access-Control-Allow-Origin', $Client_address);
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST');
-  res.header('Access-Control-Allow-Headers', 'Content-type');
-  next();
-});
 
 
 debug('Startup: Loading in ACCOUNT routes')

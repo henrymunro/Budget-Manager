@@ -1,21 +1,14 @@
-const express = require('express')
+const debug = require('debug')('ledger')
+
+//Load in router class
 const Router = require('../router')
 const router = new Router().router
-const debug = require('debug')('ledger')
+
+//Load in database connection
 const pool = require('../databaseConnection')
-
-
 const databaseProcedures = require('../globalFunctions/databaseProcedures')
 const   { callProcUPDATE, callProcGET } = databaseProcedures
 
-$Client_address = 'http://localhost:8080'
-
-router.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', $Client_address)
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS')
-  res.header('Access-Control-Allow-Headers', 'Content-type')
-  next()
-})
 
 debug('Startup: Loading in LEDGER routes')
 
