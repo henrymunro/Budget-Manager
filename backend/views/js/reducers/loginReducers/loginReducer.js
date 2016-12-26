@@ -1,7 +1,8 @@
 export default function reducer(state={
 		loggedIn: false,
 		shouldRedirect: false,
-		errorMessage: null
+		errorMessage: null,
+    createUserMessage: null
 	}, action){
 
 	switch(action.type) {
@@ -15,13 +16,20 @@ export default function reducer(state={
         	}
       	}
 
-      	case "AUTHENTICATE_USER_REJECTED": {
-      		return {...state, 
-        		loggedIn: false,
-        		shouldRedirect: false,
-        		errorMessage: "Error connecting to the server please try again." 
-        	}
-      	}
+  	case "AUTHENTICATE_USER_REJECTED": {
+  		return {...state, 
+    		loggedIn: false,
+    		shouldRedirect: false,
+    		errorMessage: "Error connecting to the server please try again." 
+    	}
+  	}
+
+    case "CREATE_USER_FULFILLED":{
+      return{
+        ...state,
+        createUserMessage: action.payload.data.message
+      }
+    }
 
   }
 

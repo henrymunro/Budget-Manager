@@ -33,9 +33,9 @@ module.exports =  class Router {
 
 
 		router.use(function(req, res, next) {
-			debug('Starting session checking')
+			debug('Starting session checking', req.originalUrl, req.baseUrl)
 			//Always allow login path
-			if(req.originalUrl === '/login'){
+			if(req.baseUrl === '/login'){
 				debug('Log in path moving on...')
 				next()
 			}else {

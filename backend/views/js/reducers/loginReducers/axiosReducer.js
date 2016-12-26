@@ -11,6 +11,7 @@ export default function reducer (state = {
         baseURL: 'http://localhost:3000/',
         // file Uploads 
         login: 'login',
+        createUser: 'login/create',
         home: 'home'
       }
     }
