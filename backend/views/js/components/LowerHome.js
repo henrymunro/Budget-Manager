@@ -6,7 +6,6 @@ import { getAccounts } from 'js/actions/accountsActions'
 import { getYearMonth, getLedger, updateDescription, saveDescription } from 'js/actions/ledgerActions'
 import { getType } from 'js/actions/typeActions'
 
-import NavBar from 'js/components/HomePage/NavBar'
 import Ledger from 'js/components/Ledger' 
 import FileUpload from 'js/components//FileUpload'
 import Mappings from 'js/components//Mappings'
@@ -59,10 +58,6 @@ export default class LowerHome extends React.Component {
         display = <AddNewMappings {...newMappingsProps} dispatch={this.props.dispatch} axios={this.props.axios} />
         break
       }
-      case "#accounts": {
-        display = <Accounts />
-        break
-      }
       case "#ledger": {
         display = <Ledger {...other} />
         break
@@ -83,14 +78,7 @@ export default class LowerHome extends React.Component {
     return (
       <StickyContainer>
         <div className={'row '} >        
-          <div className='col s12 l2'>
-            <Sticky>
-              <div className="card">
-                <NavBar dispatch={this.props.dispatch} axios={this.props.axios}/> 
-              </div>
-            </Sticky>  
-          </div>
-          <div className='col s12 l10'> 
+          <div className='col s12 l12'> 
             {display}
           </div>
         </div>

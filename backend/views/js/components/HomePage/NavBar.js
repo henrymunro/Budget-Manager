@@ -11,7 +11,8 @@ export default class NavBar extends React.Component {
 
   render () {
     return (
-      <div>
+      <nav>
+        <div class="nav-wrapper">
         	<ul className='nav navbar-nav'>
         		<li className='nav-item'><a className='nav-link' href="#ledger">Ledger</a></li>
         		<li className='nav-item'><a className='nav-link' href="#mappings">Mappings - Edit</a></li>            
@@ -20,7 +21,8 @@ export default class NavBar extends React.Component {
         		<li className='nav-item'><a className='nav-link' href="#type">Type & Account</a></li>
         	</ul>
           <button onClick={this.logUserOut.bind(this)}>Logout</button>
-      </div>
+        </div>
+      </nav>
     )
   }
 }

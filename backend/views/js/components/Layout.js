@@ -10,6 +10,9 @@ import { updateGraphWidth, updateGraphHeight } from 'js/actions/graphActions'
 import HomePage from './HomePage'
 import LowerHome from 'js/components/LowerHome'
 import OverviewGraph from './HomePage/OverviewGraph'
+import NavBar from 'js/components/HomePage/NavBar'
+
+import baseStyles from 'styles/base.css'
 
 
 @connect((store) => {
@@ -76,6 +79,10 @@ export default class Layout extends React.Component {
 
 
     return <div>
+              <StickyContainer>
+               <div className={'col s12 l12 '+ baseStyles.cf}>
+                  <NavBar dispatch={this.props.dispatch} axios={this.props.axios}/> 
+              </div>
               <div className="row">
                 <div className='col s12 l3'></div>
                 <div className='col s12 l9'>
@@ -83,7 +90,6 @@ export default class Layout extends React.Component {
                 </div>               
               </div>
                
-              <StickyContainer>
                 <LowerHome />
               </StickyContainer>
            </div>
