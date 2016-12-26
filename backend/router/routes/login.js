@@ -28,12 +28,12 @@ router.post('/', (req, res)=>{
   authenticateUser(username, password).then((response)=>{
     if(response){
       const user_id = response.User_id 
-      debug('Request SUCCESS to authenticate user: '+username+', user_id: ', user_id)
+      debug('Request SUCCESS to authenticate user: '+username+', user_id: '+ user_id)
       // Session info
       req.session.user_id = user_id
       req.session.username = username
       console.log('SESSION: ', req.session)
-      res.send({loggedIn:true, shouldRedirect:true})
+      res.status(200).send({loggedIn:true, shouldRedirect:true})
     }else{
       debug('Request ERROR unable to authenticate user: '+username)
       res.send({loggedIn:false, shouldRedirect:false, errorMessage: 'Incorrect Username or password please try again'})
