@@ -12,8 +12,8 @@ const router = new Router().router
 const pool = require('../databaseConnection')
 
 //Load in other functions
-const user = require('../globalFunctions/authenticateUser')
-const   { authenticateUser, createNewUser } = user
+const user = require('../globalFunctions/createNewUser')
+const   { createNewUser } = user
 
 
 debug('Startup: Loading in LOGIN routes')
