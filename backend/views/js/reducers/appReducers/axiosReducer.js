@@ -22,6 +22,7 @@ export default function reducer (state = {
         // Account
         accounts: 'accounts',
         addAccount: 'accounts/add',
+        deleteAccount: 'accounts/delete',
         // Ledger 
         ledger: 'ledger',
         yearMonth:'ledger/yearMonth',

@@ -1,10 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { getAccounts, addAccounts, updateNewAccountTextBox, saveNewAccount } from '../actions/accountsActions'
+import { getAccounts, addAccounts, updateNewAccountTextBox, saveNewAccount, deleteAccount } from '../actions/accountsActions'
 
 import AccountsDropDown from './Accounts/AccountsDropDown'
 // import HomePage from './HomePage'
+
+import baseStyles from 'styles/base.css'
+
 
 
 @connect((store) => {
@@ -40,13 +43,27 @@ export default class Accounts extends React.Component {
     console.log('Account: ', e.target.value)
   }
 
+  deleteAccount(e){
+    const UserAccount_id = e.target.attributes.getNamedItem('data-useraccount-id').value
+    console.log('USER: ', UserAccount_id)
+    this.props.dispatch(deleteAccount(UserAccount_id, this.props.axios))
+        .then((res)=>{
+          this.props.dispatch(getAccounts(this.props.axios))
+        })
+  }
+
   render () {
 
     const { accounts } = this.props
     const accountsListElements = accounts.map((account, key)=>{
       return <li data-account-id={account.UserAccount_id} key={key} className="list-group-item">
                 {account.AccountName}
-                <button className='button button-xs'>x</button>
+                <button className={baseStyles.deleteButton}>
+                  <i className="tiny material-icons"
+                     data-useraccount-id={account.UserAccount_id}
+                     onClick={this.deleteAccount.bind(this)}
+                     >delete</i>
+                </button>
               </li>
     })
     const accountsList = <ul className="list-group">{accountsListElements}</ul>

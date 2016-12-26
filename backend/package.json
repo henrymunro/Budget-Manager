@@ -5,7 +5,7 @@
   "scripts": {
     "webpack-watch": "webpack --watch --config webpack.config.prod.js",
     "start": "node ./bin/www",
-    "express-server": "DEBUG=home,router,authenticateUser,login,fileUpload,csvParser,mappings,type,ledger,graph,databaseProcedure,databaseConnection,LOG,fileUploadValidation  nodemon -w . -w www",
+    "express-server": "DEBUG=account,home,router,authenticateUser,login,fileUpload,csvParser,mappings,type,ledger,graph,databaseProcedure,databaseConnection,LOG,fileUploadValidation  nodemon -w . -w www",
     "dev": "concurrently --kill-others \"npm run webpack-watch\" \"npm run express-server\""
   },
   "dependencies": {
