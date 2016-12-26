@@ -16,7 +16,7 @@ router.get('/', (req, res)=>{
   debug('Request to get user mappings')
 pool.getConnection()
      .then((conn) => {
-     	const user_id = 1 
+     	const user_id = req.session.user_id 
        const res = conn.query('CALL sp_GetUserMappings( ?);', [user_id])
        conn.release()
        return res;
@@ -35,7 +35,7 @@ router.post('/add', (req, res)=>{
   // Gathers infromation
   let operation = 'add user mapping [mapping, mapTo, type, subType, user_id] '
   const procedure = 'CALL sp_AddNewUserMapping( ?, ?, ?, ?, ?);',
-        user_id = 1, 
+        user_id = req.session.user_id, 
         { mapping, mapTo, type, subType } = req.body,
         params = [mapping, mapTo, type, subType, user_id]
   // Updates logging text
@@ -49,7 +49,7 @@ router.post('/delete', (req, res)=>{
    // Gathers infromation
   let operation = 'delete user mapping [userMapping_id, user_id] '
   const procedure = 'CALL sp_DeleteUserMapping( ?, ?);',
-        user_id = 1, 
+        user_id = req.session.user_id, 
         { userMapping_id } = req.body,
         params = [userMapping_id, user_id]
   // Updates logging text
@@ -64,7 +64,7 @@ router.post('/type', (req, res)=>{
   // Gathers infromation
   let operation = 'update type and subtype of mapping [user_id, budgetType, budgetSubType, userMapping_id] '
   const procedure = 'CALL sp_UpdateMappingType( ?, ?, ?, ?);',
-        user_id = 1, 
+        user_id = req.session.user_id, 
         { budgetType, budgetSubType, userMapping_id } = req.body,
         params = [user_id, budgetType, budgetSubType, userMapping_id]
   // Updates logging text
@@ -79,7 +79,7 @@ router.post('/applyMappings', (req, res)=>{
   // Gathers infromation
   let operation = 'apply mappings [user_id, onlyApplyToNewEntries] '
   const procedure = 'CALL sp_ApplyMappings( ?, ?);',
-        user_id = 1, 
+        user_id = req.session.user_id, 
         { onlyApplyToNewEntries } = req.body,
         params = [user_id, onlyApplyToNewEntries]
   // Updates logging text
@@ -93,7 +93,7 @@ router.post('/testMappings', (req, res)=>{
   // Gathers infromation
   let operation = 'test mapping [user_id, testMapping] '
   const procedure = 'CALL sp_TestNewMappings( ?, ?);',
-        user_id = 1, 
+        user_id = req.session.user_id, 
         { testMapping } = req.body,
         params = [user_id, testMapping]
   // Updates logging text

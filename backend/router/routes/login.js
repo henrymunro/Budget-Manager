@@ -63,27 +63,6 @@ router.post('/', (req, res)=>{
           res.send({loggedIn:false, shouldRedirect:false, errorMessage: 'Unable to authenticate user please try again'})
          })
 
-
-  // authenticateUser(username).then((response)=>{
-  //   if(response){
-  //     const user_id = response.User_id 
-  //     debug('Request SUCCESS to authenticate user: '+username+', user_id: '+ user_id)
-  //     // Session info
-  //     req.session.user_id = user_id
-  //     req.session.username = username
-  //     console.log('SESSION: ', req.session)
-  //     res.status(200).send({loggedIn:true, shouldRedirect:true})
-  //   }else{
-  //     debug('Request ERROR unable to authenticate user: '+username)
-  //     res.send({loggedIn:false, shouldRedirect:false, errorMessage: 'Incorrect Username or password please try again'})
-  //   }
-    
-
-  // }).catch((error)=>{
-  //   debug('Request ERROR authenticating user: '+username+ ', error: ' +  err)
-  //   res.send({loggedIn:false, shouldRedirect:false, errorMessage: 'Unable to authenticate user please try again'})
-
-  // })
 })
 
 

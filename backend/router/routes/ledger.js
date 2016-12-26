@@ -18,7 +18,7 @@ router.get('/', (req, res)=>{
 	debug('Request recieved to get ledger')
 	pool.getConnection()
 	     .then((conn) => {
-	     	const user_id = 1 
+	     	const user_id = req.session.user_id
 	       const res = conn.query('CALL sp_GetLedger( ?);', [user_id])
 	       conn.release()
 	       return res;
@@ -38,7 +38,7 @@ router.get('/yearMonth', (req, res)=>{
 	debug('Request recievd to get YearMonth')
 	pool.getConnection()
 	     .then((conn) => {
-	     	const user_id = 1 
+	     	const user_id = req.session.user_id
 	       const res = conn.query('CALL sp_GetYearMonth( ?);', [user_id])
 	       conn.release()
 	       return res;
@@ -63,7 +63,7 @@ router.post('/description', (req, res)=>{
 	debug(Description, User_Ledger_id)
 	pool.getConnection()
 	     .then((conn) => {
-	     	const user_id = 1 
+	     	const user_id = req.session.user_id
 	       const res = conn.query('CALL sp_UpdateDescription( ?, ?, ?);', [user_id, Description, User_Ledger_id])
 	       conn.release()
 	       return res;
@@ -79,7 +79,7 @@ router.post('/description', (req, res)=>{
 })
 
 router.post('/type', (req, res)=>{ 
-	const user_id = 1 
+	const user_id = req.session.user_id
 	const BudgetType = req.body.budgetType,
 			BudgetSubType = req.body.budgetSubType,
 			User_Ledger_id = req.body.user_Ledger_id
@@ -105,9 +105,9 @@ router.post('/split', (req, res)=>{
   // Gathers infromation
   let operation = 'update ledger split [user_id, split, user_Ledger_id] '
   const procedure = 'CALL sp_UpdateLedgerSplit( ?, ?, ?);',
-        user_id = 1, 
-        { split, user_Ledger_id } = req.body,
-        params = [user_id, split, user_Ledger_id]
+        user_id = req.session.user_id, 
+        { split, user_Ledger_id } = req.body
+   const params = [user_id, split, user_Ledger_id]
   // Updates logging text
   operation = operation + params.join(', ') 
   // Makes DB update

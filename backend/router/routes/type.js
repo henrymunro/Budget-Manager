@@ -14,7 +14,7 @@ debug('Startup: Loading in TYPE routes')
 
 //Route to get types 
 router.get('/', (req, res)=> {
-	const user_id = 1 
+	const user_id = req.session.user_id 
 	debug('Request recieved to get Types, user: '+user_id)
 		pool.getConnection()
 	     .then((conn) => {
@@ -35,7 +35,7 @@ router.get('/', (req, res)=> {
 
 //Route to add a new type 
 router.post('/addType', (req, res)=> {
-	const user_id = 1 
+	const user_id = req.session.user_id 
 	const budgetType = req.body.budgetType
 	debug('Request recieved to add new Type, user: '+user_id+', Type : '+budgetType)
 		pool.getConnection()
@@ -56,7 +56,7 @@ router.post('/addType', (req, res)=> {
 
 //Route to add a new type 
 router.post('/addSubType', (req, res)=> {
-	const user_id = 1 
+	const user_id = req.session.user_id 
 	const budgetType = req.body.budgetType,
 			budgetSubType = req.body.budgetSubType
 	debug('Request recieved to add new SubType, user: '+user_id+', type: '+budgetType+ ', subtype: '+ budgetSubType)
@@ -82,7 +82,7 @@ router.post('/ceaseType', (req, res)=>{
   // Gathers infromation
   let operation = 'cease type [user_id, budgetType] '
   const procedure = 'CALL sp_CeaseUserType( ?, ?);',
-        user_id = 1, 
+        user_id = req.session.user_id, 
         { budgetType } = req.body,
         params = [user_id, budgetType]
   // Updates logging text
@@ -96,7 +96,7 @@ router.post('/ceaseSubType', (req, res)=>{
   // Gathers infromation
   let operation = 'cease subType [user_id, budgetSubType] '
   const procedure = 'CALL sp_CeaseUserSubType( ?, ?);',
-        user_id = 1, 
+        user_id = req.session.user_id, 
         { budgetSubType } = req.body,
         params = [user_id, budgetSubType]
   // Updates logging text

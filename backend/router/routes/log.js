@@ -17,9 +17,9 @@ router.post('/browserError', (req, res)=>{
   // Gathers infromation
   let operation = 'logging browser error [user_id, message, stack, errorType] '
   const procedure = 'CALL sp_LogError( ?, ?, ?, ?);',
-        user_id = 1, 
-        { message, stack } = req.body,
-        params = [user_id, message, stack, 'browser']
+        user_id = req.session.user_id, 
+        { message, stack } = req.body
+  const  params = [user_id, message, stack, 'browser']
   // Updates logging text
   operation = operation + params.join(', ') 
   // Makes DB update
