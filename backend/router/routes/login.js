@@ -2,7 +2,7 @@ var express = require('express');
 var Router = require('../router')
 var router = new Router().router
 const debug = require('debug')('login')
-const pool = require('mysql2/promise').createPool({host:'localhost', user: 'root', database: 'Budget'}); 
+const pool = require('../databaseConnection')
 const path = require('path')
 
 const user = require('../globalFunctions/authenticateUser')

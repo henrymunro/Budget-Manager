@@ -2,10 +2,10 @@ const express = require('express')
 const Router = require('../router')
 const router = new Router().router
 const debug = require('debug')('type')
-const pool = require('mysql2/promise').createPool({host:'localhost', user: 'root', database: 'Budget'}); 
+const pool = require('../databaseConnection')
 
-const databaseConnection = require('../globalFunctions/databaseConnection')
-const   { callProcUPDATE, callProcGET } = databaseConnection
+const databaseProcedures = require('../globalFunctions/databaseProcedures')
+const   { callProcUPDATE, callProcGET } = databaseProcedures
 
 $Client_address = 'http://localhost:8080'
 

@@ -3,9 +3,7 @@ const Router = require('../router')
 const router = new Router().router
 const Escape = require('validator').escape
 const debug = require('debug')('mappings')
-const pool = require('mysql2/promise').createPool({host:'localhost', user: 'root', database: 'Budget'}); 
-
-$Client_address = 'http://localhost:8080';
+const pool = require('../databaseConnection')
 
 
 router.use(function(req, res, next){

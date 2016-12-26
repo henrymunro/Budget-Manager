@@ -8,7 +8,7 @@ const csvParser = require('../globalFunctions/csvParser.js')
 const parseCSV = csvParser.parseCSV
 const validateUploadedFile = require('../globalFunctions/fileUploadValidation.js').validateUploadedFile
 const moment = require('moment')
-const pool = require('mysql2/promise').createPool({host:'localhost', user: 'root', database: 'Budget'}); 
+const pool = require('../databaseConnection')
 
 $Client_address = 'http://localhost:8080'
 

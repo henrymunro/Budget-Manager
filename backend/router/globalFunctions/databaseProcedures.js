@@ -1,6 +1,8 @@
 
-const debug = require('debug')('databaseConnection')
-const pool = require('mysql2/promise').createPool({host:'localhost', user: 'root', database: 'Budget'}); 
+const debug = require('debug')('databaseProcedure')
+const pool = require('../databaseConnection')
+
+debug('Startup: Loading in DATABASE PROCEDURES')
 
 
 function callProcUPDATE(procedure, parameters, operation, res){

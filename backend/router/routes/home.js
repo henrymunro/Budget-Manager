@@ -2,7 +2,7 @@ var express = require('express');
 var Router = require('../router') //import router class 
 var router = new Router().router
 const debug = require('debug')('home')
-const pool = require('mysql2/promise').createPool({host:'localhost', user: 'root', database: 'Budget'}); 
+const pool = require('../databaseConnection')
 const path = require('path')
 
 $Client_address = 'http://localhost:8080';
