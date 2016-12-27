@@ -21,7 +21,7 @@ import baseStyles from 'styles/base.css'
   return {
     user: store.user.user,
     userFetched: store.user.fetched,
-    hash: store.nav.hash,
+    nav: store.nav,
     axios: store.axios.axios,
     graph: store.graph
   }
@@ -83,7 +83,7 @@ export default class Layout extends React.Component {
     return <div>
               <StickyContainer>
                <div className={'col s12 l12 '+ baseStyles.cf}>
-                  <NavBar dispatch={this.props.dispatch} axios={this.props.axios} hash={this.props.hash}/> 
+                  <NavBar dispatch={this.props.dispatch} axios={this.props.axios} nav={this.props.nav} /> 
               </div>
               <div className="row">
                 <div className='col s12 l3'></div>

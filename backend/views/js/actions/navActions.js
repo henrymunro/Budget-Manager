@@ -12,3 +12,17 @@ export function logUserOut(axios){
 		payload: axios.request.get(axios.URLS.logout)
 	}
 }
+
+export function openMappingPopOver(){
+	return {
+		type: 'NAV_OPEN_MAPPING_POPOVER',
+		payload: true
+	}
+}
+
+export function closeMappingPopOver(){
+	return {
+		type: 'NAV_CLOSE_MAPPING_POPOVER',
+		payload: false
+	}
+}

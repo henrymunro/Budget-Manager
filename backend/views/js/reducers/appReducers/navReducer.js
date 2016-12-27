@@ -1,5 +1,6 @@
 export default function reducer(state={
-		hash:''
+		hash:'',
+		mappingPopoverOpen: false
 	}, action){
 
 	switch(action.type) {
@@ -8,6 +9,19 @@ export default function reducer(state={
 		}
 		
 	}
+
+	switch(action.type) {
+		case "NAV_OPEN_MAPPING_POPOVER" : {
+			return {...state, mappingPopoverOpen: true}
+		}
+	}
+
+	switch(action.type) {
+		case "NAV_CLOSE_MAPPING_POPOVER" : {
+			return {...state, mappingPopoverOpen: false}
+		}
+	}
+
 
 	return state
 }

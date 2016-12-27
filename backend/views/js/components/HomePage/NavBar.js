@@ -1,8 +1,23 @@
 import React from 'react'
 
-var $ = require("styles/materialize-css/js/materialize.js")
+import IconMenu from 'material-ui/IconMenu';
+import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
+import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 
-import {logUserOut} from 'js/actions/navActions'
+
+
+import {logUserOut,
+        openMappingPopOver,
+        closeMappingPopOver
+    } from 'js/actions/navActions'
 
 export default class NavBar extends React.Component {
 
@@ -10,37 +25,72 @@ export default class NavBar extends React.Component {
     this.props.dispatch(logUserOut(this.props.axios))
   }
 
+  openMappingPopOver(e){
+    // This prevents ghost click.
+    e.preventDefault()
+
+    this.props.dispatch(openMappingPopOver())
+  }
+
+  closeMappingPopOver(){
+    this.props.dispatch(closeMappingPopOver())
+  }
+
+  updateHash(e){
+    console.log(e.target)
+    const userMapping_id = e.target.attributes.getNamedItem('data-hash').value
+  }
+
 
   render () {
 
-    const hash = this.props.hash
+    const { hash, mappingPopoverOpen } = this.props.nav
     console.log('HASH: ', hash)
+
+    const mappingButton = <div>
+        <FlatButton
+          onTouchTap={this.openMappingPopOver.bind(this)}
+          label="Mappings"
+          id='Nav_Mapping_Button'
+        />
+        <Popover
+          open={mappingPopoverOpen}
+          anchorEl={document.getElementById('Nav_Mapping_Button')}
+          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+          targetOrigin={{horizontal: 'left', vertical: 'top'}}
+          onRequestClose={this.closeMappingPopOver.bind(this)}
+          animation={PopoverAnimationVertical}
+        >
+            <Menu>
+                <MenuItem primaryText="" children={<a href='#addNewMappings'>Add Mapping</a>}/>
+                <MenuItem primaryText="" children={<a href='#mappings'>Edit Mappings</a>}/>
+            </Menu>
+        </Popover>
+    </div>
+
+
     return (
-        <div class="navbar-fixed">
-          <nav>
-            <div class="right nav-wrapper">
-            	<ul>
-                	<li className={hash==='#ledger'?'active':''}>
-                        <a className='nav-link' href="#ledger">Ledger</a>
-                    </li>
-                	<li className={hash==='#mappings'?'active':''}>
-                        <a className='nav-link' href="#mappings">Mappings - Edit</a>
-                    </li>            
-                    <li className={hash==='#addNewMappings'?'active':''}>
-                        <a className='nav-link' href="#addNewMappings">Mappings - Add New</a>
-                    </li>
-                	<li className={hash==='#fileUpload'?'active':''}>
-                        <a className='nav-link' href="#fileUpload">File Upload</a></li>      		
-                	<li className={hash==='#type'?'active':''}>
-                        <a className='nav-link' href="#type">Type & Account</a>
-                    </li>
-                    <li>
-                        <a className="waves-effect waves-light btn" onClick={this.logUserOut.bind(this)}>Logout</a>
-                    </li>
-            	</ul>          
-            </div>
-          </nav>
-        </div>
+
+        <Toolbar>
+        <ToolbarGroup>
+            <a href="#ledger">
+                <ToolbarTitle text="Ledger" />
+            </a>
+            <a href="#fileUpload">
+                <ToolbarTitle text="Upload" />
+            </a>
+            <a href="#type">
+                <ToolbarTitle text="Type & Account" />
+            </a>
+            {mappingButton}
+
+
+          <ToolbarSeparator />
+          <RaisedButton label="Logout" primary={true} onClick={this.logUserOut.bind(this)}/>
+          
+        </ToolbarGroup>
+      </Toolbar>
     )
   }
 }
+     
