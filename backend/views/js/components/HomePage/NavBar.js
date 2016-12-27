@@ -1,5 +1,7 @@
 import React from 'react'
 
+var $ = require("styles/materialize-css/js/materialize.js")
+
 import {logUserOut} from 'js/actions/navActions'
 
 export default class NavBar extends React.Component {

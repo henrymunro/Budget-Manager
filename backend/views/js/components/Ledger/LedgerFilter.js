@@ -1,4 +1,5 @@
 import React from 'react'
+var $ = require("styles/materialize-css/js/materialize.js")
 
 import YearMonthDropDown from 'js/components/Ledger/YearMonthDropDown'
 import LedgerTypeFilter from 'js/components/Ledger/LedgerTypeFilter'
@@ -16,7 +17,7 @@ export default class LedgerFilter extends React.Component {
   }
 
   componentDidMount () {
-    //$('.collapsible').collapsible()
+    $('.collapsible').collapsible()
     
   }
 
