@@ -81,7 +81,7 @@ export default class Layout extends React.Component {
     return <div>
               <StickyContainer>
                <div className={'col s12 l12 '+ baseStyles.cf}>
-                  <NavBar dispatch={this.props.dispatch} axios={this.props.axios}/> 
+                  <NavBar dispatch={this.props.dispatch} axios={this.props.axios} hash={this.props.hash}/> 
               </div>
               <div className="row">
                 <div className='col s12 l3'></div>
